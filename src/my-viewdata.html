@@ -1,0 +1,454 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<script type="text/javascript" src="/lib/jquery-3.2.1.min.js"> </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- TODO: Are all of these imports necessary? idt so -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/toggle-icon/toggle-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-number-input/paper-number-input.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<dom-module id="my-viewdata">
+  <template>
+    <style include="shared-styles">
+      :host {
+          display: block;
+          padding: 10px;
+      }
+      .table_stats {
+          border: solid black;
+          border-width: 1px 1px 1px 1px;
+      }
+    </style>
+
+    <div class="card">
+      <div class="rectangle">Get Team Data</div>
+      <!-- TODO: Why is there an extra div here? -->
+			<div>
+      	<form id="form3">
+      		<h3> Team Number only </h3>
+					<paper-input id="team_number_input" always-float-label align="center" label="Team Number:"></paper-input>
+      		<paper-button raised on-click="submit_query_team"> By Team Number </paper-button>
+					<br>
+					<br>
+      		<h3> Match only </h3>
+					<paper-input id="match_number_input" always-float-label align="center" label="Match Number:"></paper-input>
+          <paper-dropdown-menu id="match_type" label="Match Type">
+            <paper-listbox slot="dropdown-content" selected="1">
+              <paper-item>Practice</paper-item>
+              <paper-item>Qualifier</paper-item>
+              <paper-item>Quarterfinals</paper-item>
+              <paper-item>Semifinals</paper-item>
+              <paper-item>Finals</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+      		<br>
+					<br>
+					<paper-button raised on-click="submit_query_match"> For a match </paper-button>
+              <!--<paper-dropdown-menu id="match_type" label="Match Type">
+                <paper-listbox slot="dropdown-content" selected="1">
+                  <paper-item>Practice</paper-item>
+                  <paper-item>Qualifier</paper-item>
+                  <paper-item>Quarterfinals</paper-item>
+                  <paper-item>Semifinals</paper-item>
+                  <paper-item>Finals</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>-->
+      		<br>
+			<br>
+			<h3> Scout Name Only (Include First and Last Name!) </h3>
+      <paper-input id="scout_name_input" always-float-label align="center" label="Scout Name:"></paper-input>
+        <paper-button raised on-click="submit_query_team"> By Scout Name: </paper-button>
+        <br>
+					<h3> All Matches and Teams </h3>
+			  	<paper-button raised on-click="submit_query_all"> Every Team </paper-button>
+      		<br>
+      	</form>
+     	</div>
+		</div>
+  	<div id="stats_div" class="card" style="display:none">
+			<center>
+				<h1> Statistics of FRC Teams </h1>
+				<h3> General Stats </h3>
+        <div id="table_general_div" style="width: 100%"></div>
+				<br>
+        <div id="table_averages_container" style="display:none">
+          <h3> Average data for ALL Teams </h3>
+          <div id="table_averages_div" style="width: 100%"> </div>
+          <br>
+          <h3> Average Teleop Gears scored
+				  <div id="chart_div_gears" style="width: 100%"></div>
+				  <br>
+          <h3> Average Climbing Rate (%)
+				  <div id="chart_div_climb" style="width: 100%"></div>
+				</div>
+        <br>
+        <div id="line_plot" style="display:none"></div>
+				<br>
+			</center>
+		</div>
+	</template>
+
+  <script>
+    class MyViewData extends Polymer.Element {
+        static get is() { return 'my-viewdata'; }
+
+				submit_query_match() {
+					var match_number = this.$.match_type.value + " " + this.$.match_number_input.value;
+					var base = this;
+					$.ajax({
+            		    url: "/getteamdata?match_number=" + match_number,
+            		    type: "GET",
+            		    success: function(data) {
+                        base.generate_graph(data, base);
+                        base.generate_averages(data, base);
+                    }
+            		});
+				}
+
+				submit_query_team() {
+					var team_number = this.$.team_number_input.value;
+					var base = this;
+					$.ajax({
+            		    url: "/getteamdata?team_number=" + team_number,
+            		    type: "GET",
+            		    success: function(data) {
+                        base.generate_graph(data, base);
+                        base.generate_line_plot(data, base);
+                    }
+            		});
+				}
+
+				submit_query_all() {
+					var base = this;
+					$.ajax({
+            		    url: "/getteamdata",
+            		    type: "GET",
+            		    success: function(data) {
+                            base.generate_graph(data, base);
+                            base.generate_averages(data, base);
+                        }
+            		});
+				}
+
+				generate_graph(data, base) {
+            // TODO: This makes it depend on what order we init our graphs (needs to be more consistent)
+            base.$.table_averages_container.style.display="none";
+					  base.$.stats_div.style.display="block";
+					  google.charts.load('45', {packages: ['corechart', 'bar', 'table']});
+					  //google.charts.load('current', {'packages':['corechart']});
+					  //google.charts.load('current', {'packages':['table']});
+					  //google.charts.setOnLoadCallback(function() {base.drawChart(data, base);} );
+					  google.charts.setOnLoadCallback(function() {base.drawTableGeneral(data, base);} );
+					  //google.charts.setOnLoadCallback(drawTable);
+					  //google.charts.setOnLoadCallback(drawBarGraphGears);
+					  //google.charts.setOnLoadCallback(drawBarGraphFuel);
+				}
+
+				generate_averages(data, base) {
+            base.$.table_averages_container.style.display="block";
+					  google.charts.setOnLoadCallback(function() {base.drawTableAverages(data, base);} );
+					  google.charts.setOnLoadCallback(function() {base.drawBarGraphGears(data, base);} );
+					  google.charts.setOnLoadCallback(function() {base.drawBarGraphClimb(data, base);} );
+        }
+
+        generate_line_plot(data, base) {
+            base.$.line_plot.style.display="block";
+					  google.charts.setOnLoadCallback(function() {base.drawLinePlot(data, base);} );
+        }
+
+				//Above is Initialization of Chart Loaders as well as packages online etc....
+
+				//The Code below creates the bar graph for gears
+				drawBarGraphGears(dat, base) {
+    		    //var data = new google.visualization.DataTable();
+            var data_table = [];
+            data_table.push(["Team Number", ""]);
+					  Object.keys(dat).forEach(function(element) {
+						    //data.addColumn('string', element);
+					      var teleop_gear_sum = 0;
+					      var length = dat[element].length;
+
+                dat[element].forEach(function(mdata) {
+						    	  teleop_gear_sum += mdata.gears_scored;
+						    });
+					      var row = [
+					      	  element,
+					      	  teleop_gear_sum / length
+					      ]
+                data_table.push(row);
+
+					  });
+    		    var options = {
+    		      	/*axes: {
+    		      	  	x: {
+    		      	  	  	0: {side: 'bottom' }
+    		      	  	}
+    		      	},*/
+    		      	hAxis: {
+    		      	  	title: 'Team #'/*,
+    		      	  	viewWindow: {
+    		      	  	  	min: [7 , 30, 0],
+    		      	  	  	max: [10, 30, 50],
+    		      	  	}*/
+    		      	},
+    		      	vAxis: {
+    		      	  	title: 'Gears Scored',
+                    minValue: 0
+    		      	}
+    		    };
+            var data = google.visualization.arrayToDataTable(data_table);
+    		  	var materialChart = new google.charts.Bar(base.$.chart_div_gears);
+    		    materialChart.draw(data, options);
+    	  }
+				//The Code below creates the bar graph for Climbs
+				drawBarGraphClimb(dat, base) {
+    		    //var data = new google.visualization.DataTable();
+            var data_table = [];
+            data_table.push(["Team Number", ""]);
+					  Object.keys(dat).forEach(function(element) {
+						    //data.addColumn('string', element);
+					      var climb_sum = 0;
+					      var length = dat[element].length;
+
+                dat[element].forEach(function(mdata) {
+						    	  climb_sum += mdata.climb;
+						    });
+					      var row = [
+					      	  element,
+					      	  100 * climb_sum / length
+					      ]
+                data_table.push(row);
+
+					  });
+    		    var options = {
+    		      	/*axes: {
+    		      	  	x: {
+    		      	  	  	0: {side: 'bottom' }
+    		      	  	}
+    		      	},*/
+    		      	hAxis: {
+    		      	  	title: 'Team #'/*,
+    		      	  	viewWindow: {
+    		      	  	  	min: [7 , 30, 0],
+    		      	  	  	max: [10, 30, 50],
+    		      	  	}*/
+    		      	},
+    		      	vAxis: {
+    		      	  	title: 'Climb %',
+                    minValue: 0,
+                    maxValue: 100
+    		      	}
+    		    };
+            var data = google.visualization.arrayToDataTable(data_table);
+    		  	var materialChart = new google.charts.Bar(base.$.chart_div_climb);
+    		    materialChart.draw(data, options);
+    	  }
+    		//The Following Code below draws the Line Graph Chart.
+    		drawLinePlot(dat, base) {
+    		  	/*var data = google.visualization.arrayToDataTable([
+    		  	  	['Match #', 'Teleop Gears Scored',],
+    		  	  	['Match 1',  2],
+    		  	  	['Match 2',  4],
+    		  	  	['Match 3',  3],
+    		  	  	['Match 4',  3],
+    		  	  	['Match 5',  0],
+    		  	  	['Match 6',  1],
+    		  	  	['Match 7',  2],
+    		  	  	['Match 8',  1],
+    		  	  	['Match 9',  4],
+    		  	  	['Match 10',  2],
+    		  	]);*/
+
+            var data = [];
+            data.push(["Match Number", "Gears Scored"]);
+            // We assume we're only dealing with one team here
+            var team = Object.keys(dat)[0];
+
+            dat[team].forEach(function(mdata) {
+                data.push([mdata.match_number, mdata.gears_scored]);
+            });
+    		  	var options = {
+    		  	  	fontName: 'Verdana',
+    		  	  	title: 'Gear Score per match',
+    		  	  	curveType: 'function',
+    		  	  	legend: { position: 'bottom' }
+    		  	};
+
+    		  	var chart = new google.visualization.LineChart(base.$.line_plot);
+            var data = google.visualization.arrayToDataTable(data);
+    		  	chart.draw(data, options);
+    		}
+
+    		//The following code below draws the table that shows the general chart.
+    		drawTableGeneral(dat, base) {
+    		  	var data = new google.visualization.DataTable();
+    		  	data.addColumn('string', 'Team #');
+    		  	data.addColumn('string', 'Match #');
+    		  	data.addColumn('string', 'Green Line?');
+    		  	data.addColumn('number', 'Auton Fuel')
+    		  	data.addColumn('number', 'Auton Hoppers Triggered')
+    		  	data.addColumn('string', 'Auton Gear Routine');
+    		  	data.addColumn('string', 'Pickups');
+    		  	data.addColumn('string', 'Boiler Shooting?');
+                data.addColumn('number', 'Teleop Gears Scored');
+                data.addColumn('number', 'Teleop Gears Dropped');
+    		  	data.addColumn('number', 'Teleop Fuel');
+    		  	data.addColumn('string', 'Climb?');
+    		  	data.addColumn('string', 'Yellow Card?');
+                // TODO: Make this not absolutely ugly
+    		  	data.addColumn('string', 'Comments________________________________________________');
+
+			    var length = Object.keys(dat).length;
+			    Object.keys(dat).forEach(function(element) {
+			    	dat[element].forEach(function(mdata) {
+                        var pickups = '';
+                        var boiler = '';
+                        if (mdata.ground_pickup_gear) pickups += 'GEAR\n';
+                        if (mdata.ground_pickup_fuel) pickups += 'FUEL\n';
+                        if (pickups === '') pickups = 'NONE';
+
+                        if (mdata.fuel_scoring_high) boiler += 'HIGH\n';
+                        if (mdata.fuel_scoring_low) boiler += 'LOW\n';
+                        if (boiler === '') boiler = 'NONE';
+
+                        data.addRow([
+                            element,
+                            mdata.match_number,
+                            mdata.cross_green_line == 1 ? "YES" : "NO",
+                            mdata.fuel_auton,
+                            mdata.hoppers,
+                            mdata.gear_score,
+                            pickups,
+                            boiler,
+                            mdata.gears_scored,
+                            mdata.gears_dropped,
+                            mdata.fuel_teleop,
+                            mdata.climb == 1 ? "YES" : "NO",
+                            mdata.yellow_card == 1 ? "YES" : "NO",
+                            mdata.comments
+
+                        ]);
+                    });
+                        /*var name = element;
+			    		var auton_fuel_sum = 0;
+			    		var auton_gear_routines = {
+			    				"CENTER": false,
+			    				"HP": false,
+			    				"BOILER": false
+			    		};
+			    		var auton_gear_sum = 0;
+			    		var teleop_gear_sum = 0;
+			    		var teleop_fuel_sum = 0;
+			    		var climb_sum = 0;
+			    		dat[element].forEach(function(mdata) {
+			    				auton_fuel_sum += mdata.fuel_auton;
+			    				auton_gear_sum += (mdata.gear_score === "YES" ? 1 : 0);
+			    				teleop_gear_sum += mdata.gears_scored;
+			    				teleop_fuel_sum += mdata.fuel_teleop;
+			    				climb_sum += mdata.climb;
+			    				// Record that we have a gear routine, if it's not none
+			    				if (mdata.gear_routine !== "NONE")
+			    						auton_gear_routines[mdata.gear_routine] = true;
+			    		});
+
+			    		// Construct a string telling us which gear methods the bot uses (can have multiple!)
+			    		var gear_routine_string = "";
+			    		if (!(auton_gear_routines["CENTER"] || auton_gear_routines["HP"] || auton_gear_routines["BOILER"])) {
+			    				gear_routine_string = "None";
+			    		} else {
+			    				gear_routine_string += auton_gear_routines["CENTER"] ? "Center " : "";
+			    				gear_routine_string += auton_gear_routines["HP"] ? "HP " : "";
+			    				gear_routine_string += auton_gear_routines["BOILER"] ? "Boiler" : "";
+			    		}
+			    		var row = [
+			    				name,
+			    				'' + (auton_fuel_sum / length),
+			    				gear_routine_string,
+			    				(100.0 * auton_gear_sum / length) + "%",
+			    				'' + (teleop_gear_sum / length),
+			    				'' + (teleop_fuel_sum / length),
+			    				(100.0 * climb_sum / length) + "%"
+			    		]
+			    		console.log(row);
+			    		data.addRow(row);
+			    	*/
+			    });
+
+                //data.setTableProperties
+            data.setColumnProperty(data.getNumberOfColumns() - 1, "style", 'width: 400px');
+            data.setColumnProperty(1, "style", 'font-weight : bold');
+    		  	var table = new google.visualization.Table(base.$.table_general_div);
+            var cssClassNames = {
+                headerRow: 'table_stats',
+                tableCell: 'table_stats'
+            };
+
+    		  	table.draw(data, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
+    		}
+
+    		drawTableAverages(dat, base) {
+    		  	var data = new google.visualization.DataTable();
+    		  	data.addColumn('string', 'Team #');
+    		  	data.addColumn('number', 'Avg Teleop Gears');
+    		  	data.addColumn('string', 'Auton Gear Rate')
+    		  	data.addColumn('string', 'Auton Mobility Rate')
+    		  	data.addColumn('string', 'Climb Rate');
+
+			      Object.keys(dat).forEach(function(element) {
+                var teleop_gear_sum = 0;
+                var auton_gear_sum = 0;
+                var auton_mobility_sum = 0;
+                var climb_sum = 0;
+                var length = dat[element].length;
+			      	  dat[element].forEach(function(mdata) {
+			      	  		auton_gear_sum += (mdata.gear_score === "YES" ? 1 : 0);
+			      	  		teleop_gear_sum += mdata.gears_scored;
+			      	  		auton_mobility_sum += mdata.cross_green_line;
+                    climb_sum += mdata.climb;
+			      	  });
+
+			      	  var row = [
+			      	  		element,
+			      	  		(teleop_gear_sum / length),
+			      	  		(100.0 * auton_gear_sum / length) + "%",
+			      	  		(100.0 * auton_mobility_sum / length) + "%",
+                    (100.0 * climb_sum / length) + "%"
+			      	  ];
+			      	  console.log(row);
+			      	  data.addRow(row);
+
+    		    });
+    		    var table = new google.visualization.Table(base.$.table_averages_div);
+
+            var cssClassNames = {
+                headerRow: 'table_stats',
+                tableCell: 'table_stats'
+            };
+
+            data.setColumnProperty(1, "style", 'font-weight : bold');
+    		  	table.draw(data, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
+		    }
+    }
+    window.customElements.define(MyViewData.is, MyViewData);
+  </script>
+</dom-module>
