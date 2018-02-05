@@ -87,7 +87,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						<div id="loadable_sheet" style="display:none">
               <div class="rectangle" style="font-size:24px;">Scouting</div>
 							<h3> <p id="loadable_sheet_team_number" style=""> </h3>
-                <paper-input always-float-label align="center" id="match"label="Match Number: "></paper-input>
                 <paper-dropdown-menu id="match_type" label="Match Type">
                   <paper-listbox slot="dropdown-content" selected="1">
                     <paper-item>Practice</paper-item>
@@ -97,19 +96,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-item>Finals</paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
+                <paper-input always-float-label align="center" id="match"label="Match Number: "></paper-input>
+                <paper-input always-float-label align="center" id="methodScoring" label="Method of Scoring: "> </paper-input>
+                <paper-input always-float-label align="center" id="methodAcquiring" label="Method of Acquiring: "> </paper-input>
+                <paper-input always-float-label align="center" id="climbMech" label="Climb Mechanism: "> </paper-input>
           		<br>
           		<hr>
-          		<h4> Autonomous </h4>
+          		<h4> Autonomous: </h4>
           		<iron-label for="moblity">
           		  Mobility?
           		</iron-label>
                <toggle-icon id="mobility" required=true icon="icons:thumb-up" animation="flip-vertical" class="green-red"></toggle-icon>
           		<br>
-              <iron-label for="switch">
+              <br>
+              <iron-label for="autonSwitchCubes">
               Amount of Power Cubes on Switch:
             </iron-label>
             <br>
-            <paper-button-group selected = "0">
+            <paper-button-group id="autonSwitchCubes" selected = "0">
                 <paper-button toggles raised class="custom red">1</paper-button>
                 <paper-button toggles raised class="custom red">2</paper-button>
                 <paper-button toggles raised class="custom red">3</paper-button>
@@ -117,15 +121,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised class="custom red">5</paper-button>
                <paper-button toggles raised class="custom red">6</paper-button>
                <paper-button toggles raised class="custom input">7+</paper-button>
+               <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
              </paper-button-group>
              <br>
              <br>
 
-             <iron-label for="scale">
+             <iron-label for="autonScaleCubes">
                Amount of Power Cubes on Scale:
              </iron-label>
              <br>
-             <paper-button-group selected = "0">
+             <paper-button-group id="autonScaleCubes" selected = "0">
                  <paper-button toggles raised class="custom red">1</paper-button>
                  <paper-button toggles raised class="custom red">2</paper-button>
                  <paper-button toggles raised class="custom red">3</paper-button>
@@ -133,18 +138,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  <paper-button toggles raised class="custom red">5</paper-button>
                 <paper-button toggles raised class="custom red">6</paper-button>
                  <paper-button toggles raised class="custom input">7+</paper-button>
+                 <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+
               </paper-button-group>
               <br>
               <br>
 
 
-          		<h4>Teleop</h4>
+          		<h4>Teleop:</h4>
           		<div>
-                <iron-label>
-                  Number of Alliance Switch Cubes:
+                <iron-label for="allianceSwitchCubes">
+                  Number of Alliance Switch Power Cubes:
                 </iron-label>
                 <br>
-                <paper-button-group selected = "0">
+                <paper-button-group id="allianceSwitchCubes" selected = "0">
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -152,15 +159,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                    <paper-button toggles raised class="custom red">6</paper-button>
                     <paper-button toggles raised class="custom input">7+</paper-button>
+                    <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+
                  </paper-button-group>
                <br>
                <br>
 
-               <iron-label>
-                 Number of Opposing Switch Cubes:
+               <iron-label for="opposingSwitchCubes">
+                 Number of Opposing Switch Power Cubes:
           		  <iron-label>
                   <br>
-                  <paper-button-group selected = "0">
+                  <paper-button-group id="opposingSwitchCubes" selected = "0">
                       <paper-button toggles raised class="custom red">1</paper-button>
                       <paper-button toggles raised class="custom red">2</paper-button>
                       <paper-button toggles raised class="custom red">3</paper-button>
@@ -168,15 +177,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <paper-button toggles raised class="custom red">5</paper-button>
                      <paper-button toggles raised class="custom red">6</paper-button>
                       <paper-button toggles raised class="custom input">7+</paper-button>
+                      <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+
                    </paper-button-group>
                  <br>
                  <br>
 
-                 <iron-label>
-                  Number of Cubes on the Scale:
+                 <iron-label for="teleopScaleCubes">
+                  Number of Power Cubes on the Scale:
                 </iron-label>
                 <br>
-                <paper-button-group selected = "0">
+                <paper-button-group id="teleopScaleCubes" selected = "0">
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -184,15 +195,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                    <paper-button toggles raised class="custom red">6</paper-button>
                     <paper-button toggles raised class="custom input">7+</paper-button>
+                    <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
                  </paper-button-group>
                 <br>
                 <br>
 
-                <iron-label>
-                  Cubes from the exchange:
+                <iron-label for="exchange">
+                  Power Cubes from the exchange:
                 </iron-label>
                 <br>
-                <paper-button-group selected = "0">
+                <paper-button-group id="exchange" selected = "0">
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -200,13 +212,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                    <paper-button toggles raised class="custom red">6</paper-button>
                     <paper-button toggles raised class="custom input">7+</paper-button>
+                    <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
                  </paper-button-group>
                   <br>
-                  <br>
-                  <br>
-                  <h4> EndGame </h4>
+                  <h4> EndGame: </h4>
                   <paper-input always-float-label align="center" id="scoutName"label = "Scout Name: "> </paper-input>
-                  <iron-label>
+                  <iron-label for="climb">
           		    Climb?
           		  </iron-label>
                 <paper-radio-group  id="climb" selected="climb" aria-labelledby="climb">
@@ -216,10 +227,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  <paper-radio-button name="PLATOFRM"> Platform </paper-radio-button>
                </paper-radio-group>
                    <br>
-          		  <iron-label>
+          		  <iron-label for="assistedOption">
           		  	Robots Assisted?
           		  </iron-label>
-          		  <paper-radio-group id="assisted" selected="assisted" aria-labelledby="assisted">
+          		  <paper-radio-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
                   <paper-radio-button name="NONE"> None </paper-radio-button>
                     <paper-radio-button name="ONE"> One </paper-radio-button>
                     <paper-radio-button name="TWO"> Two </paper-radio-button>
