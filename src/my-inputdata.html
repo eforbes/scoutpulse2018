@@ -281,8 +281,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var scoutName = this.$.scoutName.value;
 
 						// First fill our form with its default values, clean slate
-            this.$.mobility.selected = "NO"
-						this.$.climb.checked = true;
+            // Not necessraily required. This "feature" is present in most of the elements.
+            this.$.mobility.checked = "TRUE"
+						this.$.climb.selected = "NO";
 						this.$.comments.value = "";
 
 						// Try to find data in server and fill in our form
@@ -296,8 +297,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 										}
         						console.log(data);
                     data = data[0]; // object is stored in array
-										this.$.climb.checked = !data.climb != 0;
+
+                    this.$.match_number.value,
+                    this.$.methodScoring.value,
+                    this.$.methodAcquiring.value,
+                    this.$.climbMech.value,
+                    this.$.scoutName.value,
+                    this.$.mobility.checked,
+                    this.$.autonSwitchCubes.value,
+                    this.$.autonScaleCubes.value,
+                    this.$.allianceSwitchCubes.value,
+                    this.$.opposingSwitchCubes.value,
+                    this.$.teleopScaleCubes.value,
+                    this.$.exchange.value,
+										this.$.climb.selected = data.climb;
 										this.$.comments.value = data.comments;
+
 								},
 			 					error: function(data) {
 										this.set_notif_error_message("ERROR: Did not load data, "
@@ -310,8 +325,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						this.$.sheet_key_info.style.display="none";
             //this.$.load_sheet_button.style.display="none";
 				    this.$.loadable_sheet_team_number.innerHTML = "Team " + team;
-				    this.$.loadable_sheet_match_number.innerHTML = match;
-            this.$.loadable_sheet_scout_name.innerHTML = "Scout Name: " + scoutName;
         }
 
 				close_data() {
@@ -323,14 +336,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     		submit_data() {
       			//var form = $("#scout_form");
       			var info = {
+                team_number: this.$.team.value,
         				match_number: this.$.match_type.value + " " + this.$.match.value,
-        				team_number: this.$.team.value,
+                methodScoring: this.$.methodScoring.value,
+                methodAcquiring: this.$.methodAcquiring.value,
+                climbMech: this.$.climbMech.value,
                 scout_name: this.$.scoutName.value,
-								climb: !this.$.climb.checked  ? 1 : 0,
-								comments: this.$.comments.value
+                mobility: this.$.mobility.checked ? 1 : 0,
+                autonSwitchCubes: this.$.autonSwitchCubes.value,
+                autonScaleCubes: this.$.autonScaleCubes.value,
+                allianceSwitchCubes: this.$.allianceSwitchCubes.value,
+                opposingSwitchCubes: this.$.opposingSwitchCubes.value,
+                teleopScaleCubes: this.$.teleopScaleCubes.value,
+                exchange: this.$.exchange.value,
+								climb: !this.$.climb.selected,
+								comments: this.$.comments.value,
+                assistedOption: this.$.assistedOption.value,
+
       			};
-      			console.log(this.$.crossg.checked);
-      			console.log(this.$.crossg.checked? 1 : 0);
+      			console.log(this.$.mobility.checked);
+      			console.log(this.$.mobility.checked? 1 : 0);
       			//console.log(!this.$.yellow_card.checked);
 	  				//console.log(this.$.comments.value);
 	  				//console.log(this.$.successgr);
