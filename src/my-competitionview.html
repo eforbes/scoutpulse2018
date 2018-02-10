@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 
-<dom-module id="my-viewdata">
+<dom-module id="my-competitionview">
   <template>
     <style include="shared-styles">
       :host {
@@ -47,23 +47,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       	<form id="form3">
       		<h3> Team Number only </h3>
 					<paper-input id="team_number_input" always-float-label align="center" label="Team Number:"></paper-input>
-      		<paper-button raised on-click="submit_query_team"> By Team Number </paper-button>
+      		        <paper-button raised on-click="submit_query_team"> By Team Number </paper-button>
 					<br>
 					<br>
+
+
       		<h3> Match only </h3>
-					<paper-input id="match_number_input" always-float-label align="center" label="Match Number:"></paper-input>
-          <paper-dropdown-menu id="match_type" label="Match Type">
-            <paper-listbox slot="dropdown-content" selected="1">
-              <paper-item>Practice</paper-item>
-              <paper-item>Qualifier</paper-item>
-              <paper-item>Quarterfinals</paper-item>
-              <paper-item>Semifinals</paper-item>
-              <paper-item>Finals</paper-item>
-            </paper-listbox>
-          </paper-dropdown-menu>
-      		<br>
+				<paper-input id="match_number_input" always-float-label align="center" label="Match Number:"></paper-input>
+                <paper-dropdown-menu id="match_type" label="Match Type">
+                <paper-listbox slot="dropdown-content" selected="1">
+                    <paper-item>Practice</paper-item>
+                    <paper-item>Qualifier</paper-item>
+                    <paper-item>Quarterfinals</paper-item>
+                    <paper-item>Semifinals</paper-item>
+                    <paper-item>Finals</paper-item>
+                    </paper-listbox>
+                    </paper-dropdown-menu>
+      		        <br>
 					<br>
-					<paper-button raised on-click="submit_query_match"> For a match </paper-button>
+
+
+			<paper-button raised on-click="submit_query_match"> For a match </paper-button>
               <!--<paper-dropdown-menu id="match_type" label="Match Type">
                 <paper-listbox slot="dropdown-content" selected="1">
                   <paper-item>Practice</paper-item>
@@ -75,18 +79,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-dropdown-menu>-->
       		<br>
 			<br>
+
+
 			<h3> Scout Name Only (Include First and Last Name!) </h3>
-      <paper-input id="scout_name_input" always-float-label align="center" label="Scout Name:"></paper-input>
-        <paper-button raised on-click="submit_query_team"> By Scout Name: </paper-button>
-        <br>
-					<h3> All Matches and Teams </h3>
+                <paper-input id="scout_name_input" always-float-label align="center" label="Scout Name:"></paper-input>
+                <paper-button raised on-click="submit_query_team"> By Scout Name: </paper-button>
+            <br>
+            <br>
+			
+
+			<h3> All Matches and Teams </h3>
 			  	<paper-button raised on-click="submit_query_all"> Every Team </paper-button>
       		<br>
       	</form>
      	</div>
 		</div>
-  	<div id="stats_div" class="card" style="display:none">
-			<center>
+  	    <div id="stats_div" class="card" style="display:none">
+		    	<center>
 				<h1> Statistics of FRC Teams </h1>
 				<h3> General Stats </h3>
         <div id="table_general_div" style="width: 100%"></div>
@@ -110,7 +119,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     class MyViewData extends Polymer.Element {
-        static get is() { return 'my-viewdata'; }
+        static get is() { return 'my-competitionview'; }
 
 				submit_query_match() {
 					var match_number = this.$.match_type.value + " " + this.$.match_number_input.value;
@@ -184,7 +193,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var data_table = [];
             data_table.push(["Team Number", ""]);
 					  Object.keys(dat).forEach(function(element) {
-						    //data.addColumn('string', element);
+                              //data.addColumn('string', element);
 					      var teleop_gear_sum = 0;
 					      var length = dat[element].length;
 
