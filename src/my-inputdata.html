@@ -96,7 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-item>Finals</paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
-                <paper-input always-float-label align="center" id="match"label="Match Number: "></paper-input>
+                <paper-input always-float-label align="center" id="match" label="Match Number: "></paper-input>
                 <paper-input always-float-label align="center" id="methodScoring" label="Method of Scoring: "> </paper-input>
                 <paper-input always-float-label align="center" id="methodAcquiring" label="Method of Acquiring: "> </paper-input>
                 <paper-input always-float-label align="center" id="climbMech" label="Climb Mechanism: "> </paper-input>
@@ -119,15 +119,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised class="custom red">3</paper-button>
                 <paper-button toggles raised class="custom red">4</paper-button>
                 <paper-button toggles raised class="custom red">5</paper-button>
-               <paper-button toggles raised class="custom red">6</paper-button>
-               <paper-button toggles raised class="custom input">7+</paper-button>
-               <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+                <paper-button toggles raised class="custom red">6</paper-button>
+                <paper-button toggles raised on-click="load_text_switch_cubes" class="custom input">7+</paper-button>
+				<div id="loadable_text0" style="display:none">
+					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+				</div>
+
              </paper-button-group>
              <br>
              <br>
 
              <iron-label for="autonScaleCubes">
-               Amount of Power Cubes on Scale:
+               Number of Power Cubes on Scale:
              </iron-label>
              <br>
              <paper-button-group id="autonScaleCubes" selected = "0">
@@ -136,9 +139,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  <paper-button toggles raised class="custom red">3</paper-button>
                  <paper-button toggles raised class="custom red">4</paper-button>
                  <paper-button toggles raised class="custom red">5</paper-button>
-                <paper-button toggles raised class="custom red">6</paper-button>
-                 <paper-button toggles raised class="custom input">7+</paper-button>
-                 <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+                 <paper-button toggles raised class="custom red">6</paper-button>
+                 <paper-button toggles raised on-click="load_text_scale_cubes_auton" class="custom input">7+</paper-button>
+				 <div id="loadable_text1" style="display:none">
+					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+				 </div>
 
               </paper-button-group>
               <br>
@@ -157,10 +162,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">3</paper-button>
                     <paper-button toggles raised class="custom red">4</paper-button>
                     <paper-button toggles raised class="custom red">5</paper-button>
-                   <paper-button toggles raised class="custom red">6</paper-button>
-                    <paper-button toggles raised class="custom input">7+</paper-button>
-                    <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
-
+                    <paper-button toggles raised class="custom red">6</paper-button>
+                    <paper-button toggles raised on-click="load_text_alliance_switch_cubes" class="custom input">7+</paper-button>
+					<div id="loadable_text2" style="display:none">
+						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					</div>
+					
                  </paper-button-group>
                <br>
                <br>
@@ -170,15 +177,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		  <iron-label>
                   <br>
                   <paper-button-group id="opposingSwitchCubes" selected = "0">
-                      <paper-button toggles raised class="custom red">1</paper-button>
-                      <paper-button toggles raised class="custom red">2</paper-button>
-                      <paper-button toggles raised class="custom red">3</paper-button>
-                      <paper-button toggles raised class="custom red">4</paper-button>
-                      <paper-button toggles raised class="custom red">5</paper-button>
-                     <paper-button toggles raised class="custom red">6</paper-button>
-                      <paper-button toggles raised class="custom input">7+</paper-button>
-                      <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
-
+                    <paper-button toggles raised class="custom red">1</paper-button>
+                    <paper-button toggles raised class="custom red">2</paper-button>
+                    <paper-button toggles raised class="custom red">3</paper-button>
+                    <paper-button toggles raised class="custom red">4</paper-button>
+                    <paper-button toggles raised class="custom red">5</paper-button>
+                    <paper-button toggles raised class="custom red">6</paper-button>
+					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" class="custom input">7+</paper-button> 
+					<div id="loadable_text3" style="display:none">
+						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					</div>
+					
                    </paper-button-group>
                  <br>
                  <br>
@@ -193,15 +202,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">3</paper-button>
                     <paper-button toggles raised class="custom red">4</paper-button>
                     <paper-button toggles raised class="custom red">5</paper-button>
-                   <paper-button toggles raised class="custom red">6</paper-button>
-                    <paper-button toggles raised class="custom input">7+</paper-button>
-                    <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+                    <paper-button toggles raised class="custom red">6</paper-button>
+					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" class="custom input">7+</paper-button> 
+					<div id="loadable_text4" style="display:none">
+						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					</div>
+					
                  </paper-button-group>
                 <br>
                 <br>
 
                 <iron-label for="exchange">
-                  Power Cubes from the exchange:
+                  Power Cubes from the Exchange:
                 </iron-label>
                 <br>
                 <paper-button-group id="exchange" selected = "0">
@@ -210,9 +222,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">3</paper-button>
                     <paper-button toggles raised class="custom red">4</paper-button>
                     <paper-button toggles raised class="custom red">5</paper-button>
-                   <paper-button toggles raised class="custom red">6</paper-button>
-                    <paper-button toggles raised class="custom input">7+</paper-button>
-                    <paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+                    <paper-button toggles raised class="custom red">6</paper-button>
+					<paper-button toggles raised on-click="load_text_exchange_cubes" class="custom input">7+</paper-button> 
+					<div id="loadable_text5" style="display:none">
+						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					</div>
+					
                  </paper-button-group>
                   <br>
                   <h4> EndGame: </h4>
@@ -308,6 +323,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 						this.$.loadable_sheet.style.display="block";
 						this.$.sheet_key_info.style.display="none";
+						this.$.toggle_button.style.display="button";
             //this.$.load_sheet_button.style.display="none";
 				    this.$.loadable_sheet_team_number.innerHTML = "Team " + team;
 				    this.$.loadable_sheet_match_number.innerHTML = match;
@@ -320,6 +336,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             //this.$.load_sheet_button.style.display="block";
 				}
 
+				load_text_switch_cubes() {
+						this.$.loadable_text0.style.display="block";
+				}
+				
+				load_text_scale_cubes_auton() {
+						this.$.loadable_text1.style.display="block";
+				}
+				
+				load_text_alliance_switch_cubes() {
+						this.$.loadable_text2.style.display="block";
+				}
+				
+				load_text_opposing_switch_cubes() {
+						this.$.loadable_text3.style.display="block";
+				}
+				
+				load_text_scale_cubes_teleop() {
+						this.$.loadable_text4.style.display="block";
+				}
+				
+				load_text_exchange_cubes() {
+						this.$.loadable_text5.style.display="block";
+				}
+				
     		submit_data() {
       			//var form = $("#scout_form");
       			var info = {
