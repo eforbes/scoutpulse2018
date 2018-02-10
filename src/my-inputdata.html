@@ -44,12 +44,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           color: var(--paper-red-500);
         };
       }
-
       .notif_normal {
         --paper-toast-background-color: #323232;
         --paper-toast-color: #f1f1f1;
       }
-
       .notif_error {
         --paper-toast-background-color: #ff3232;
         --paper-toast-color: #f1f1f1;
@@ -61,16 +59,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     paper-button.red[active] {
     background-color: var(--paper-green-500);
     }
-
     paper-button.input {
       background-color: var(--paper-red-500);
       color:white;
     }
-
     paper-button.input[active] {
     background-color: var(--paper-green-500);
     }
-
     </style>
 
     <div class="card">
@@ -110,11 +105,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		<br>
               <br>
               <iron-label for="autonSwitchCubes">
-              Amount of Power Cubes on Switch:
+              Number of Power Cubes on Switch:
             </iron-label>
             <br>
             <paper-button-group id="autonSwitchCubes" selected = "0">
-<<<<<<< HEAD
                 <paper-button toggles raised class="custom red">1</paper-button>
                 <paper-button toggles raised class="custom red">2</paper-button>
                 <paper-button toggles raised class="custom red">3</paper-button>
@@ -125,28 +119,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<div id="loadable_text0" style="display:none">
 					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 				</div>
-
-=======
-                <paper-button toggles raised class="custom red" name="0">0</paper-button>
-                <paper-button toggles raised class="custom red" name="1">1</paper-button>
-                <paper-button toggles raised class="custom red" name="2">2</paper-button>
-                <paper-button toggles raised class="custom red" name="3">3</paper-button>
-                <paper-button toggles raised class="custom red" name="4">4</paper-button>
-                <paper-button toggles raised class="custom red" name="5">5</paper-button>
-               <paper-button toggles raised class="custom red" name="6">6</paper-button>
-               <paper-button toggles raised class="custom input" name="7+">7+</paper-button>
-               <paper-textarea label="If there are 7+ Cubes, Input here." name="autonSwitchInput"> </paper-textarea>
->>>>>>> 2bfe602a1448347fcfa94c96edd84a6a620d1e13
-             </paper-button-group>
-             <br>
-             <br>
-
+				</paper-button-group>
+				<br>
+				<br>
+				
              <iron-label for="autonScaleCubes">
                Number of Power Cubes on Scale:
              </iron-label>
              <br>
              <paper-button-group id="autonScaleCubes" selected = "0">
-<<<<<<< HEAD
                  <paper-button toggles raised class="custom red">1</paper-button>
                  <paper-button toggles raised class="custom red">2</paper-button>
                  <paper-button toggles raised class="custom red">3</paper-button>
@@ -158,22 +139,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 				 </div>
 
-=======
-                 <paper-button toggles raised class="custom red" name="0">0</paper-button>
-                 <paper-button toggles raised class="custom red" name="1">1</paper-button>
-                 <paper-button toggles raised class="custom red" name="2">2</paper-button>
-                 <paper-button toggles raised class="custom red" name="3">3</paper-button>
-                 <paper-button toggles raised class="custom red" name="4">4</paper-button>
-                 <paper-button toggles raised class="custom red" name="5">5</paper-button>
-                 <paper-button toggles raised class="custom red" name="6">6</paper-button>
-                 <paper-button toggles raised class="custom input" name="7+">7+</paper-button>
-                 <paper-textarea label="If there are 7+ Cubes, Input here." name="autonScaleInput" > </paper-textarea>
->>>>>>> 2bfe602a1448347fcfa94c96edd84a6a620d1e13
               </paper-button-group>
               <br>
               <br>
-
-
+			  
           		<h4>Teleop:</h4>
           		<div>
                 <iron-label for="allianceSwitchCubes">
@@ -181,7 +150,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-label>
                 <br>
                 <paper-button-group id="allianceSwitchCubes" selected = "0">
-<<<<<<< HEAD
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -192,29 +160,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<div id="loadable_text2" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
-					
-=======
-                    <paper-button toggles raised class="custom red" name="0">0</paper-button>
-                    <paper-button toggles raised class="custom red" name="1">1</paper-button>
-                    <paper-button toggles raised class="custom red" name="2">2</paper-button>
-                    <paper-button toggles raised class="custom red" name="3">3</paper-button>
-                    <paper-button toggles raised class="custom red" name="4">4</paper-button>
-                    <paper-button toggles raised class="custom red" name="5">5</paper-button>
-                   <paper-button toggles raised class="custom red" name="6">6</paper-button>
-                    <paper-button toggles raised class="custom input" name="7+">7+</paper-button>
-                    <paper-textarea label="If there are 7+ Cubes, Input here."  name="switchInput"> </paper-textarea>
-
->>>>>>> 2bfe602a1448347fcfa94c96edd84a6a620d1e13
-                 </paper-button-group>
-               <br>
-               <br>
+			
+					</paper-button-group>
+					<br>
+					<br>
 
                <iron-label for="opposingSwitchCubes">
                  Number of Opposing Switch Power Cubes:
-          		  <iron-label>
+          		  </iron-label>
                   <br>
                   <paper-button-group id="opposingSwitchCubes" selected = "0">
-<<<<<<< HEAD
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -225,19 +180,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<div id="loadable_text3" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
-					
-=======
-                      <paper-button toggles raised class="custom red" name="0">0</paper-button>
-                      <paper-button toggles raised class="custom red" name="1">1</paper-button>
-                      <paper-button toggles raised class="custom red" name="2">2</paper-button>
-                      <paper-button toggles raised class="custom red" name="3">3</paper-button>
-                      <paper-button toggles raised class="custom red" name="4">4</paper-button>
-                      <paper-button toggles raised class="custom red" name="5">5</paper-button>
-                     <paper-button toggles raised class="custom red" name="6">6</paper-button>
-                      <paper-button toggles raised class="custom input" name="7+">7+</paper-button>
-                      <paper-textarea label="If there are 7+ Cubes, Input here." name="opposingSwitchInput"> </paper-textarea>
 
->>>>>>> 2bfe602a1448347fcfa94c96edd84a6a620d1e13
                    </paper-button-group>
                  <br>
                  <br>
@@ -247,7 +190,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-label>
                 <br>
                 <paper-button-group id="teleopScaleCubes" selected = "0">
-<<<<<<< HEAD
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -258,25 +200,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<div id="loadable_text4" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
-					
-=======
-                   <paper-button toggles raised class="custom red" name="0">0</paper-button>
-                    <paper-button toggles raised class="custom red" name="1">1</paper-button>
-                    <paper-button toggles raised class="custom red" name="2">2</paper-button>
-                    <paper-button toggles raised class="custom red" name="3">3</paper-button>
-                    <paper-button toggles raised class="custom red" name="4">4</paper-button>
-                    <paper-button toggles raised class="custom red" name="5">5</paper-button>
-                   <paper-button toggles raised class="custom red" name="6">6</paper-button>
-                    <paper-button toggles raised class="custom input" name="7+">7+</paper-button>
-                    <paper-textarea label="If there are 7+ Cubes, Input here."  name="teleopScaleInput"> </paper-textarea>
->>>>>>> 2bfe602a1448347fcfa94c96edd84a6a620d1e13
+
                  </paper-button-group>
                 <br>
                 <br>
 
                 <iron-label for="exchange">
-<<<<<<< HEAD
-                  Power Cubes from the Exchange:
+                  Number of Power Cubes in the Exchange:
                 </iron-label>
                 <br>
                 <paper-button-group id="exchange" selected = "0">
@@ -290,22 +220,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<div id="loadable_text5" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
-					
-=======
-                  Power Cubes in exchange:
-                </iron-label>
-                <br>
-                <paper-button-group id="exchange" selected = "0">
-                    <paper-button toggles raised class="custom red" name="0">0</paper-button>
-                    <paper-button toggles raised class="custom red" name="1">1</paper-button>
-                    <paper-button toggles raised class="custom red" name="2">2</paper-button>
-                    <paper-button toggles raised class="custom red" name="3">3</paper-button>
-                    <paper-button toggles raised class="custom red" name="4">4</paper-button>
-                    <paper-button toggles raised class="custom red" name="5">5</paper-button>
-                   <paper-button toggles raised class="custom red" name="6">6</paper-button>
-                    <paper-button toggles raised class="custom input" name="7+">7+</paper-button>
-                    <paper-textarea label="If there are 7+ Cubes, Input here." name="exchangeInput"> </paper-textarea>
->>>>>>> 2bfe602a1448347fcfa94c96edd84a6a620d1e13
+
                  </paper-button-group>
                   <br>
                   <h4> EndGame: </h4>
@@ -347,7 +262,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class MyInputData extends Polymer.Element {
       	static get is() { return 'my-inputdata'; }
-
             // Sets a notif message that pops up
             set_notif_error_message(message) {
                 this.$.notif_toast_error.set("text", message)
@@ -355,7 +269,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$.notif_toast_error.refit();
                 this.$.notif_toast_error.open();
             }
-
             // Sets a notif message that pops up
             set_notif_normal_message(message) {
                 this.$.notif_toast_normal.set("text", message)
@@ -363,29 +276,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$.notif_toast_normal.refit();
                 this.$.notif_toast_normal.open();
             }
-
     		load_data() {
-						var match = this.$.match_type.value + " " + this.$.match.value;
-						console.log("MATCH: " + match);
-            var team = this.$.team.value;
-
-						// First fill our form with its default values, clean slate
+		var match = this.$.match_type.value + " " + this.$.match.value;
+		console.log("MATCH: " + match);
+                var team = this.$.team.value;
+	    // First fill our form with its default values, clean slate
             // Not necessraily required. This "feature" is present in most of the elements.
             this.$.mobility.checked = "TRUE"
-						this.$.climb.selected = "NO";
-
-						// Try to find data in server and fill in our form
-						$.ajax({
+	    this.$.climb.selected = "NO";
+	    // Try to find data in server and fill in our form
+	    $.ajax({
                 url: "/getdata?match_number=" + match + "&team_number=" + team,
                 type: "GET",
                 success: (data) => { // We use Lambda (=>) instead of function() because it preserves "this"
                     if (data.length == 0) {
-												this.set_notif_normal_message("No data found! Starting new sheet");
+		        this.set_notif_normal_message("No data found! Starting new sheet");
                         return;
 										}
-        						console.log(data);
+        	    console.log(data);
                     data = data[0]; // object is stored in array
-
                     this.$.match_number.value,
                     this.$.methodScoring.value,
                     this.$.methodAcquiring.value,
@@ -398,7 +307,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.$.teleopScaleCubes.value,
                     this.$.exchange.value,
 										this.$.climb.value = data.climb
-
 								},
 			 					error: function(data) {
 										this.set_notif_error_message("ERROR: Did not load data, "
@@ -406,20 +314,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           + "Be wary when uploading");
 								}
 						});
-
 						this.$.loadable_sheet.style.display="block";
 						this.$.sheet_key_info.style.display="none";
 						this.$.toggle_button.style.display="button";
             //this.$.load_sheet_button.style.display="none";
 				    this.$.loadable_sheet_team_number.innerHTML = "Team " + team;
         }
-
 				close_data() {
 						this.$.loadable_sheet.style.display="none";
 						this.$.sheet_key_info.style.display="block";
             //this.$.load_sheet_button.style.display="block";
 				}
-
 				load_text_switch_cubes() {
 						this.$.loadable_text0.style.display="block";
 				}
@@ -461,7 +366,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 exchange: this.$.exchange.value,
 								climb: !this.$.climb.value,
                 assistedOption: this.$.assistedOption.value,
-
       			};
       			console.log(this.$.mobility.checked);
       			console.log(this.$.mobility.checked? 1 : 0);
@@ -469,12 +373,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  				//console.log(this.$.comments.value);
 	  				//console.log(this.$.successgr);
 	  				//console.log(this.$.successgr.selected);
-
 	  				console.log(info);
-
 	  				/*console.log(this.$.team.value);
     				  console.log(form.serialize());*/
-
                 var base = this;
       			$.ajax({
       			    url: "/scout",
@@ -491,7 +392,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         + "Make sure that all inputs are less than 255 and greater than 0");
       			        }*/
       			    },
-
       			    error: function() {
                     base.set_notif_error_message("Failed to update!"
                         + " Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only)");
