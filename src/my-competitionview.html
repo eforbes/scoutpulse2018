@@ -2,40 +2,56 @@
 
 <link rel="import" href="../bower_components/google-chart/google-chart.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-
 <dom-module id="my-competitionview">
     <template>
         <style>
             google-chart {
                 height: 300px;
                 width: 50em;
+                background-color: white;
             }
-
+            td {
+              background-color: black;
+            }
         </style>
-    
+
         <!-- Table Chart -->
+        <center>
+          <br>
         <google-chart
             type='table'
-            options='{"title": "Competition View"}'
-            cols='[{"label":"Team #", "type":"string"}, 
+            options='{"title": "Competition View", "border":}'
+            cols='[{"label":"Team #", "type":"string"},
                    {"label":"Average Switch Cubes in Auton", "type":"number"},
                    {"label":"Average Scale Cubes in Auton", "type":"number"},
                    {"label":"Average Switch Cubes in Teleop", "type":"number"},
                    {"label":"Average Scale Cubes in Teleop", "type":"number"}
                   ]'
             rows='[["694", 0, 6, 9, 4],["254", 100, 100, 200, 200],["123", 0, 0, 0, 0]]'>
-        </google-chart> 
-        
-        <!-- Box Chart -->
+        </google-chart>
+
+        <!-- Box Chart/Candlestick Chart for Scale -->
         <google-chart
             type='candlestick'
             options='{"title": "Scale Scores in Teleop",
                       "candlestick" : {"hollowIsRising" : "true"}
                      }'
-                           
+
             data='[["Team", "Min", "Q1", "Q3", "Max"], ["694", 4, 10, 15, 20], ["254", 13, 14, 30, 31], ["123", 14, 60, 70, 80]]'
             >
         </google-chart>
+        <br>
+        <!-- Box Chart/Candlestick Chart for Switch -->
+        <google-chart
+            type='candlestick'
+            options='{"title": "Switch Scores in Teleop",
+                      "candlestick" : {"hollowIsRising" : "true"}
+                     }'
+
+            data='[["Team", "Min", "Q1", "Q3", "Max"], ["694", 4, 10, 15, 20], ["254", 13, 14, 30, 31], ["123", 14, 60, 70, 80]]'
+            >
+        </google-chart>
+      </center>
     </template>
     <script>
         class MyCompetitionView extends Polymer.Element {
