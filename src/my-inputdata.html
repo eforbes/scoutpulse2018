@@ -53,11 +53,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --iron-icon-height: 40em;
         --iron-icon-width: 40em;
       }
-      
+
       .fontsize {
         font-size: 2em;
       }
-      
+
       .green-red {
         --toggle-icon: {
           color: var(--paper-green-500);
@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           color: var(--paper-red-500);
         };
       }
-      
+
       .notif_normal {
         --paper-toast-background-color: #323232;
         --paper-toast-color: #f1f1f1;
@@ -132,8 +132,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		  Mobility?
           		</iron-label>
                 <paper-button-group id="mobility">
-                    <paper-button toggles raised class="custom red">Yes</paper-button>
-                    <paper-button toggles raised class="custom red">No</paper-button>
+                    <paper-button toggles raised class="custom red" name="YES">Yes</paper-button>
+                    <paper-button toggles raised class="custom red" name="NO" selected>No</paper-button>
                 </paper-button-group>
           		<br>
               <br>
@@ -152,7 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised on-click="load_text_switch_cubes" class="custom input">7+</paper-button>
 				<div id="loadable_text0" style="display:none">
 					<paper-input always-float-label id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
-					
+
 				</div>
 
              </paper-button-group>
@@ -176,7 +176,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<paper-input always-float-label id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 				 </div>
 
-              </paper-button-group>V
+              </paper-button-group>
               <br>
               <br>
 
@@ -327,7 +327,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.methodScoring.value = "";
             this.$.methodAcquiring.value = "";
             this.$.climbMech.value = "";
-            this.$.mobility.value = "No";
+            this.$.mobility.selected = "YES";
             this.$.autonSwitchCubes.selected = "0";
             this.$.autonScaleCubes.selected = "0";
             this.$.allianceSwitchCubes.selected = "0";
@@ -352,7 +352,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.$.methodScoring.value = data.methodScoring;
                     this.$.methodAcquiring.value = data.methodAcquiring;
                     this.$.climbMech.value = data.climbMech;
-                    this.$.mobility.value = !data.mobility != "No";
+                    this.$.mobility.selected = data.mobility;
                     this.$.autonSwitchCubes.selected = data.autonSwitchCubes;
                     this.$.autonScaleCubes.selected = data.autonScaleCubes;
                     this.$.allianceSwitchCubes.selected = data.allianceSwitchCubes;
@@ -404,6 +404,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     		submit_data() {
       			//var form = $("#scout_form");
+
+            //Changes selected numerical values to strings.
+            //Mobility
+            if (this.$.mobility.selected == 0) {
+              this.$.mobility.value = "YES"
+            }
+            else {this.$.mobility.value = "NO"}
+            //climb:
+            if (this.$.climb.selected == 0 ) {
+              this.$.climb.value = "YES"
+            }
+            if (this.$.climb.selected == 1 ) {
+              this.$.climb.value = "NO"
+            }
+            if (this.$.climb.selected == 2 ) {
+              this.$.climb.value = "ASSISTED"
+            }
+            if (this.$.climb.selected == 3 ) {
+              this.$.climb.value = "PLATFORM"
+            }
+            //assistedOption
+            if (this.$.assistedOption.selected == 0) {
+              this.$.assistedOption.value = "NONE"
+            }
+            if (this.$.assistedOption.selected == 1) {
+              this.$.assistedOption.value = 1
+            }
+            if (this.$.assistedOption.selected == 2) {
+              this.$.assistedOption.value = 2
+            }
+
+            // Set a variable, "info" to the data.
       			var info = {
               	team_number: this.$.team.value,
         				match_type: this.$.match_type.value,
@@ -411,7 +443,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 methodScoring: this.$.methodScoring.value,
                 methodAcquiring: this.$.methodAcquiring.value,
                 climbMech: this.$.climbMech.value,
-                mobility: !this.$.mobility.checked  ? 1 : 0,
+                mobility: this.$.mobility.value,
                 autonSwitchCubes: this.$.autonSwitchCubes.selected,
                 autonSwitchCubes7: this.$.autonSwitchCubes7.value,
                 autonScaleCubes: this.$.autonScaleCubes.selected,
@@ -424,11 +456,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 teleopScaleCubes7: this.$.teleopScaleCubes7.value,
                 exchange: this.$.exchange.selected,
                 exchange7: this.$.exchange7.value,
-                climb: this.$.climb.selected,
-                assistedOption: this.$.assistedOption.selected
+                climb: this.$.climb.value,
+                assistedOption: this.$.assistedOption.value
       			};
-      			console.log(this.$.mobility.checked);
-      			console.log(this.$.mobility.checked? 1 : 0);
+      			console.log(this.$.mobility.selected);
             console.log("Match Type: " + this.$.match_type.value + ", Match Number: " + this.$.match_number.value);
       			//console.log(!this.$.yellow_card.checked);
 	  				//console.log(this.$.comments.value);

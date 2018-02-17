@@ -1,20 +1,34 @@
 <link rel="import" href="../bower_components/google-chart/google-chart.html">
-<link type="image/x-icon" rel="shortcut icon" href="http://david-mulder.github.io/paper-datatable/components/paper-datatable/docs/icon.png">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable.html">
+<link rel="import" href="../bower_components/paper-datatable/paper-datatable-column.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+
 <dom-module id="my-competitionview">
     <template>
-      <style is="custom-style">body {
-        overflow:hidden;
-        }
-      </style>
       <style>
             google-chart {
               height: 300px;
               width: 40em;
               background-color: white;
-
+            }
+            paper-card {
+              display:block;
             }
         </style>
-
+        <paper-card heading="Averages">
+          <paper-datatable selectable multi-selection resize-behavior="overflow">
+            <paper-datatable-column header="Team #" property="title" type="Number" style="width:99%;" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Mobility" property="moblity" type="Number" style="width:99%;" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Auton Switch Cubes" property="autonSwitch" type="Number" style="width:99%;" sortable>
+            </paper-datatable-column>
+          </paper-datatable>
+        </paper-card>
+        <br>
+        <br>
         <!-- Table Chart
         <center>
           <br>
