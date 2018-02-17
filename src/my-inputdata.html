@@ -226,32 +226,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  </paper-button-group>
                   <br>
                   <h4> EndGame: </h4>
-                  <paper-input always-float-label align="center" id="scoutName"label = "Scout Name: "> </paper-input>
                   <iron-label for="climb">
           		    Climb?
           		  </iron-label>
-                <paper-radio-group  id="climb" selected="climb" aria-labelledby="climb">
-                 <paper-radio-button name="YES"> Yes </paper-radio-button>
-                 <paper-radio-button name="NO"> No </paper-radio-button>
-                 <paper-radio-button name="ASSISTED"> Assisted </paper-radio-button>
-                 <paper-radio-button name="PLATOFRM"> Platform </paper-radio-button>
-               </paper-radio-group>
+                <paper-button-group  id="climb" selected="climb" aria-labelledby="climb">
+                 <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
+                 <paper-button toggles raised class="custom red" name="NO"> No </paper-button>
+                 <paper-button toggles raised class="custom red" name="ASSISTED"> Assisted </paper-button>
+                 <paper-button toggles raised class="custom red" name="PLATOFRM"> Platform </paper-button>
+               </paper-button-group>
+                   <br>
                    <br>
           		  <iron-label for="assistedOption">
           		  	Robots Assisted?
           		  </iron-label>
-          		  <paper-radio-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
-                  <paper-radio-button name="NONE"> None </paper-radio-button>
-                    <paper-radio-button name="ONE"> One </paper-radio-button>
-                    <paper-radio-button name="TWO"> Two </paper-radio-button>
-                  </paper-radio-group>
+          		  <paper-button-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
+                  <paper-button toggles raised class="custom red" name="NONE"> None </paper-button>
+                    <paper-button toggles raised class="custom red" name="ONE"> One </paper-button>
+                    <paper-button toggles raised class="custom red" name="TWO"> Two </paper-button>
+                  </paper-button-group>
           		  <br>
-          		  <div class="rectangle"><b>Comments:</div></b>
-          		  <paper-textarea id="comments" always-float-label label="Please note in the comments how the robot behaved on the field.
-	      			    	Make sure to note if robot was not functional or repeatedly incurred fouls.">
-								</paper-textarea>
-          		  <br>
-
+                <br>
           		</div>
 	  	  	    <paper-button on-click="submit_data"> Submit </paper-button>
       		    <paper-button on-click="close_data"> Edit other sheet </paper-button>
@@ -285,11 +280,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						var match = this.$.match_type.value + " " + this.$.match.value;
 						console.log("MATCH: " + match);
             var team = this.$.team.value;
-            var scoutName = this.$.scoutName.value;
-						// First fill our form with its default values, clean slate
-            this.$.mobility.selected = "NO"
-						this.$.climb.checked = true;
-						this.$.comments.value = "";
 						// Try to find data in server and fill in our form
 						$.ajax({
                 url: "/getdata?match_number=" + match + "&team_number=" + team,
@@ -302,7 +292,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         						console.log(data);
                     data = data[0]; // object is stored in array
 										this.$.climb.checked = !data.climb != 0;
-										this.$.comments.value = data.comments;
 								},
 			 					error: function(data) {
 										this.set_notif_error_message("ERROR: Did not load data, "
@@ -351,12 +340,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       			var info = {
         				match_number: this.$.match_type.value + " " + this.$.match.value,
         				team_number: this.$.team.value,
-                scout_name: this.$.scoutName.value,
-								climb: !this.$.climb.checked  ? 1 : 0,
-								comments: this.$.comments.value
+                methodScoring: this.$.methodScoring.value,
+                methodAcquiring: this.$.methodAcquiring.value,
+                climbMech: this.$.climbMech.value,
+                mobility: !this.$.mobility.checked  ? 1 : 0,
+                autonSwitchCubes: this.$.autonSwitchCubes.pressed,
+                autonScaleCubes: this.$.autonScaleCubes.pressed,
+                allianceSwitchCubes: this.$.allianceSwitchCubes.pressed,
+                opposingSwitchCubes: this.$.opposingSwitchCubes.pressed,
+                teleopScaleCubes: this.$.teleopScaleCubes.pressed,
+                exchange: this.$.exchange.pressed,
+                climb: this.$.climb.pressed,
+                assistedOption: this.$.climb.pressed
       			};
-      			console.log(this.$.crossg.checked);
-      			console.log(this.$.crossg.checked? 1 : 0);
+      			console.log(this.$.mobility.checked);
+      			console.log(this.$.mobility.checked? 1 : 0);
       			//console.log(!this.$.yellow_card.checked);
 	  				//console.log(this.$.comments.value);
 	  				//console.log(this.$.successgr);
