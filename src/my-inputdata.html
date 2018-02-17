@@ -143,7 +143,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised class="custom red">6</paper-button>
                 <paper-button toggles raised on-click="load_text_switch_cubes" class="custom input">7+</paper-button>
 				<div id="loadable_text0" style="display:none">
-					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					<paper-textarea id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
 				</div>
 
              </paper-button-group>
@@ -163,7 +163,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  <paper-button toggles raised class="custom red">6</paper-button>
                  <paper-button toggles raised on-click="load_text_scale_cubes_auton" class="custom input">7+</paper-button>
 				 <div id="loadable_text1" style="display:none">
-					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					<paper-textarea id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
 				 </div>
 
               </paper-button-group>
@@ -186,7 +186,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
                     <paper-button toggles raised on-click="load_text_alliance_switch_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text2" style="display:none">
-						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-textarea id="allianceSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
 
                  </paper-button-group>
@@ -206,7 +206,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text3" style="display:none">
-						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-textarea id="opposingSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
 
                    </paper-button-group>
@@ -226,7 +226,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" class="custom input">7+</paper-button>
 					<div id="loadable_text4" style="display:none">
-						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-textarea id="teleopScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
 
                  </paper-button-group>
@@ -246,7 +246,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_exchange_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text5" style="display:none">
-						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-textarea id="exchange7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
 
                  </paper-button-group>
@@ -358,7 +358,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				}
 
 				load_text_exchange_cubes() {
-						this.$.loadable_text5.style.display="block";
+            this.$.loadable_text5.style.display ="block";
 				}
 
     		submit_data() {
@@ -371,11 +371,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 climbMech: this.$.climbMech.value,
                 mobility: !this.$.mobility.checked  ? 1 : 0,
                 autonSwitchCubes: this.$.autonSwitchCubes.pressed,
+                autonSwitchCubes7: this.$.loadable_text0,
                 autonScaleCubes: this.$.autonScaleCubes.pressed,
+                autonScaleCubes7: this.$.loadable_text1.value,
                 allianceSwitchCubes: this.$.allianceSwitchCubes.pressed,
+                allianceSwitchCubes7: this.$.loadable_text2.value,
                 opposingSwitchCubes: this.$.opposingSwitchCubes.pressed,
+                opposingSwitchCubes7: this.$.loadable_text3.value,
                 teleopScaleCubes: this.$.teleopScaleCubes.pressed,
+                teleopScaleCubes7: this.$.loadable_text4.value,
                 exchange: this.$.exchange.pressed,
+                exchange7: this.$.loadable_text5.value;
                 climb: this.$.climb.pressed,
                 assistedOption: this.$.climb.pressed
       			};
