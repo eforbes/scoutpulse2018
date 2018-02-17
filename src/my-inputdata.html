@@ -47,13 +47,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --paper-input-container-input: {
           font-size: 1.55em;
         };
-        --paper-listbox: {
-          font-size: 1.75em;
-        };
       }
+
+      .iconbig {
+        --iron-icon-height: 40em;
+        --iron-icon-width: 40em;
+      }
+      
       .fontsize {
         font-size: 2em;
       }
+      
       .green-red {
         --toggle-icon: {
           color: var(--paper-green-500);
@@ -62,6 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           color: var(--paper-red-500);
         };
       }
+      
       .notif_normal {
         --paper-toast-background-color: #323232;
         --paper-toast-color: #f1f1f1;
@@ -116,17 +121,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-item>Finals</paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
-                <paper-input always-float-label align="center" id="match_number" label="Match Number: "></paper-input>
-                <paper-input always-float-label align="center" id="methodScoring" label="Method of Scoring: "> </paper-input>
-                <paper-input always-float-label align="center" id="methodAcquiring" label="Method of Acquiring: "> </paper-input>
-                <paper-input always-float-label align="center" id="climbMech" label="Climb Mechanism: "> </paper-input>
+                <paper-input always-float-label id="match_number" label="Match Number: "></paper-input>
+                <paper-input always-float-label id="methodScoring" label="Method of Scoring: "> </paper-input>
+                <paper-input always-float-label id="methodAcquiring" label="Method of Acquiring: "> </paper-input>
+                <paper-input always-float-label id="climbMech" label="Climb Mechanism: "> </paper-input>
           		<br>
           		<hr>
           		<h4> Autonomous: </h4>
           		<iron-label for="moblity">
           		  Mobility?
           		</iron-label>
-               <toggle-icon id="mobility" required=true icon="icons:thumb-up" animation="flip-vertical" class="green-red"></toggle-icon>
+                <paper-button-group id="mobility">
+                    <paper-button toggles raised class="custom red">Yes</paper-button>
+                    <paper-button toggles raised class="custom red">No</paper-button>
+                </paper-button-group>
           		<br>
               <br>
               <iron-label for="autonSwitchCubes">
@@ -143,7 +151,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised class="custom red">6</paper-button>
                 <paper-button toggles raised on-click="load_text_switch_cubes" class="custom input">7+</paper-button>
 				<div id="loadable_text0" style="display:none">
-					<paper-textarea id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					<paper-input always-float-label id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
+					
 				</div>
 
              </paper-button-group>
@@ -164,10 +173,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  <paper-button toggles raised class="custom red">6</paper-button>
                  <paper-button toggles raised on-click="load_text_scale_cubes_auton" class="custom input">7+</paper-button>
 				 <div id="loadable_text1" style="display:none">
-					<paper-textarea id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
+					<paper-input always-float-label id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 				 </div>
 
-              </paper-button-group>
+              </paper-button-group>V
               <br>
               <br>
 
@@ -188,7 +197,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
                     <paper-button toggles raised on-click="load_text_alliance_switch_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text2" style="display:none">
-						<paper-textarea id="allianceSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-input always-float-label id="allianceSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
                  </paper-button-group>
@@ -209,7 +218,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text3" style="display:none">
-						<paper-textarea id="opposingSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-input always-float-label id="opposingSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
                    </paper-button-group>
@@ -230,7 +239,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" class="custom input">7+</paper-button>
 					<div id="loadable_text4" style="display:none">
-						<paper-textarea id="teleopScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-input always-float-label id="teleopScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
                  </paper-button-group>
@@ -251,12 +260,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_exchange_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text5" style="display:none">
-						<paper-textarea id="exchange7" label="If there are 7+ Cubes, Input here."> </paper-textarea>
+						<paper-input always-float-label id="exchange7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
                  </paper-button-group>
                   <br>
-                  <h4> EndGame: </h4>
+                  <h4> End Game: </h4>
                   <iron-label for="climb">
           		    Climb?
           		  </iron-label>
@@ -318,7 +327,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.methodScoring.value = "";
             this.$.methodAcquiring.value = "";
             this.$.climbMech.value = "";
-            this.$.mobility.checked = true;
+            this.$.mobility.value = "No";
             this.$.autonSwitchCubes.selected = "0";
             this.$.autonScaleCubes.selected = "0";
             this.$.allianceSwitchCubes.selected = "0";
@@ -343,7 +352,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.$.methodScoring.value = data.methodScoring;
                     this.$.methodAcquiring.value = data.methodAcquiring;
                     this.$.climbMech.value = data.climbMech;
-                    this.$.mobility.checked = !data.mobility != 0;
+                    this.$.mobility.value = !data.mobility != "No";
                     this.$.autonSwitchCubes.selected = data.autonSwitchCubes;
                     this.$.autonScaleCubes.selected = data.autonScaleCubes;
                     this.$.allianceSwitchCubes.selected = data.allianceSwitchCubes;
