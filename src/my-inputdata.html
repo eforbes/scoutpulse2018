@@ -119,10 +119,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<div id="loadable_text0" style="display:none">
 					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 				</div>
+<<<<<<< HEAD
 				</paper-button-group>
 				<br>
 				<br>
 				
+=======
+
+             </paper-button-group>
+             <br>
+             <br>
+
+>>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
              <iron-label for="autonScaleCubes">
                Number of Power Cubes on Scale:
              </iron-label>
@@ -160,10 +168,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<div id="loadable_text2" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
+<<<<<<< HEAD
 			
 					</paper-button-group>
 					<br>
 					<br>
+=======
+
+                 </paper-button-group>
+               <br>
+               <br>
+>>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
 
                <iron-label for="opposingSwitchCubes">
                  Number of Opposing Switch Power Cubes:
@@ -176,7 +191,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">4</paper-button>
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
-					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" class="custom input">7+</paper-button> 
+					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text3" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
@@ -196,7 +211,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">4</paper-button>
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
-					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" class="custom input">7+</paper-button> 
+					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" class="custom input">7+</paper-button>
 					<div id="loadable_text4" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
@@ -206,7 +221,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <br>
 
                 <iron-label for="exchange">
+<<<<<<< HEAD
                   Number of Power Cubes in the Exchange:
+=======
+                  Power Cubes from the Exchange:
+>>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
                 </iron-label>
                 <br>
                 <paper-button-group id="exchange" selected = "0">
@@ -216,7 +235,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">4</paper-button>
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
-					<paper-button toggles raised on-click="load_text_exchange_cubes" class="custom input">7+</paper-button> 
+					<paper-button toggles raised on-click="load_text_exchange_cubes" class="custom input">7+</paper-button>
 					<div id="loadable_text5" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
@@ -224,29 +243,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  </paper-button-group>
                   <br>
                   <h4> EndGame: </h4>
+                  <paper-input always-float-label align="center" id="scoutName"label = "Scout Name: "> </paper-input>
                   <iron-label for="climb">
           		    Climb?
           		  </iron-label>
-                <paper-button-group id="climb">
-                 <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
-                 <paper-button toggles raised class="custom red" name="NO"> No </paper-button>
-                 <paper-button toggles raised class="custom red" name="ASSISTED"> Assisted </paper-button>
-                 <paper-button toggles raised class="custom red" name="PLATFORM"> Platform </paper-button>
-               </paper-button-group>
-                   <br>
+                <paper-radio-group  id="climb" selected="climb" aria-labelledby="climb">
+                 <paper-radio-button name="YES"> Yes </paper-radio-button>
+                 <paper-radio-button name="NO"> No </paper-radio-button>
+                 <paper-radio-button name="ASSISTED"> Assisted </paper-radio-button>
+                 <paper-radio-button name="PLATOFRM"> Platform </paper-radio-button>
+               </paper-radio-group>
                    <br>
           		  <iron-label for="assistedOption">
           		  	Robots Assisted?
           		  </iron-label>
-          		  <paper-button-group id="assistedOption">
-                  <paper-button toggles raised class="custom red" name="NONE"> None </paper-button>
-                  <paper-button toggles raised class="custom red" name="ONE"> One </paper-button>
-                  <paper-button toggles raised class="custom red" name="TWO"> Two </paper-button>
-                </paper-button-group>
+          		  <paper-radio-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
+                  <paper-radio-button name="NONE"> None </paper-radio-button>
+                    <paper-radio-button name="ONE"> One </paper-radio-button>
+                    <paper-radio-button name="TWO"> Two </paper-radio-button>
+                  </paper-radio-group>
           		  <br>
-                <br>
-                <br>
-                <br?
+          		  <div class="rectangle"><b>Comments:</div></b>
+          		  <paper-textarea id="comments" always-float-label label="Please note in the comments how the robot behaved on the field.
+	      			    	Make sure to note if robot was not functional or repeatedly incurred fouls.">
+								</paper-textarea>
+          		  <br>
+
           		</div>
 	  	  	    <paper-button on-click="submit_data"> Submit </paper-button>
       		    <paper-button on-click="close_data"> Edit other sheet </paper-button>
@@ -277,6 +299,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$.notif_toast_normal.open();
             }
     		load_data() {
+<<<<<<< HEAD
 		var match = this.$.match_type.value + " " + this.$.match.value;
 		console.log("MATCH: " + match);
                 var team = this.$.team.value;
@@ -286,6 +309,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	    this.$.climb.selected = "NO";
 	    // Try to find data in server and fill in our form
 	    $.ajax({
+=======
+						var match = this.$.match_type.value + " " + this.$.match.value;
+						console.log("MATCH: " + match);
+            var team = this.$.team.value;
+            var scoutName = this.$.scoutName.value;
+						// First fill our form with its default values, clean slate
+            this.$.mobility.selected = "NO"
+						this.$.climb.checked = true;
+						this.$.comments.value = "";
+						// Try to find data in server and fill in our form
+						$.ajax({
+>>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
                 url: "/getdata?match_number=" + match + "&team_number=" + team,
                 type: "GET",
                 success: (data) => { // We use Lambda (=>) instead of function() because it preserves "this"
@@ -295,6 +330,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 										}
         	    console.log(data);
                     data = data[0]; // object is stored in array
+<<<<<<< HEAD
                     this.$.match_number.value,
                     this.$.methodScoring.value,
                     this.$.methodAcquiring.value,
@@ -307,6 +343,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.$.teleopScaleCubes.value,
                     this.$.exchange.value,
 										this.$.climb.value = data.climb
+=======
+										this.$.climb.checked = !data.climb != 0;
+										this.$.comments.value = data.comments;
+>>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
 								},
 			 					error: function(data) {
 										this.set_notif_error_message("ERROR: Did not load data, "
@@ -319,6 +359,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						this.$.toggle_button.style.display="button";
             //this.$.load_sheet_button.style.display="none";
 				    this.$.loadable_sheet_team_number.innerHTML = "Team " + team;
+				    this.$.loadable_sheet_match_number.innerHTML = match;
         }
 				close_data() {
 						this.$.loadable_sheet.style.display="none";
@@ -328,32 +369,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				load_text_switch_cubes() {
 						this.$.loadable_text0.style.display="block";
 				}
-				
+
 				load_text_scale_cubes_auton() {
 						this.$.loadable_text1.style.display="block";
 				}
-				
+
 				load_text_alliance_switch_cubes() {
 						this.$.loadable_text2.style.display="block";
 				}
-				
+
 				load_text_opposing_switch_cubes() {
 						this.$.loadable_text3.style.display="block";
 				}
-				
+
 				load_text_scale_cubes_teleop() {
 						this.$.loadable_text4.style.display="block";
 				}
-				
+
 				load_text_exchange_cubes() {
 						this.$.loadable_text5.style.display="block";
 				}
-				
+
     		submit_data() {
       			//var form = $("#scout_form");
       			var info = {
-                team_number: this.$.team.value,
         				match_number: this.$.match_type.value + " " + this.$.match.value,
+<<<<<<< HEAD
                 methodScoring: this.$.methodScoring.value,
                 methodAcquiring: this.$.methodAcquiring.value,
                 climbMech: this.$.climbMech.value,
@@ -366,9 +407,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 exchange: this.$.exchange.value,
 								climb: !this.$.climb.value,
                 assistedOption: this.$.assistedOption.value,
+=======
+        				team_number: this.$.team.value,
+                scout_name: this.$.scoutName.value,
+								climb: !this.$.climb.checked  ? 1 : 0,
+								comments: this.$.comments.value
+>>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
       			};
-      			console.log(this.$.mobility.checked);
-      			console.log(this.$.mobility.checked? 1 : 0);
+      			console.log(this.$.crossg.checked);
+      			console.log(this.$.crossg.checked? 1 : 0);
       			//console.log(!this.$.yellow_card.checked);
 	  				//console.log(this.$.comments.value);
 	  				//console.log(this.$.successgr);
@@ -394,7 +441,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       			    },
       			    error: function() {
                     base.set_notif_error_message("Failed to update!"
-                        + " Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only)");
+                        + "Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only)");
                     /*(base.set_notif_error_message("Invalid data! "
                     + "Make sure that all inputs are less than 255 and greater than 0");*/
       			        /*$("#error_log").html("Failed to update. Try using QR (once we get that up and running)");
