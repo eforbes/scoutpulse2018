@@ -105,7 +105,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		<br>
               <br>
               <iron-label for="autonSwitchCubes">
-              Number of Power Cubes on Switch:
+              Amount of Power Cubes on Switch:
             </iron-label>
             <br>
             <paper-button-group id="autonSwitchCubes" selected = "0">
@@ -119,18 +119,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				<div id="loadable_text0" style="display:none">
 					<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 				</div>
-<<<<<<< HEAD
-				</paper-button-group>
-				<br>
-				<br>
-				
-=======
 
              </paper-button-group>
              <br>
              <br>
 
->>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
              <iron-label for="autonScaleCubes">
                Number of Power Cubes on Scale:
              </iron-label>
@@ -150,7 +143,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-button-group>
               <br>
               <br>
-			  
+
+
           		<h4>Teleop:</h4>
           		<div>
                 <iron-label for="allianceSwitchCubes">
@@ -168,21 +162,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<div id="loadable_text2" style="display:none">
 						<paper-textarea label="If there are 7+ Cubes, Input here."> </paper-textarea>
 					</div>
-<<<<<<< HEAD
-			
-					</paper-button-group>
-					<br>
-					<br>
-=======
 
                  </paper-button-group>
                <br>
                <br>
->>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
 
                <iron-label for="opposingSwitchCubes">
                  Number of Opposing Switch Power Cubes:
-          		  </iron-label>
+          		  <iron-label>
                   <br>
                   <paper-button-group id="opposingSwitchCubes" selected = "0">
                     <paper-button toggles raised class="custom red">1</paper-button>
@@ -221,11 +208,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <br>
 
                 <iron-label for="exchange">
-<<<<<<< HEAD
-                  Number of Power Cubes in the Exchange:
-=======
                   Power Cubes from the Exchange:
->>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
                 </iron-label>
                 <br>
                 <paper-button-group id="exchange" selected = "0">
@@ -299,17 +282,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$.notif_toast_normal.open();
             }
     		load_data() {
-<<<<<<< HEAD
-		var match = this.$.match_type.value + " " + this.$.match.value;
-		console.log("MATCH: " + match);
-                var team = this.$.team.value;
-	    // First fill our form with its default values, clean slate
-            // Not necessraily required. This "feature" is present in most of the elements.
-            this.$.mobility.checked = "TRUE"
-	    this.$.climb.selected = "NO";
-	    // Try to find data in server and fill in our form
-	    $.ajax({
-=======
 						var match = this.$.match_type.value + " " + this.$.match.value;
 						console.log("MATCH: " + match);
             var team = this.$.team.value;
@@ -320,33 +292,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						this.$.comments.value = "";
 						// Try to find data in server and fill in our form
 						$.ajax({
->>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
                 url: "/getdata?match_number=" + match + "&team_number=" + team,
                 type: "GET",
                 success: (data) => { // We use Lambda (=>) instead of function() because it preserves "this"
                     if (data.length == 0) {
-		        this.set_notif_normal_message("No data found! Starting new sheet");
+												this.set_notif_normal_message("No data found! Starting new sheet");
                         return;
 										}
-        	    console.log(data);
+        						console.log(data);
                     data = data[0]; // object is stored in array
-<<<<<<< HEAD
-                    this.$.match_number.value,
-                    this.$.methodScoring.value,
-                    this.$.methodAcquiring.value,
-                    this.$.climbMech.value,
-                    this.$.mobility.checked  ? 1 : 0,
-                    this.$.autonSwitchCubes.value,
-                    this.$.autonScaleCubes.value,
-                    this.$.allianceSwitchCubes.value,
-                    this.$.opposingSwitchCubes.value,
-                    this.$.teleopScaleCubes.value,
-                    this.$.exchange.value,
-										this.$.climb.value = data.climb
-=======
 										this.$.climb.checked = !data.climb != 0;
 										this.$.comments.value = data.comments;
->>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
 								},
 			 					error: function(data) {
 										this.set_notif_error_message("ERROR: Did not load data, "
@@ -369,50 +325,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				load_text_switch_cubes() {
 						this.$.loadable_text0.style.display="block";
 				}
-
 				load_text_scale_cubes_auton() {
 						this.$.loadable_text1.style.display="block";
 				}
-
 				load_text_alliance_switch_cubes() {
 						this.$.loadable_text2.style.display="block";
 				}
-
 				load_text_opposing_switch_cubes() {
 						this.$.loadable_text3.style.display="block";
 				}
-
 				load_text_scale_cubes_teleop() {
 						this.$.loadable_text4.style.display="block";
 				}
-
 				load_text_exchange_cubes() {
 						this.$.loadable_text5.style.display="block";
 				}
-
     		submit_data() {
       			//var form = $("#scout_form");
       			var info = {
         				match_number: this.$.match_type.value + " " + this.$.match.value,
-<<<<<<< HEAD
-                methodScoring: this.$.methodScoring.value,
-                methodAcquiring: this.$.methodAcquiring.value,
-                climbMech: this.$.climbMech.value,
-                mobility: this.$.mobility.checked ? 1 : 0,
-                autonSwitchCubes: this.$.autonSwitchCubes.value,
-                autonScaleCubes: this.$.autonScaleCubes.value,
-                allianceSwitchCubes: this.$.allianceSwitchCubes.value,
-                opposingSwitchCubes: this.$.opposingSwitchCubes.value,
-                teleopScaleCubes: this.$.teleopScaleCubes.value,
-                exchange: this.$.exchange.value,
-								climb: !this.$.climb.value,
-                assistedOption: this.$.assistedOption.value,
-=======
         				team_number: this.$.team.value,
                 scout_name: this.$.scoutName.value,
 								climb: !this.$.climb.checked  ? 1 : 0,
 								comments: this.$.comments.value
->>>>>>> c90cc85e76700b04cd6a82f3a1217e69ff8d6c09
       			};
       			console.log(this.$.crossg.checked);
       			console.log(this.$.crossg.checked? 1 : 0);
