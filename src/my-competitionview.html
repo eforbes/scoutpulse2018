@@ -1,36 +1,62 @@
-<script type="text/javascript" src="../lib/jquery-3.2.1.min.js"> </script>
-
-<link rel="import" href="../bower_components/google-chart/google-chart.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/google-chart/google-chart.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower-components/paper-toolbar/paper-toolbar.html">
+<link type="image/x-icon" rel="shortcut icon" href="http://david-mulder.github.io/paper-datatable/components/paper-datatable/docs/icon.png">
 <dom-module id="my-competitionview">
     <template>
-        <style>
+      <style is="custom-style">body {
+        overflow:hidden;
+        }
+
+        paper-card {
+          display:block;
+        }
+      </style>
+      <style>
             google-chart {
-                height: 300px;
-                width: 50em;
-                background-color: white;
-            }
-            td {
-              background-color: black;
+              height: 300px;
+              width: 40em;
+              background-color: white;
+
             }
         </style>
 
-        <!-- Table Chart -->
+        <!-- Table Chart
         <center>
           <br>
         <google-chart
             type='table'
-            options='{"title": "Competition View", "border":}'
-            cols='[{"label":"Team #", "type":"string"},
-                   {"label":"Average Switch Cubes in Auton", "type":"number"},
-                   {"label":"Average Scale Cubes in Auton", "type":"number"},
-                   {"label":"Average Switch Cubes in Teleop", "type":"number"},
-                   {"label":"Average Scale Cubes in Teleop", "type":"number"}
-                  ]'
-            rows='[["694", 0, 6, 9, 4],["254", 100, 100, 200, 200],["123", 0, 0, 0, 0]]'>
+            options='{"allowHtml": "true",
+            "title": "Competition View",
+                "page": "enable",
+                "pageSize": 3,
+                "pagingButtons": "both"}'
+            data='[["Team Number", "Average Switch Cubes in Auton", "Average Scale Cubes in Auton", "Average Switch Cubes in Teleop", "Average Scale Cubes in Teleop"],
+            ["694", 0, 6, 9, 4],
+            ["254", 100, 100, 200, 200],
+            ["694", 0, 6, 9, 4],
+            ["254", 100, 100, 200, 200],
+            ["123", 0, 0, 0, 0]]'>
         </google-chart>
+        <google-chart-loader id="loader" class="style-scope google-chart"></google-chart-loader> -->
 
         <!-- Box Chart/Candlestick Chart for Scale -->
+        <center>
+          <paper-card>
+            <paper-input>
+            </paper-input>
+          </paper-card>
         <google-chart
             type='candlestick'
             options='{"title": "Scale Scores in Teleop",
