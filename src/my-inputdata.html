@@ -35,6 +35,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         padding: 10px;
+        
+        --paper-input-container-label: {
+          font-size: 1.55em;
+          line-height: 100px;
+        };
+        --paper-input-container: {
+          padding-top: 1.55em;
+          padding-right: 4em;
+          padding-left: 4em;
+        };
+        --paper-input-container-input: {
+          font-size: 1.55em;
+        };
+        --paper-listbox: {
+          font-size: 1.75em;
+        };
+      }
+      .fontsize {
+        font-size: 2em;
       }
       .green-red {
         --toggle-icon: {
@@ -79,16 +98,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="card">
         <paper-toast id="notif_toast_error" class="notif_error" text="Notification!" vertical-align horizontal-align > </paper-toast>
         <paper-toast id="notif_toast_normal" class="notif_normal" text="Notification!" vertical-align horizontal-align > </paper-toast>
-      <div>
+      <div class="fontsize">
         <iron-form id="scout_form">
 			    <form  method="post" action="/scout" >
             <div id="sheet_key_info" style="display:block">
-              <div class="rectangle">Input</div>
               <paper-input always-float-label align="center" id="team" label="Team: "></paper-input>
 	  				<paper-button id="load_sheet_button" on-click="load_data"> Load Sheet </paper-button>
             </div>
 						<div id="loadable_sheet" style="display:none">
-              <div class="rectangle" style="font-size:24px;">Scouting</div>
+              <div class="rectangle" class="fontsize" style="font-size:24px;">Scouting</div>
 							<h3> <p id="loadable_sheet_team_number" style=""> </h3>
                 <paper-dropdown-menu id="match_type" label="Match Type">
                   <paper-listbox slot="dropdown-content" selected="1">
