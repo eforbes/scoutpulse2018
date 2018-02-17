@@ -25,7 +25,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../bower_components/paper-button/paper-toggle-button.html">
 <link rel="import" href="../bower_components/paper-button-group/paper-button-group.html">
 <link rel="import" href="shared-styles.html">
 
@@ -91,7 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-item>Finals</paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
-                <paper-input always-float-label align="center" id="match" label="Match Number: "></paper-input>
+                <paper-input always-float-label align="center" id="match_number" label="Match Number: "></paper-input>
                 <paper-input always-float-label align="center" id="methodScoring" label="Method of Scoring: "> </paper-input>
                 <paper-input always-float-label align="center" id="methodAcquiring" label="Method of Acquiring: "> </paper-input>
                 <paper-input always-float-label align="center" id="climbMech" label="Climb Mechanism: "> </paper-input>
@@ -109,6 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </iron-label>
             <br>
             <paper-button-group id="autonSwitchCubes" selected = "0">
+              <paper-button toggles raised class="custom red">0</paper-button>
                 <paper-button toggles raised class="custom red">1</paper-button>
                 <paper-button toggles raised class="custom red">2</paper-button>
                 <paper-button toggles raised class="custom red">3</paper-button>
@@ -129,6 +129,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              </iron-label>
              <br>
              <paper-button-group id="autonScaleCubes" selected = "0">
+               <paper-button toggles raised class="custom red">0</paper-button>
                  <paper-button toggles raised class="custom red">1</paper-button>
                  <paper-button toggles raised class="custom red">2</paper-button>
                  <paper-button toggles raised class="custom red">3</paper-button>
@@ -152,6 +153,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-label>
                 <br>
                 <paper-button-group id="allianceSwitchCubes" selected = "0">
+                    <paper-button toggles raised class="custom red">0</paper-button>
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -172,6 +174,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		  <iron-label>
                   <br>
                   <paper-button-group id="opposingSwitchCubes" selected = "0">
+                    <paper-button toggles raised class="custom red">0</paper-button>
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -192,6 +195,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-label>
                 <br>
                 <paper-button-group id="teleopScaleCubes" selected = "0">
+                  <paper-button toggles raised class="custom red">0</paper-button>
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -212,6 +216,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-label>
                 <br>
                 <paper-button-group id="exchange" selected = "0">
+                    <paper-button toggles raised class="custom red">0</paper-button>
                     <paper-button toggles raised class="custom red">1</paper-button>
                     <paper-button toggles raised class="custom red">2</paper-button>
                     <paper-button toggles raised class="custom red">3</paper-button>
@@ -231,7 +236,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		  </iron-label>
                 <paper-button-group  id="climb" selected="climb" aria-labelledby="climb">
                  <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
-                 <paper-button toggles raised class="custom red" name="NO"> No </paper-button>
+                 <paper-button toggles raised class="custom red" name="NO" selected> No </paper-button>
                  <paper-button toggles raised class="custom red" name="ASSISTED"> Assisted </paper-button>
                  <paper-button toggles raised class="custom red" name="PLATOFRM"> Platform </paper-button>
                </paper-button-group>
@@ -241,7 +246,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		  	Robots Assisted?
           		  </iron-label>
           		  <paper-button-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
-                  <paper-button toggles raised class="custom red" name="NONE"> None </paper-button>
+                  <paper-button toggles raised class="custom red" name="NONE" selected> None </paper-button>
                     <paper-button toggles raised class="custom red" name="ONE"> One </paper-button>
                     <paper-button toggles raised class="custom red" name="TWO"> Two </paper-button>
                   </paper-button-group>
@@ -277,9 +282,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$.notif_toast_normal.open();
             }
     		load_data() {
-						var match = this.$.match_type.value + " " + this.$.match.value;
-						console.log("MATCH: " + match);
+            var match = this.$.match_type.value + "" + this.$.match_number.value;
+            console.log("MATCH: " + match);
             var team = this.$.team.value;
+            //Fill form with default values:
+            this.$.climb.selected = "NO";
+            this.$.match_type.value = "";
+            this.$.match_number.value = "";
+            this.$.methodScoring.value = "";
+            this.$.methodAcquiring.value = "";
+            this.$.climbMech.value = "";
+            this.$.mobility.checked = true;
+            this.$.autonSwitchCubes.selected = "0";
+            this.$.autonScaleCubes.selected = "0";
+            this.$.allianceSwitchCubes.selected = "0";
+            this.$.opposingSwitchCubes.selected = "0";
+            this.$.teleopScaleCubes.selected = "1";
+            this.$.exchange.selected = "0";
+            this.$.assistedOption.selected = "NONE";
 						// Try to find data in server and fill in our form
 						$.ajax({
                 url: "/getdata?match_number=" + match + "&team_number=" + team,
@@ -291,7 +311,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 										}
         						console.log(data);
                     data = data[0]; // object is stored in array
-										this.$.climb.checked = !data.climb != 0;
+                    this.$.climb.selected = data.climb;
+                    this.$.match_type.value = data.match_type;
+                    this.$.match_number.value = data.match_number;
+                    this.$.methodScoring.value = data.methodScoring;
+                    this.$.methodAcquiring.value = data.methodAcquiring;
+                    this.$.climbMech.value = data.climbMech;
+                    this.$.mobility.checked = !data.mobility != 0;
+                    this.$.autonSwitchCubes.selected = data.autonSwitchCubes;
+                    this.$.autonScaleCubes.selected = data.autonScaleCubes;
+                    this.$.allianceSwitchCubes.selected = data.allianceSwitchCubes;
+                    this.$.opposingSwitchCubes.selected = data.opposingSwitchCubes;
+                    this.$.teleopScaleCubes.selected = data.teleopScaleCubes;
+                    this.$.exchange.selected = data.exchange;
+                    this.$.assistedOption.selected = data.assistedOption;
 								},
 			 					error: function(data) {
 										this.set_notif_error_message("ERROR: Did not load data, "
@@ -301,11 +334,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						});
 						this.$.loadable_sheet.style.display="block";
 						this.$.sheet_key_info.style.display="none";
-						this.$.toggle_button.style.display="button";
             //this.$.load_sheet_button.style.display="none";
 				    this.$.loadable_sheet_team_number.innerHTML = "Team " + team;
-				    this.$.loadable_sheet_match_number.innerHTML = match;
-        }
+                  }
+
 				close_data() {
 						this.$.loadable_sheet.style.display="none";
 						this.$.sheet_key_info.style.display="block";
@@ -338,23 +370,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     		submit_data() {
       			//var form = $("#scout_form");
       			var info = {
-        				match_number: this.$.match_type.value + " " + this.$.match.value,
-        				team_number: this.$.team.value,
+              	team_number: this.$.team.value,
+        				match_type: this.$.match_type.value,
+                match_number: this.$.match_number.value,
                 methodScoring: this.$.methodScoring.value,
                 methodAcquiring: this.$.methodAcquiring.value,
                 climbMech: this.$.climbMech.value,
                 mobility: !this.$.mobility.checked  ? 1 : 0,
-                autonSwitchCubes: this.$.autonSwitchCubes.pressed,
-                autonScaleCubes: this.$.autonScaleCubes.pressed,
-                allianceSwitchCubes: this.$.allianceSwitchCubes.pressed,
-                opposingSwitchCubes: this.$.opposingSwitchCubes.pressed,
-                teleopScaleCubes: this.$.teleopScaleCubes.pressed,
-                exchange: this.$.exchange.pressed,
-                climb: this.$.climb.pressed,
-                assistedOption: this.$.climb.pressed
+                autonSwitchCubes: this.$.autonSwitchCubes.selected,
+                autonScaleCubes: this.$.autonScaleCubes.selected,
+                allianceSwitchCubes: this.$.allianceSwitchCubes.selected,
+                opposingSwitchCubes: this.$.opposingSwitchCubes.selected,
+                teleopScaleCubes: this.$.teleopScaleCubes.selected,
+                exchange: this.$.exchange.selected,
+                climb: this.$.climb.selected,
+                assistedOption: this.$.assistedOption.selected
       			};
       			console.log(this.$.mobility.checked);
       			console.log(this.$.mobility.checked? 1 : 0);
+            console.log("Match Type: " + this.$.match_type.value + ", Match Number: " + this.$.match_number.value);
       			//console.log(!this.$.yellow_card.checked);
 	  				//console.log(this.$.comments.value);
 	  				//console.log(this.$.successgr);
@@ -380,7 +414,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       			    },
       			    error: function() {
                     base.set_notif_error_message("Failed to update!"
-                        + "Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only)");
+                        + " Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only)");
                     /*(base.set_notif_error_message("Invalid data! "
                     + "Make sure that all inputs are less than 255 and greater than 0");*/
       			        /*$("#error_log").html("Failed to update. Try using QR (once we get that up and running)");

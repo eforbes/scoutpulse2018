@@ -10,17 +10,11 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower-components/paper-toolbar/paper-toolbar.html">
 <link type="image/x-icon" rel="shortcut icon" href="http://david-mulder.github.io/paper-datatable/components/paper-datatable/docs/icon.png">
 <dom-module id="my-competitionview">
     <template>
       <style is="custom-style">body {
         overflow:hidden;
-        }
-
-        paper-card {
-          display:block;
         }
       </style>
       <style>
@@ -53,10 +47,6 @@
 
         <!-- Box Chart/Candlestick Chart for Scale -->
         <center>
-          <paper-card>
-            <paper-input>
-            </paper-input>
-          </paper-card>
         <google-chart
             type='candlestick'
             options='{"title": "Scale Scores in Teleop",
