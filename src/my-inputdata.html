@@ -104,14 +104,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-toast id="notif_toast_normal" class="notif_normal" text="Notification!" vertical-align horizontal-align > </paper-toast>
       <div class="fontsize">
         <iron-form id="scout_form">
-			    <form  method="post" action="/scout" >
+		    <form  method="post" action="/scout" >
             <div id="sheet_key_info" style="display:block">
               <paper-input always-float-label align="center" id="team" label="Team: "></paper-input>
-	  				<paper-button id="load_sheet_button" on-click="load_data"> Load Sheet </paper-button>
+	  		  <paper-button id="load_sheet_button" on-click="load_data"> Load Sheet </paper-button>
             </div>
-						<div id="loadable_sheet" style="display:none">
+			  <div id="loadable_sheet" style="display:none">
               <div class="rectangle" class="fontsize" style="font-size:24px;">Scouting</div>
-							<h3> <p id="loadable_sheet_team_number" style=""> </h3>
+				<h3> <p id="loadable_sheet_team_number" style=""> </h3>
                 <paper-dropdown-menu id="match_type" label="Match Type">
                   <paper-listbox slot="dropdown-content" selected="1">
                     <paper-item>Practice</paper-item>
@@ -122,9 +122,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <paper-input always-float-label id="match_number" label="Match Number: "></paper-input>
-                <paper-input always-float-label id="methodScoring" label="Method of Scoring: "> </paper-input>
-                <paper-input always-float-label id="methodAcquiring" label="Method of Acquiring: "> </paper-input>
-                <paper-input always-float-label id="climbMech" label="Climb Mechanism: "> </paper-input>
+               <iron-label for="methodScoring">
+                 Method of Acquiring
+               </iron-label>
+               <br>
+               <paper-button-group id="methodScoring" selected = "methodScoring">
+                <paper-button toggles raised class="custom red"> Place </paper-button>
+                <paper-button toggles raised class="custom red"> Shoot Cube </paper-button>
+                <paper-button toggles raised on-click="load_text_method_scoring" class="custom red"> Other </paper-button>
+                <!--<div id="loadable_text0" style="display:none">
+                    <paper-input always-float-label id="methodScoringOther"> </paper-input>
+                </div> -->
+               </paper-button-group>
+               <br>
+
+               <iron-label for="methodAcquiring">
+                Method of Acquiring
+               </iron-label>
+               <paper-button-group id="methodAcquiring" selected = "methodAcquiring">
+                <paper-button toggles raised class="custom red"> Floor </paper-button> 
+                <paper-button toggles raised class="custom red"> Portal </paper-button>
+                <paper-button toggles raised on-click="load_text_method_acquiring" class="custom red"> Other </paper-button>
+                <!-- <div id="loadable_text1" style="display:none">
+                    <paper-input always-float-label id="methodAcquiringOther"> </paper-input>
+                </div> -->
+               </paper-button-group>
+               <br>
+
+               <iron-label for="climbMech">
+                Climb Mechanism
+               </iron-label>
+               <paper-button-group id="climbMech" selected="climbMech">
+                <paper-button toggles raised class="custom red"> Rung </paper-button>
+          		<paper-button toggles raised class="custom red"> Ramp </paper-button>
+          		<paper-button toggles raised class="custom red"> Rung Expansion </paper-button>
+          		<paper-button toggles raised on-click-"load_text_climb_mech" class="custom red"> Other </paper-button>
+          		<!-- <div id="loadable_text2" style="display:none">
+          		    <paper-input always-float-label id="climbMechOther"> </paper-input>
+          	    </div> -->
+          	   </paper-button-group>
           		<br>
           		<hr>
           		<h4> Autonomous: </h4>
@@ -137,7 +173,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </paper-button-group>
           		<br>
               <br>
-              <iron-label for="autonSwitchCubes">
+            <iron-label for="autonSwitchCubes">
               Amount of Power Cubes on Switch:
             </iron-label>
             <br>
@@ -150,7 +186,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised class="custom red">5</paper-button>
                 <paper-button toggles raised class="custom red">6</paper-button>
                 <paper-button toggles raised on-click="load_text_switch_cubes" class="custom input">7+</paper-button>
-				<div id="loadable_text0" style="display:none">
+				<div id="loadable_text3" style="display:none">
 					<paper-input always-float-label id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 
 				</div>
@@ -172,7 +208,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  <paper-button toggles raised class="custom red">5</paper-button>
                  <paper-button toggles raised class="custom red">6</paper-button>
                  <paper-button toggles raised on-click="load_text_scale_cubes_auton" class="custom input">7+</paper-button>
-				 <div id="loadable_text1" style="display:none">
+				 <div id="loadable_text4" style="display:none">
 					<paper-input always-float-label id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 				 </div>
 
@@ -196,7 +232,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
                     <paper-button toggles raised on-click="load_text_alliance_switch_cubes" class="custom input">7+</paper-button>
-					<div id="loadable_text2" style="display:none">
+					<div id="loadable_text5" style="display:none">
 						<paper-input always-float-label id="allianceSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
@@ -217,7 +253,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" class="custom input">7+</paper-button>
-					<div id="loadable_text3" style="display:none">
+					<div id="loadable_text6" style="display:none">
 						<paper-input always-float-label id="opposingSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
@@ -238,7 +274,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" class="custom input">7+</paper-button>
-					<div id="loadable_text4" style="display:none">
+					<div id="loadable_text7" style="display:none">
 						<paper-input always-float-label id="teleopScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
@@ -259,7 +295,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-button toggles raised class="custom red">5</paper-button>
                     <paper-button toggles raised class="custom red">6</paper-button>
 					<paper-button toggles raised on-click="load_text_exchange_cubes" class="custom input">7+</paper-button>
-					<div id="loadable_text5" style="display:none">
+					<div id="loadable_text8" style="display:none">
 						<paper-input always-float-label id="exchange7" label="If there are 7+ Cubes, Input here."> </paper-input>
 					</div>
 
@@ -324,9 +360,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.climb.selected = "NO";
             this.$.match_type.value = "";
             this.$.match_number.value = "";
-            this.$.methodScoring.value = "";
-            this.$.methodAcquiring.value = "";
-            this.$.climbMech.value = "";
+            this.$.methodScoring.selected = "0";
+            this.$.methodAcquiring.selected = "0";
+            this.$.climbMech.selected = "0";
             this.$.mobility.selected = "YES";
             this.$.autonSwitchCubes.selected = "0";
             this.$.autonScaleCubes.selected = "0";
@@ -349,9 +385,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.$.climb.selected = data.climb;
                     this.$.match_type.value = data.match_type;
                     this.$.match_number.value = data.match_number;
-                    this.$.methodScoring.value = data.methodScoring;
-                    this.$.methodAcquiring.value = data.methodAcquiring;
-                    this.$.climbMech.value = data.climbMech;
+                    this.$.methodScoring.selected = data.methodScoring;
+                    this.$.methodAcquiring.selected = data.methodAcquiring;
+                    this.$.climbMech.selected = data.climbMech;
                     this.$.mobility.selected = data.mobility;
                     this.$.autonSwitchCubes.selected = data.autonSwitchCubes;
                     this.$.autonScaleCubes.selected = data.autonScaleCubes;
@@ -378,28 +414,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						this.$.sheet_key_info.style.display="block";
             //this.$.load_sheet_button.style.display="block";
 				}
+
+                load_text_method_scoring() {
+                        this.$.loadable_text0.style.display="block";
+                }
+
+                load_text_method_acquiring() {
+                        this.$.loadable_text1.style.display="block";
+                }
+
+                load_text_climb_mech() {
+                        this.$.loadable_text2.style.display="block";
+                }
+
 				load_text_switch_cubes() {
-						this.$.loadable_text0.style.display="block";
-				}
-
-				load_text_scale_cubes_auton() {
-						this.$.loadable_text1.style.display="block";
-				}
-
-				load_text_alliance_switch_cubes() {
-						this.$.loadable_text2.style.display="block";
-				}
-
-				load_text_opposing_switch_cubes() {
 						this.$.loadable_text3.style.display="block";
 				}
 
-				load_text_scale_cubes_teleop() {
+				load_text_scale_cubes_auton() {
 						this.$.loadable_text4.style.display="block";
 				}
 
+				load_text_alliance_switch_cubes() {
+						this.$.loadable_text5.style.display="block";
+				}
+
+				load_text_opposing_switch_cubes() {
+						this.$.loadable_text6.style.display="block";
+				}
+
+				load_text_scale_cubes_teleop() {
+						this.$.loadable_text7.style.display="block";
+				}
+
 				load_text_exchange_cubes() {
-            this.$.loadable_text5.style.display ="block";
+                        this.$.loadable_text8.style.display ="block";
 				}
 
     		submit_data() {
@@ -411,6 +460,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               this.$.mobility.value = "YES"
             }
             else {this.$.mobility.value = "NO"}
+            
+            //Method of Scoring
+            if (this.$.methodScoring.selected == 0) {
+              this.$.methodScoring.value = "Place"
+            }
+            if (this.$.methodScoring.selected == 1) {
+              this.$.methodScoring.value = "Shoot Cube"
+            }
+
+            //Method of Acquiring
+            if (this.$.methodAcquiring.selected == 0) {
+              this.$.methodAcquiring.value = "Floor"
+            }
+            if (this.$.methodAcquiring.selected == 1) {
+              this.$.methodAcquiring.value = "Portal"
+            }
+        
+            //Climb Mechanism
+            if (this.$.climbMech.selected == 0) {
+              this.$.climbMech.value = "Rung"
+            }
+            if (this.$.climbMech.selected == 1) {
+              this.$.climbMech.value == "Ramp"
+            }
+            if (this.$.climbMech.selected == 2) {
+              this.$.climbMech.value == "Rung Expansion"
+            }
+
             //climb:
             if (this.$.climb.selected == 0 ) {
               this.$.climb.value = "YES"
@@ -424,6 +501,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             if (this.$.climb.selected == 3 ) {
               this.$.climb.value = "PLATFORM"
             }
+            
             //assistedOption
             if (this.$.assistedOption.selected == 0) {
               this.$.assistedOption.value = "NONE"
@@ -438,9 +516,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // Set a variable, "info" to the data.
       			var info = {
               	team_number: this.$.team.value,
-        				match_type: this.$.match_type.value,
+        		match_type: this.$.match_type.value,
                 match_number: this.$.match_number.value,
                 methodScoring: this.$.methodScoring.value,
+//                methodScoringOther: this.$.methodScoringOther.value,
                 methodAcquiring: this.$.methodAcquiring.value,
                 climbMech: this.$.climbMech.value,
                 mobility: this.$.mobility.value,
