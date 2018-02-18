@@ -125,14 +125,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                <iron-label for="methodScoring">
                  Method of Acquiring
                </iron-label>
-               <br>
                <paper-button-group id="methodScoring" selected = "methodScoring">
                 <paper-button toggles raised class="custom red"> Place </paper-button>
-                <paper-button toggles raised class="custom red"> Shoot Cube </paper-button>
+                <paper-button toggles raised class="custom red"> Shoot </paper-button>
                 <paper-button toggles raised on-click="load_text_method_scoring" class="custom red"> Other </paper-button>
-                <!--<div id="loadable_text0" style="display:none">
+                <div id="loadable_text0" style="display:none">
                     <paper-input always-float-label id="methodScoringOther"> </paper-input>
-                </div> -->
+                </div>
                </paper-button-group>
                <br>
 
@@ -143,9 +142,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button toggles raised class="custom red"> Floor </paper-button> 
                 <paper-button toggles raised class="custom red"> Portal </paper-button>
                 <paper-button toggles raised on-click="load_text_method_acquiring" class="custom red"> Other </paper-button>
-                <!-- <div id="loadable_text1" style="display:none">
+                <div id="loadable_text1" style="display:none">
                     <paper-input always-float-label id="methodAcquiringOther"> </paper-input>
-                </div> -->
+                </div>
                </paper-button-group>
                <br>
 
@@ -155,12 +154,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                <paper-button-group id="climbMech" selected="climbMech">
                 <paper-button toggles raised class="custom red"> Rung </paper-button>
           		<paper-button toggles raised class="custom red"> Ramp </paper-button>
-          		<paper-button toggles raised class="custom red"> Rung Expansion </paper-button>
-          		<paper-button toggles raised on-click-"load_text_climb_mech" class="custom red"> Other </paper-button>
-          		<!-- <div id="loadable_text2" style="display:none">
+          		<paper-button toggles raised class="custom red"> Expansion </paper-button>
+          		<paper-button toggles raised on-click="load_text_climb_mech" class="custom red"> Other </paper-button>
+          		<div id="loadable_text2" style="display:none">
           		    <paper-input always-float-label id="climbMechOther"> </paper-input>
-          	    </div> -->
+          	    </div>
           	   </paper-button-group>
+
           		<br>
           		<hr>
           		<h4> Autonomous: </h4>
@@ -482,10 +482,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               this.$.climbMech.value = "Rung"
             }
             if (this.$.climbMech.selected == 1) {
-              this.$.climbMech.value == "Ramp"
+              this.$.climbMech.value = "Ramp"
             }
             if (this.$.climbMech.selected == 2) {
-              this.$.climbMech.value == "Rung Expansion"
+              this.$.climbMech.value = "Rung Expansion"
             }
 
             //climb:
@@ -519,9 +519,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         		match_type: this.$.match_type.value,
                 match_number: this.$.match_number.value,
                 methodScoring: this.$.methodScoring.value,
-//                methodScoringOther: this.$.methodScoringOther.value,
+                methodScoringOther: this.$.methodScoringOther.value,
                 methodAcquiring: this.$.methodAcquiring.value,
+                methodAcquiringOther: this.$.methodAcquiringOther.value,
                 climbMech: this.$.climbMech.value,
+                climbMechOther: this.$.climbMechOther.value,
                 mobility: this.$.mobility.value,
                 autonSwitchCubes: this.$.autonSwitchCubes.selected,
                 autonSwitchCubes7: this.$.autonSwitchCubes7.value,
