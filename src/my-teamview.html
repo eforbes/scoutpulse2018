@@ -27,6 +27,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/google-chart/google-chart.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
+<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
 
 
 
@@ -38,10 +41,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               width: 50em;
               background-color: white;
           }
+          paper-card {
+            display:block;
+          }
       </style>
-<center>
-  <br>
-  <br>
+      <center>
+  <paper-card heading="Specific Team Data:">
+    <paper-datatable data="{{data}}"selectable multi-selection resize-behavior="overflow" response-width="100px">
+      <paper-datatable-column header="Match #" property="title" type="Number" align="right" sortable>
+      </paper-datatable-column>
+      <paper-datatable-column header="Mobility?" property="mobility" type="String" align="right" sortable>
+      </paper-datatable-column>
+      <paper-datatable-column header="Has a Switch Auton?" property="switchAuton" type="String" align="right" sortable>
+      </paper-datatable-column>
+      <paper-datatable-column header="Cubes in Scale" property="scaleCubes" type="Number" align="right" sortable>
+      </paper-datatable-column>
+      <paper-datatable-column header="Cubes in Exchange" property="exchange" type="Number" align="right" sortable>
+      </paper-datatable-column>
+      <paper-datatable-column header="Climb?" property="climb" type="String" align="right" sortable>
+</paper-card>
+<br>
+<paper-card heading="Averages:">
+  <paper-datatable data="{{data}}" selectable multi-selection resize-behavior="overflow" response-width="100px">
+    <paper-datatable-column header="Mobility Percentage" property="mobility%" type="Number" align="right" sortable>
+    </paper-datatable-column>
+    <paper-datatable-column header="Cubes in Scale" property="teleopScale" type="Number" align="right" sortable>
+    </paper-datatable-column>
+    <paper-datatable-column header="Cubes in Switch" property="askericaboutthis" type="Number" align="right" sortable>
+    </paper-datatable-column>
+    <paper-datatable-column header="Climb Percentage" property="climb%" type="Number" align="right" sortable>
+    </paper-datatable-column>
+  </paper-datatable>
+</paper-card>
 <google-chart
   type='table'
   options='{"title": "Team View",
@@ -88,9 +119,13 @@ view='{{dataview}}'
 </center>
 </template>
 <script>
+
     class MyTeamView extends Polymer.Element {
     static get is() { return 'my-teamview' }
     }
 window.customElements.define(MyTeamView.is, MyTeamView);
+
+var teamview = document.querySelector('#teamview');
+teamview.data = [{title: 1, mobility: "YES", switchAuton: "NO", scaleCubes: 24, exchange: 4, climb: "Yes"},{title: 2, mobility: "NO", switchAuton: "YES", scaleCubes: 24, exchange: 4, climb: "Yes"}];
 </script>
 </dom-module>

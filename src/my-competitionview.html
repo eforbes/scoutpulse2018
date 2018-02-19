@@ -1,8 +1,8 @@
 <link rel="import" href="../bower_components/google-chart/google-chart.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-datatable/paper-datatable.html">
-<link rel="import" href="../bower_components/paper-datatable/paper-datatable-column.html">
+<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
+<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 <dom-module id="my-competitionview">
@@ -17,13 +17,28 @@
               display:block;
             }
         </style>
-        <paper-card heading="Averages">
-          <paper-datatable selectable multi-selection resize-behavior="overflow">
-            <paper-datatable-column header="Team #" type="Number" style="width:99%;" sortable>
+        <center>
+        <paper-card heading="Team Averages:">
+          <paper-datatable selectable multi-selection resize-behavior="overflow" response-width="100px">
+            <paper-datatable-column header="Team #" property="title" type="Number"  sortable>
             </paper-datatable-column>
-            <paper-datatable-column header="Mobility" type="Number" style="width:99%;" sortable>
+            <paper-datatable-column header="Mobility Percentage" property="mobility%" type="Number" sortable>
             </paper-datatable-column>
-            <paper-datatable-column header="Auton Switch Cubes" type="Number" style="width:99%;" sortable>
+            <paper-datatable-column header="Auton Switch Cubes" property="autonSwitch" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Auton Scale Cubes" property="autonScale" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Alliance Switch Cubes" property="allianceSwitch" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Opposing Switch Cubes" property="opposingSwitch" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Scale Cubes" property="teleopScale" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Exchange" property="exchange" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Climb Percentage" property="climb%" type="Number" sortable>
+            </paper-datatable-column>
+            <paper-datatable-column header="Robots Assisted" property="assisted" type="Number" sortable>
             </paper-datatable-column>
           </paper-datatable>
         </paper-card>
@@ -49,7 +64,6 @@
         <google-chart-loader id="loader" class="style-scope google-chart"></google-chart-loader> -->
 
         <!-- Box Chart/Candlestick Chart for Scale -->
-        <center>
         <google-chart
             type='candlestick'
             options='{"title": "Scale Scores in Teleop",
