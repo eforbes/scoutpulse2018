@@ -1,0 +1,6 @@
+[submodule "iron-iage"]
+	path = iron-iage
+	url = https://github.com/PolymerElements/iron-image.git
+[submodule "iron-image"]
+	path = iron-image
+	url = https://github.com/PolymerElements/iron-image.git
