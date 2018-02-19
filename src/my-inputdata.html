@@ -107,15 +107,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			  <div id="loadable_sheet" style="display:none">
               <div class="rectangle" class="fontsize" style="font-size:60px;">Scouting</div>
 				<h3> <p id="loadable_sheet_team_number" style=""> </h3>
-                <paper-dropdown-menu id="match_type" label="Match Type">
-                  <paper-listbox slot="dropdown-content" selected="1">
-                    <paper-item style="font-size:30px;">Practice</paper-item>
-                    <paper-item style="font-size:30px;">Qualifier</paper-item>
-                    <paper-item style="font-size:30px;">Quarterfinals</paper-item>
-                    <paper-item style="font-size:30px;">Semifinals</paper-item>
-                    <paper-item style="font-size:30px;">Finals</paper-item>
-                  </paper-listbox>
-                </paper-dropdown-menu>
+                <iron-label for="match_type">
+                    Match Type
+                </iron-type>
+                <br>               
+                <paper-button-group id="match_type" selected="match_type">
+                    <paper-button toggles raised class="custom red"> Practice </paper-button>
+                    <paper-button toggles raised class="custom red"> Qualifier </paper-button>
+                    <paper-button toggles raised class="custom red"> Quarterfinals </paper-button>
+                    <paper-button toggles raised class="custom red"> Semifinals </paper-button>
+                    <paper-button toggles raised class="custom red"> Finals </paper-button> 
+                </paper-button-group>
+                <br>
+
                 <paper-input always-float-label id="match_number" label="Match Number: "></paper-input>
                 <br>
                <iron-label for="methodScoring">
@@ -359,7 +363,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var team = this.$.team.value;
             //Fill form with default values:
             this.$.climb.selected = "NO";
-            this.$.match_type.value = "";
+            this.$.match_type.selected = "0";
             this.$.match_number.value = "";
             this.$.methodScoring.selected = "0";
             this.$.methodAcquiring.selected = "0";
@@ -384,7 +388,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         						console.log(data);
                     data = data[0]; // object is stored in array
                     this.$.climb.selected = data.climb;
-                    this.$.match_type.value = data.match_type;
+                    this.$.match_type.selected = data.match_type;
                     this.$.match_number.value = data.match_number;
                     this.$.methodScoring.selected = data.methodScoring;
                     this.$.methodAcquiring.selected = data.methodAcquiring;
@@ -521,6 +525,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               this.$.mobility.value = "YES"
             }
             else {this.$.mobility.value = "NO"}
+            
+            //Match Type
+            if (this.$.match_type.selected == 0) {
+                this.$.match_type.value = "Practice"
+            }
+            if (this.$.match_type.selected == 1) {
+                this.$.match_type.value = "Qualifier"
+            }
+            if (this.$.match_type.selected == 2) {
+                this.$.match_type.value = "Quarterfinals"
+            }
+            if (this.$.match_type.selected == 3) {
+                this.$.match_type.value = "Semifinals"
+            }
+            if (this.$.match_type.selected == 4) {
+                this.$.match_type.value = "Finals"
+            }
 
             //Method of Scoring
             if (this.$.methodScoring.selected == 0) {
