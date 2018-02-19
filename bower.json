@@ -28,7 +28,11 @@
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
-    "google-chart": "GoogleWebComponents/google-chart#^2.0.0"
+    "google-chart": "GoogleWebComponents/google-chart#^2.0.0",
+    "paper-material": "PolymerElements/paper-material#^2.1.0",
+    "paper-password-input": "Collaborne/paper-password-input#^2.2.0",
+    "paper-toolbar": "PolymerElements/paper-toolbar#^2.1.0",
+    "paper-tooltip": "PolymerElements/paper-tooltip#^2.1.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"

@@ -1,0 +1,33 @@
+[submodule "iron-iage"]
+	path = iron-iage
+	url = https://github.com/PolymerElements/iron-image.git
+[submodule "iron-image"]
+	path = iron-image
+	url = https://github.com/PolymerElements/iron-image.git
+[submodule "bower_components/iron-range-behavior"]
+	path = bower_components/iron-range-behavior
+	url = https://github.com/PolymerElements/iron-range-behavior.git
+[submodule "bower_components/paper-button-group"]
+	path = bower_components/paper-button-group
+	url = https://github.com/Protoss78/paper-button-group.git
+[submodule "bower_components/paper-card"]
+	path = bower_components/paper-card
+	url = https://github.com/PolymerElements/paper-card.git
+[submodule "bower_components/paper-datatable"]
+	path = bower_components/paper-datatable
+	url = https://github.com/David-Mulder/paper-datatable.git
+[submodule "bower_components/paper-datatable-api"]
+	path = bower_components/paper-datatable-api
+	url = https://github.com/RoXuS/paper-datatable-api.git
+[submodule "bower_components/paper-material"]
+	path = bower_components/paper-material
+	url = https://github.com/PolymerElements/paper-material.git
+[submodule "bower_components/paper-password-input"]
+	path = bower_components/paper-password-input
+	url = https://github.com/Collaborne/paper-password-input.git
+[submodule "bower_components/paper-toolbar"]
+	path = bower_components/paper-toolbar
+	url = https://github.com/PolymerElements/paper-toolbar.git
+[submodule "bower_components/paper-tooltip"]
+	path = bower_components/paper-tooltip
+	url = https://github.com/PolymerElements/paper-tooltip.git

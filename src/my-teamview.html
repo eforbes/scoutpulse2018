@@ -47,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </style>
       <center>
   <paper-card heading="Specific Team Data:">
-    <paper-datatable data="{{data}}"selectable multi-selection resize-behavior="overflow" response-width="100px">
+    <paper-datatable data="{{data}}"selectable multi-selection resize-behavior="overflow" response-width="767px">
       <paper-datatable-column header="Match #" property="title" type="Number" align="right" sortable>
       </paper-datatable-column>
       <paper-datatable-column header="Mobility?" property="mobility" type="String" align="right" sortable>
@@ -62,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </paper-card>
 <br>
 <paper-card heading="Averages:">
-  <paper-datatable data="{{data}}" selectable multi-selection resize-behavior="overflow" response-width="100px">
+  <paper-datatable data="{{data}}" selectable multi-selection resize-behavior="overflow" response-width="767px">
     <paper-datatable-column header="Mobility Percentage" property="mobility%" type="Number" align="right" sortable>
     </paper-datatable-column>
     <paper-datatable-column header="Cubes in Scale" property="teleopScale" type="Number" align="right" sortable>
@@ -125,7 +125,9 @@ view='{{dataview}}'
     }
 window.customElements.define(MyTeamView.is, MyTeamView);
 
-var teamview = document.querySelector('#teamview');
-teamview.data = [{title: 1, mobility: "YES", switchAuton: "NO", scaleCubes: 24, exchange: 4, climb: "Yes"},{title: 2, mobility: "NO", switchAuton: "YES", scaleCubes: 24, exchange: 4, climb: "Yes"}];
+var teamview = document.querySelector('MyTeamView');
+teamview.data = [
+  {title: 1, mobility: "YES", switchAuton: "NO", scaleCubes: 24, exchange: 4, climb: "Yes"},
+  {title: 2, mobility: "NO", switchAuton: "YES", scaleCubes: 24, exchange: 4, climb: "Yes"}];
 </script>
 </dom-module>
