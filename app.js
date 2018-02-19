@@ -99,6 +99,7 @@ app.post('/scout', function(req, res) {
             }           
             var abort = null;
 
+        //making sure if data is valid
             Object.keys(data).forEach(function(element) {
                 if (TINY_INT_LIST.indexOf(element) > -1) {
                     var intval = parseInt(data[element]);

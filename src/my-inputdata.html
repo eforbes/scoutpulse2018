@@ -371,7 +371,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$.autonScaleCubes.selected = "0";
                 this.$.allianceSwitchCubes.selected = "0";
                 this.$.opposingSwitchCubes.selected = "0";
-                this.$.teleopScaleCubes.selected = "1";
+                this.$.teleopScaleCubes.selected = "0";
                 this.$.exchange.selected = "0";
                 this.$.assistedOption.selected = "NONE";
                 // Try to find data in server and fill in our form
@@ -552,6 +552,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (this.$.methodScoring.selected == 1) {
                 this.$.methodScoring.value = "Shoot Cube"
                 }
+    
+                if (this.$.methodScoring.selected == 2) {
+                this.$.methodScoring.value = this.$.methodScoringOther.value
+                }
+
                 //Method of Acquiring
                 if (this.$.methodAcquiring.selected == 0) {
                 this.$.methodAcquiring.value = "Floor"
@@ -559,17 +564,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (this.$.methodAcquiring.selected == 1) {
                 this.$.methodAcquiring.value = "Portal"
                 }
-
+                if (this.$.methodAcquiring.selected == 2) {
+                this.$.methodAcquiring.value = this.$.methodAcquiringOther.value
+                }
+                    
+    
                 //Climb Mechanism
                 if (this.$.climbMech.selected == 0) {
                 this.$.climbMech.value = "Rung"
                 }
                 if (this.$.climbMech.selected == 1) {
-                this.$.climbMech.value == "Ramp"
+                this.$.climbMech.value = "Ramp"
                 }
                 if (this.$.climbMech.selected == 2) {
-                this.$.climbMech.value == "Rung Expansion"
+                this.$.climbMech.value = "Rung Expansion"
                 }
+                if (this.$.climbMech.selected == 3) {
+                this.$.climbMech.value = this.$.climbMechOther.value
+                }
+
                 //climb:
                 if (this.$.climb.selected == 0 ) {
                 this.$.climb.value = "YES"
@@ -594,28 +607,59 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (this.$.assistedOption.selected == 2) {
                 this.$.assistedOption.value = 2
                 }
+
+                //7 plus
+                if (this.$.autonSwitchCubes.selected == 7) {
+                    this.$.autonSwitchCubes.value = this.$.autonSwitchCubes7.value
+                } else {
+                    this.$.autonSwitchCubes.value = this.$.autonSwitchCubes.selected
+                }
+
+                if (this.$.autonScaleCubes.selected == 7) {
+                    this.$.autonScaleCubes.value = this.$.autonScaleCubes7.value
+                } else {
+                    this.$.autonScaleCubes.value = this.$.autonScaleCubes.selected
+                }
+
+                if (this.$.allianceSwitchCubes.selected == 7) {
+                    this.$.allianceSwitchCubes.value = this.$.allianceSwitchCubes7.value
+                } else {
+                    this.$.allianceSwitchCubes.value = this.$.allianceSwitchCubes.selected
+                }
+
+                if (this.$.opposingSwitchCubes.selected == 7){
+                    this.$.opposingSwitchCubes.value = this.$.opposingSwitchCubes7.value
+                } else {
+                    this.$.opposingSwitchCubes.value = this.$.opposingSwitchCubes.selected
+                }
+
+                if (this.$.teleopScaleCubes.selected == 7) {
+                    this.$.teleopScaleCubes.value = this.$.teleopScaleCubes7.value
+                } else {
+                    this.$.teleopScaleCubes.value = this.$.teleopScaleCubes.selected
+                }
+
+                if (this.$.exchange.selected == 7) {
+                    this.$.exchange.value = this.$.exchange7.value
+                } else {
+                    this.$.exchange.value = this.$.exchange.selected
+                }
+
                 // Set a variable, "info" to the data.
       			var info = {
                     team_number: this.$.team.value,
                     match_type: this.$.match_type.value,
                     match_number: this.$.match_number.value,
                     methodScoring: this.$.methodScoring.value,
-    //                methodScoringOther: this.$.methodScoringOther.value,
                     methodAcquiring: this.$.methodAcquiring.value,
                     climbMech: this.$.climbMech.value,
                     mobility: this.$.mobility.value,
-                    autonSwitchCubes: this.$.autonSwitchCubes.selected,
-                    autonSwitchCubes7: this.$.autonSwitchCubes7.value,
-                    autonScaleCubes: this.$.autonScaleCubes.selected,
-                    autonScaleCubes7: this.$.autonScaleCubes7.value,
-                    allianceSwitchCubes: this.$.allianceSwitchCubes.selected,
-                    allianceSwitchCubes7: this.$.allianceSwitchCubes7.value,
-                    opposingSwitchCubes: this.$.opposingSwitchCubes.selected,
-                    opposingSwitchCubes7: this.$.opposingSwitchCubes7.value,
-                    teleopScaleCubes: this.$.teleopScaleCubes.selected,
-                    teleopScaleCubes7: this.$.teleopScaleCubes7.value,
-                    exchange: this.$.exchange.selected,
-                    exchange7: this.$.exchange7.value,
+                    autonSwitchCubes: this.$.autonSwitchCubes.value,
+                    autonScaleCubes: this.$.autonScaleCubes.value,
+                    allianceSwitchCubes: this.$.allianceSwitchCubes.value,
+                    opposingSwitchCubes: this.$.opposingSwitchCubes.value,
+                    teleopScaleCubes: this.$.teleopScaleCubes.value,
+                    exchange: this.$.exchange.value,
                     climb: this.$.climb.value,
                     assistedOption: this.$.assistedOption.value
       			};
@@ -625,10 +669,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  				//console.log(this.$.comments.value);
 	  				//console.log(this.$.successgr);
 	  				//console.log(this.$.successgr.selected);
-	  				console.log(info);
+	  			console.log(info);
 	  				/*console.log(this.$.team.value);
     				  console.log(form.serialize());*/
                 var base = this;
+      			
       			$.ajax({
       			    url: "/scout",
       			    type: "post",
@@ -646,7 +691,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       			    },
       			    error: function() {
                         base.set_notif_error_message("Failed to update!"
-                            + " Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only)");
+                            + " Either your internet is bad, or your data is invalid! (counters must be 0 to 255 only) aka the back end is nonexistent)");
                         /*(base.set_notif_error_message("Invalid data! "
                         + "Make sure that all inputs are less than 255 and greater than 0");*/
                             /*$("#error_log").html("Failed to update. Try using QR (once we get that up and running)");
