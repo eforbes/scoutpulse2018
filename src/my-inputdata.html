@@ -30,7 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="my-inputdata">
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles" is="custom-style">
       :host {
         display: block;
         padding: 10px;
@@ -39,12 +39,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           line-height: 100px;
         };
         --paper-input-container: {
-          padding-top: 1.55em;
-          padding-right: 4em;
+          padding-top: 1.00em;
+          padding-right: 6em;
           padding-left: 4em;
         };
         --paper-input-container-input: {
-          font-size: 1.55em;
+          font-size: 3em;
         };
       }
       .iconbig {
@@ -78,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       paper-button.red[active] {
         background-color: var(--paper-green-500);
-        width: 180px;
+        width: 400px;
         height: 150px;
       }
       paper-button.input {
@@ -89,7 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       paper-button.input[active] {
         background-color: var(--paper-green-500);
-        width: 180px;
+        width: 400px;
         height: 150px;
       }
     </style>
@@ -105,15 +105,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  		  <paper-button id="load_sheet_button" on-click="load_data"> Load Sheet </paper-button>
             </div>
 			  <div id="loadable_sheet" style="display:none">
-              <div class="rectangle" class="fontsize" style="font-size:24px;">Scouting</div>
+              <div class="rectangle" class="fontsize" style="font-size:60px;">Scouting</div>
 				<h3> <p id="loadable_sheet_team_number" style=""> </h3>
                 <paper-dropdown-menu id="match_type" label="Match Type">
                   <paper-listbox slot="dropdown-content" selected="1">
-                    <paper-item>Practice</paper-item>
-                    <paper-item>Qualifier</paper-item>
-                    <paper-item>Quarterfinals</paper-item>
-                    <paper-item>Semifinals</paper-item>
-                    <paper-item>Finals</paper-item>
+                    <paper-item style="font-size:30px;">Practice</paper-item>
+                    <paper-item style="font-size:30px;">Qualifier</paper-item>
+                    <paper-item style="font-size:30px;">Quarterfinals</paper-item>
+                    <paper-item style="font-size:30px;">Semifinals</paper-item>
+                    <paper-item style="font-size:30px;">Finals</paper-item>
                   </paper-listbox>
                 </paper-dropdown-menu>
                 <paper-input always-float-label id="match_number" label="Match Number: "></paper-input>
@@ -121,7 +121,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                <iron-label for="methodScoring">
                  Method of Scoring
                </iron-label>
-               <br>
                <br>
                <paper-button-group id="methodScoring" selected = "methodScoring">
                       <paper-button toggles raised class="custom red"> Place </paper-button>
@@ -136,6 +135,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                <iron-label for="methodAcquiring">
                 Method of Acquiring
                </iron-label>
+               <br>
                <paper-button-group id="methodAcquiring" selected = "methodAcquiring">
                       <paper-button toggles raised class="custom red"> Floor </paper-button>
                       <paper-button toggles raised class="custom red"> Portal </paper-button>
@@ -149,6 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                <iron-label for="climbMech">
                 Climb Mechanism
                </iron-label>
+               <br>
             <paper-button-group id="climbMech" selected="climbMech">
                     <paper-button toggles raised class="custom red"> Rung </paper-button>
           		      <paper-button toggles raised class="custom red"> Ramp </paper-button>
@@ -165,6 +166,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		<iron-label for="moblity">
           		  Mobility?
           		</iron-label>
+              <br>
                 <paper-button-group id="mobility">
                     <paper-button toggles raised class="custom red" name="YES">Yes</paper-button>
                     <paper-button toggles raised class="custom red" name="NO" selected>No</paper-button>
@@ -302,6 +304,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <iron-label for="climb">
           		    Climb?
           		  </iron-label>
+                <br>
                 <paper-button-group  id="climb" selected="climb" aria-labelledby="climb">
                  <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
                  <paper-button toggles raised class="custom red" name="NO" selected> No </paper-button>
@@ -313,6 +316,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           		  <iron-label for="assistedOption">
           		  	Robots Assisted?
           		  </iron-label>
+                <br>
           		  <paper-button-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
                   <paper-button toggles raised class="custom red" name="NONE" selected> None </paper-button>
                     <paper-button toggles raised class="custom red" name="ONE"> One </paper-button>
