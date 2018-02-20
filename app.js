@@ -7,7 +7,7 @@ const mysql = require('mysql');
 
 const app = express();
 
-const SITE_PORT = 80;
+const SITE_PORT = 8081;
 const TEMPLATE_FOLDER = 'templates'
 
 var sql;
@@ -53,7 +53,7 @@ function sql_connect(sql_password) {
         // Match table
         sql.query('CREATE TABLE IF NOT EXISTS matches ('
                     + 'id INT PRIMARY KEY AUTO_INCREMENT,'
-                    + 'team_number TINYINT UNSIGNED,'
+                    + 'team_number SMALLINT,'    
                     + 'match_type VARCHAR(50),'
                     + 'match_number TINYINT UNSIGNED,' 
                     + 'methodScoring VARCHAR(50),'
@@ -67,10 +67,12 @@ function sql_connect(sql_password) {
                     + 'teleopScaleCubes TINYINT UNSIGNED,'
                     + 'exchange TINYINT UNSIGNED,'
                     + 'climb VARCHAR(50),'
-                    + 'assistedOption VARCHAR(50),'
+                    + 'assistedOption VARCHAR(50)'
                     + ')'
                 , function(err, result) {
-            if (err) throw err;
+            if (err) {
+                throw err;
+            }
         });
 
         // Team data table
@@ -79,7 +81,7 @@ function sql_connect(sql_password) {
 }
 
 
-const TINY_INT_LIST = ["team_number", "match_number", "autonSwitchCubes", "autonScaleCubes", "allianceSwitchCubes", "opposingSwitchCubes", "teleopScaleCubes", "exchange"];
+const TINY_INT_LIST = ["match_number", "autonSwitchCubes", "autonScaleCubes", "allianceSwitchCubes", "opposingSwitchCubes", "teleopScaleCubes", "exchange"];
 
 
 // Update scout data
@@ -106,11 +108,12 @@ app.post('/scout', function(req, res) {
                     }
                 }
             });
- 
+        console.log("length:" + result.length + "abort: " + abort!=null);
+
           if (abort != null) {
               return res.send(abort);
           }
-
+        
 	        if (result.length == 0) {
               //if (result) <--?
               return res.send(sql_fast_insert('matches', data));
