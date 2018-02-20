@@ -647,19 +647,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 // Set a variable, "info" to the data.
       			var info = {
-                    team_number: this.$.team.value,
+                    team_number: parseInt(this.$.team.value),
                     match_type: this.$.match_type.value,
-                    match_number: this.$.match_number.value,
+                    match_number: parseInt(this.$.match_number.value),
                     methodScoring: this.$.methodScoring.value,
                     methodAcquiring: this.$.methodAcquiring.value,
                     climbMech: this.$.climbMech.value,
                     mobility: this.$.mobility.value,
-                    autonSwitchCubes: this.$.autonSwitchCubes.value,
-                    autonScaleCubes: this.$.autonScaleCubes.value,
-                    allianceSwitchCubes: this.$.allianceSwitchCubes.value,
-                    opposingSwitchCubes: this.$.opposingSwitchCubes.value,
-                    teleopScaleCubes: this.$.teleopScaleCubes.value,
-                    exchange: this.$.exchange.value,
+                    autonSwitchCubes: parseInt(this.$.autonSwitchCubes.value),
+                    autonScaleCubes: parseInt(this.$.autonScaleCubes.value),
+                    allianceSwitchCubes: parseInt(this.$.allianceSwitchCubes.value),
+                    opposingSwitchCubes: parseInt(this.$.opposingSwitchCubes.value),
+                    teleopScaleCubes: parseInt(this.$.teleopScaleCubes.value),
+                    exchange: parseInt(this.$.exchange.value),
                     climb: this.$.climb.value,
                     assistedOption: this.$.assistedOption.value
       			};

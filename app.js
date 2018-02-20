@@ -52,26 +52,22 @@ function sql_connect(sql_password) {
 
         // Match table
         sql.query('CREATE TABLE IF NOT EXISTS matches ('
-                    // id and main tag labels
                     + 'id INT PRIMARY KEY AUTO_INCREMENT,'
-                    + 'author VARCHAR(50),'
-                    + 'ground_pickup_gear BOOLEAN,'
-					          + 'ground_pickup_fuel BOOLEAN,'
-					          + 'fuel_scoring_high BOOLEAN,'
-					          + 'fuel_scoring_low BOOLEAN,'
-					          + 'match_number VARCHAR(50),'
-                    + 'team_number SMALLINT,'
-                    + 'cross_green_line BOOLEAN,'
-                    + 'gear_score enum(\'YES\', \'NO\', \'TRIED\'),'
-                    + 'gear_routine enum(\'HP\', \'CENTER\', \'BOILER\', \'NONE\'),'
-                    + 'fuel_auton TINYINT UNSIGNED,'
-                    + 'hoppers TINYINT UNSIGNED,'
-                    + 'gears_scored TINYINT UNSIGNED,'
-                    + 'gears_dropped TINYINT UNSIGNED,'
-                    + 'fuel_teleop TINYINT UNSIGNED,'
-                    + 'climb BOOLEAN,'
-                    + 'yellow_card BOOLEAN,'
-                    + 'comments TEXT'
+                    + 'team_number TINYINT UNSIGNED,'
+                    + 'match_type VARCHAR(50),'
+                    + 'match_number TINYINT UNSIGNED,' 
+                    + 'methodScoring VARCHAR(50),'
+                    + 'methodAcquiring VARCHAR(50),'
+                    + 'climbMech VARCHAR(50),'
+                    + 'mobility VARCHAR(10),'
+                    + 'autonSwitchCubes TINYINT UNSIGNED,'
+                    + 'autonScaleCubes TINYINT UNSIGNED,'
+                    + 'allianceSwitchCubes TINYINT UNSIGNED,'
+                    + 'opposingSwitchCubes TINYINT UNSIGNED,'
+                    + 'teleopScaleCubes TINYINT UNSIGNED,'
+                    + 'exchange TINYINT UNSIGNED,'
+                    + 'climb VARCHAR(50),'
+                    + 'assistedOption VARCHAR(50),'
                     + ')'
                 , function(err, result) {
             if (err) throw err;
@@ -83,7 +79,7 @@ function sql_connect(sql_password) {
 }
 
 
-const TINY_INT_LIST = ["fuel_auton", "hoppers", "gears_scored", "gears_dropped", "fuel_teleop"];
+const TINY_INT_LIST = ["team_number", "match_number", "autonSwitchCubes", "autonScaleCubes", "allianceSwitchCubes", "opposingSwitchCubes", "teleopScaleCubes", "exchange"];
 
 
 // Update scout data
