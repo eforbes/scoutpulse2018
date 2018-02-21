@@ -10,6 +10,8 @@
         <paper-button raised on-click="submit_query_team"> Magic </paper-button>
         <div id="tablechart">
         </div>
+        <div id="switch_candlestick">
+        </div>
                 
     </template>
     <script>
@@ -30,11 +32,10 @@
             generate_graph(data,base) {
                 google.charts.load('45', {packages: ['corechart', 'table']});
                 google.charts.setOnLoadCallback(function() {base.drawTable(data,base);});
-            }
-            
-            drawTable(data, base) {
-                console.log(base);
-                var table = new google.visualization.DataTable();
+                google.charts.setOnLoadCallback(function() {base.drawSwitchCandle(data,base);});
+            } 
+
+            drawDataTable(data, base, table) {
                 table.addColumn('string', 'Team Number');
                 table.addColumn('number', 'Avg Scale Cubes in Auton');
                 table.addColumn('number', 'Avg Switch Cubes in Auton');
@@ -55,17 +56,7 @@
                     table.addRow(stat);
 
                 }
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pageSize": 3,
-                    "pagingButtons": "both"};
-                
-                console.log(base.$.tablechart);
-                var chart = new google.visualization.Table(base.$.tablechart);
-                chart.draw(table, options); 
-
-
+    
             }
             
             average(data, key) {
@@ -76,6 +67,43 @@
                     amount++;
                 });
                 return sum/amount;
+            }
+
+            drawTable(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pageSize": 3,
+                    "pagingButtons": "both"};
+                
+                var chart = new google.visualization.Table(base.$.tablechart);
+                chart.draw(table, options); 
+            }
+            
+            drawSwitchStat(data, key, team) {
+                var teamstats = [];
+                teamstats.push(team);
+                data.forEach(function(match) {
+                    teamstats.push(match[key]);                  
+                });
+                return teamstats;i
+            }
+
+            drawSwitchCandle(data, base) {
+                var arr = [];
+                for (var team in data) {
+                    arr.push(base.drawSwitchStat(data[team], "allianceSwitchCubes", team));
+                }
+                console.log(arr);
+                var table = google.visualization.arrayToDataTable(arr, true);
+                var options={
+                    legend : 'none'
+                };
+
+                var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
+                chart.draw(table, options);
             }
         }
     window.customElements.define(MyCompetitionView.is, MyCompetitionView);
