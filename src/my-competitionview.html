@@ -1,94 +1,82 @@
-<link rel="import" href="../bower_components/google-chart/google-chart.html">
+<script type="text/javascript" src="/lib/jquery-3.2.1.min.js"> </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
-<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <dom-module id="my-competitionview">
-    <template>
-      <style>
-            google-chart {
-              height: 300px;
-              width: 40em;
-              background-color: white;
-            }
-            paper-card {
-              display:block;
-            }
-        </style>
-        <center>
-        <paper-card heading="Team Averages:">
-          <paper-datatable selectable multi-selection resize-behavior="overflow" response-width="767px">
-            <paper-datatable-column header="Team #" property="title" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Mobility Percentage" property="mobility%" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Auton Switch Cubes" property="autonSwitch" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Auton Scale Cubes" property="autonScale" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Alliance Switch Cubes" property="allianceSwitch" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Opposing Switch Cubes" property="opposingSwitch" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Scale Cubes" property="teleopScale" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Exchange" property="exchange" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Climb Percentage" property="climb%" type="Number" sortable>
-            </paper-datatable-column>
-            <paper-datatable-column header="Robots Assisted" property="assisted" type="Number" sortable>
-            </paper-datatable-column>
-          </paper-datatable>
-        </paper-card>
-        <br>
-        <br>
-        <!-- Table Chart
-        <center>
-          <br>
-        <google-chart
-            type='table'
-            options='{"allowHtml": "true",
-            "title": "Competition View",
-                "page": "enable",
-                "pageSize": 3,
-                "pagingButtons": "both"}'
-            data='[["Team Number", "Average Switch Cubes in Auton", "Average Scale Cubes in Auton", "Average Switch Cubes in Teleop", "Average Scale Cubes in Teleop"],
-            ["694", 0, 6, 9, 4],
-            ["254", 100, 100, 200, 200],
-            ["694", 0, 6, 9, 4],
-            ["254", 100, 100, 200, 200],
-            ["123", 0, 0, 0, 0]]'>
-        </google-chart>
-        <google-chart-loader id="loader" class="style-scope google-chart"></google-chart-loader> -->
-
-        <!-- Box Chart/Candlestick Chart for Scale -->
-        <google-chart
-            type='candlestick'
-            options='{"title": "Scale Scores in Teleop",
-                      "candlestick" : {"hollowIsRising" : "true"}
-                     }'
-
-            data='[["Team", "Min", "Q1", "Q3", "Max"], ["694", 4, 10, 15, 20], ["254", 13, 14, 30, 31], ["123", 14, 60, 70, 80]]'
-            >
-        </google-chart>
-        <br>
-        <!-- Box Chart/Candlestick Chart for Switch -->
-        <google-chart
-            type='candlestick'
-            options='{"title": "Switch Scores in Teleop",
-                      "candlestick" : {"hollowIsRising" : "true"}
-                     }'
-
-            data='[["Team", "Min", "Q1", "Q3", "Max"], ["694", 4, 10, 15, 20], ["254", 13, 14, 30, 31], ["123", 14, 60, 70, 80]]'
-            >
-        </google-chart>
-      </center>
+    <template>           
+        <paper-button raised on-click="submit_query_team"> Magic </paper-button>
+        <div id="tablechart">
+        </div>
+                
     </template>
     <script>
+        google.charts.load('current', {'packages': ["table"]});
         class MyCompetitionView extends Polymer.Element {
-        static get is() { return 'my-competitionview' }
+            static get is() { return 'my-competitionview' }
+            submit_query_team() {
+                var base = this;
+                $.ajax({
+                    url: "/getteamdata",
+                    type: "GET",
+                    success: function(data) {
+                        base.generate_graph(data, base);        
+                    }
+                });
+            }
+
+            generate_graph(data,base) {
+                google.charts.load('45', {packages: ['corechart', 'table']});
+                google.charts.setOnLoadCallback(function() {base.drawTable(data,base);});
+            }
+            
+            drawTable(data, base) {
+                console.log(base);
+                var table = new google.visualization.DataTable();
+                table.addColumn('string', 'Team Number');
+                table.addColumn('number', 'Avg Scale Cubes in Auton');
+                table.addColumn('number', 'Avg Switch Cubes in Auton');
+                table.addColumn('number', 'Avg Alliance Switch Cubes in Teleop');
+                table.addColumn('number', 'Avg Opposing Switch Cubes in Teleop');
+                table.addColumn('number', 'Avg Scale Cubes in Teleop');
+                table.addColumn('number', 'Avg Exchange Cubes');
+                console.log(data);
+                for (var team in data) {
+                    var stat = [];
+                    stat.push(team);
+                    stat.push(base.average(data[team], "autonScaleCubes"));
+                    stat.push(base.average(data[team], "autonSwitchCubes"));
+                    stat.push(base.average(data[team], "allianceSwitchCubes"));
+                    stat.push(base.average(data[team], "opposingSwitchCubes"));
+                    stat.push(base.average(data[team], "teleopScaleCubes"));
+                    stat.push(base.average(data[team], "exchange"));
+                    table.addRow(stat);
+
+                }
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pageSize": 3,
+                    "pagingButtons": "both"};
+                
+                console.log(base.$.tablechart);
+                var chart = new google.visualization.Table(base.$.tablechart);
+                chart.draw(table, options); 
+
+
+            }
+            
+            average(data, key) {
+                var sum = 0.0;
+                var amount = 0;
+                data.forEach(function(match) {   
+                    sum += match[key];
+                    amount++;
+                });
+                return sum/amount;
+            }
         }
     window.customElements.define(MyCompetitionView.is, MyCompetitionView);
     </script>
