@@ -39,47 +39,43 @@
 
             generate_graph(data,base) {
                 google.charts.load('45', {packages: ['corechart', 'table']});
-                google.charts.setOnLoadCallback(function() {base.drawTable(data,base);});
+                google.charts.setOnLoadCallback(function() {base.drawGeneralTable(data,base);});
+                google.charts.setOnLoadCallback(function() {base.drawAverageTable(data, base);});
             } 
 
-            drawDataForTable(data, base, table) {
+            drawDataForGeneralTable(data, base, table) {
                 table.addColumn('number', 'Match #');
                 table.addColumn('string', 'Mobility');
-                table.addColumn('number', 'Switch Auton');
+                table.addColumn('string', 'Switch Auton');
                 table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Switch');
                 table.addColumn('number', 'Cubes in Exchange');
                 table.addColumn('string', 'Climb?');
 
                 for(var team in data) {
                     var matchstat = data[team];
+                    console.log(matchstat);
                     for(var i = 0; i < matchstat.length; i++) {
-                        var stat = [];
-                        
+                        var stat = [];                        
                         stat.push(matchstat[i]["match_number"]);
                         stat.push(matchstat[i]["mobility"]);
-                        stat.push(matchstat[i]["autonSwitchCubes"]);
+                        if (matchstat[i]["autonSwitchCubes"] != 0) {
+                            stat.push("YES");
+                        } else {
+                            stat.push("NO");
+                        }
                         stat.push(matchstat[i]["autonScaleCubes"] + matchstat[i]["teleopScaleCubes"]);
+                        stat.push(matchstat[i]["allianceSwitchCubes"] + matchstat[i]["autonSwitchCubes"] + matchstat[i]["opposingSwitchCubes"]);
                         stat.push(matchstat[i]["exchange"]);
                         stat.push(matchstat[i]["climb"]);
                         table.addRow(stat);
                    }
                 }
             }
-            
-            /* 
-            average(data, key) {
-                var sum = 0.0;
-                var amount = 0;
-                data.forEach(function(match) {   
-                    sum += match[key];
-                    amount++;
-                });
-                return sum/amount;
-            }*/
-
-            drawTable(data, base) {
+             
+            drawGeneralTable(data, base) {
                 var table = new google.visualization.DataTable();
-                base.drawDataForTable(data, base, table);
+                base.drawDataForGeneralTable(data, base, table);
                 var options = {"allowHtml": "true",
                     "title": "Competition View",
                     "page": "enable",
@@ -89,6 +85,71 @@
                 var chart = new google.visualization.Table(base.$.teamdata);
                 chart.draw(table, options); 
             }
+            
+            drawAverageTable(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataForAverageTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pagetitleSize": 3,
+                    "pagingButtons": "both"};
+
+                var chart = new google.visualization.Table(base.$.averages);
+                chart.draw(table, options);
+            }
+
+            drawDataForAverageTable(data, base, table) {
+                table.addColumn('string', 'Mobility %');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Switch');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addColumn('string', 'Climb %');
+
+                for (var team in data) {
+                    var matchstat = data[team];
+                    var mobility_success = 0.0;
+                    var climb_success = 0.0;
+                    console.log(matchstat);
+                    //iterating through each match in matchstat
+                    console.log("average scale: " + base.average(matchstat, "autonScaleCubes"));
+                    
+
+                    var averageScale = (base.average(matchstat, "autonScaleCubes") + base.average(matchstat, "teleopScaleCubes"));
+                    var averageSwitch = (base.average(matchstat, "autonSwitchCubes") + base.average(matchstat, "allianceSwitchCubes") + base.average(matchstat, "opposingSwitchCubes"));
+                    var averageExchange = (base.average(matchstat, "exchange"));
+                    for (var i = 0; i < matchstat.length; i++) {
+                        var stat = [];    
+                        if (matchstat[i]["mobility"] == "YES") {
+                            mobility_success += 1.0;
+                        }
+                        if (matchstat[i]["climb"] == "YES") {
+                            climb_success += 1.0;
+                        }
+                    }
+                    var mobility_percent = mobility_success / matchstat.length;
+                    var climb_percent = climb_success / matchstat.length;
+                    stat.push(mobility_percent * 100 + " %");
+                    stat.push(averageScale);
+                    stat.push(averageSwitch);
+                    stat.push(averageExchange);
+                    stat.push(climb_percent * 100 + " %");
+                    table.addRow(stat);
+                }
+            }
+
+            average(data, key) {
+                
+                var sum = 0.0;
+                var amount = 0;
+                data.forEach(function(match) {
+                    sum += match[key];
+                    amount++;
+                });
+
+                return sum/amount;
+            }
+
         }
     window.customElements.define(MyTeamView.is, MyTeamView);
     </script>

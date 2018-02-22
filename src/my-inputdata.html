@@ -152,7 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 Climb Mechanism
                </iron-label>
                <br>
-            <paper-button-group id="climbMech" selected="climbMech">
+               <paper-button-group id="climbMech" selected="climbMech">
                 <paper-button toggles raised class="custom red"> Rung </paper-button>
           		<paper-button toggles raised class="custom red"> Ramp </paper-button>
           		<paper-button toggles raised class="custom red"> Rung Expansion </paper-button>
@@ -310,9 +310,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-button-group  id="climb" selected="climb" aria-labelledby="climb">
                  <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
                  <paper-button toggles raised class="custom red" name="NO" selected> No </paper-button>
-                 <paper-button toggles raised class="custom red" name="ASSISTED"> Assisted </paper-button>
-                 <paper-button toggles raised class="custom red" name="PLATOFRM"> Platform </paper-button>
-               </paper-button-group>
+                </paper-button-group>
                    <br>
                    <br>
           		  <iron-label for="assistedOption">
@@ -589,12 +587,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
                 if (this.$.climb.selected == 1 ) {
                 this.$.climb.value = "NO"
-                }
-                if (this.$.climb.selected == 2 ) {
-                this.$.climb.value = "ASSISTED"
-                }
-                if (this.$.climb.selected == 3 ) {
-                this.$.climb.value = "PLATFORM"
                 }
 
                 //assistedOption
