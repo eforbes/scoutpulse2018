@@ -41,6 +41,7 @@
                 google.charts.load('45', {packages: ['corechart', 'table']});
                 google.charts.setOnLoadCallback(function() {base.drawGeneralTable(data,base);});
                 google.charts.setOnLoadCallback(function() {base.drawAverageTable(data, base);});
+                google.charts.setOnLoadCallback(function() {base.drawLineGraph(data, base);});
             } 
 
             drawDataForGeneralTable(data, base, table) {
@@ -113,7 +114,6 @@
                     console.log(matchstat);
                     //iterating through each match in matchstat
                     console.log("average scale: " + base.average(matchstat, "autonScaleCubes"));
-                    
 
                     var averageScale = (base.average(matchstat, "autonScaleCubes") + base.average(matchstat, "teleopScaleCubes"));
                     var averageSwitch = (base.average(matchstat, "autonSwitchCubes") + base.average(matchstat, "allianceSwitchCubes") + base.average(matchstat, "opposingSwitchCubes"));
@@ -148,6 +148,33 @@
                 });
 
                 return sum/amount;
+            }
+            
+            drawLineGraph(data, base) {
+                var table = new google.visualization.DataTable();
+                table.addColumn('number', 'Match');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Alliance Switch');
+                table.addColumn('number', 'Cubes in Defensive Switch');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addRows(
+                    base.drawDataForLineGraph(data, base)
+                );
+                var options = {
+                    legend : 'top'
+                };
+                var chart = new google.visualization.LineChart(base.$.linegraph);
+                chart.draw(table, options);
+            }
+
+            drawDataForLineGraph(data, base) {
+                var stats = [];
+                
+                stats.push([1,2,4,5,3]);
+                stats.push([3,3,6,7,8]);
+                stats.push([5,3,5,7,9]);
+                return stats;
+
             }
 
         }
