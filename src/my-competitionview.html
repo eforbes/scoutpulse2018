@@ -1,5 +1,6 @@
 <script type="text/javascript" src="/lib/jquery-3.2.1.min.js"> </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
+
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
@@ -7,11 +8,18 @@
 
 <dom-module id="my-competitionview">
     <template>           
-        <paper-button raised on-click="submit_query_team"> Magic </paper-button>
+        <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
         <div id="tablechart">
         </div>
+        <br>
+        
         <div id="switch_candlestick">
         </div>
+        <br>
+
+        <div id="scale_candlestick">
+        </div>
+        <br>
                 
     </template>
     <script>
@@ -32,10 +40,11 @@
             generate_graph(data,base) {
                 google.charts.load('45', {packages: ['corechart', 'table']});
                 google.charts.setOnLoadCallback(function() {base.drawTable(data,base);});
-                google.charts.setOnLoadCallback(function() {base.drawSwitchCandle(data,base);});
+                google.charts.setOnLoadCallback(function() {base.drawSwitch(data,base);});
+                google.charts.setOnLoadCallback(function() {base.drawScale(data,base);});
             } 
 
-            drawDataTable(data, base, table) {
+            drawDataForTable(data, base, table) {
                 table.addColumn('string', 'Team Number');
                 table.addColumn('number', 'Avg Scale Cubes in Auton');
                 table.addColumn('number', 'Avg Switch Cubes in Auton');
@@ -71,40 +80,120 @@
 
             drawTable(data, base) {
                 var table = new google.visualization.DataTable();
-                base.drawDataTable(data, base, table);
+                base.drawDataForTable(data, base, table);
                 var options = {"allowHtml": "true",
                     "title": "Competition View",
                     "page": "enable",
-                    "pageSize": 3,
+                    "pagtitleeSize": 3,
                     "pagingButtons": "both"};
                 
                 var chart = new google.visualization.Table(base.$.tablechart);
                 chart.draw(table, options); 
             }
             
-            drawSwitchStat(data, key, team) {
+            drawDataForSwitch(data, team, base) {
                 var teamstats = [];
+                var scores = [];
                 teamstats.push(team);
                 data.forEach(function(match) {
-                    teamstats.push(match[key]);                  
+                    scores.push(match["allianceSwitchCubes"]);
+                    scores.push(match["opposingSwitchCubes"]);
+                    scores.push(match["autonSwitchCubes"]);
                 });
+
+                var minScore = Math.min.apply(Math, scores);
+                var maxScore = Math.max.apply(Math, scores);
+                var q1 = base.calculateQuart(scores, "q1");
+                var q3 = base.calculateQuart(scores, "q3");
+                teamstats.push(minScore);
+                teamstats.push(q1);
+                teamstats.push(q3);
+                teamstats.push(maxScore);
+                return teamstats;
+            }
+           
+            drawDataForScale(data, team, base) {
+                var teamstats = [];
+                var scores = [];
+                teamstats.push(team);
+                data.forEach(function(match) {
+                    scores.push(match["autonScaleCubes"]);
+                    scores.push(match["teleopScaleCubes"]);
+                });
+
+                var minScore = Math.min.apply(Math, scores);
+                var maxScore = Math.max.apply(Math, scores);
+                var q1 = base.calculateQuart(scores, "q1");
+                var q3 = base.calculateQuart(scores, "q3");
+                teamstats.push(minScore);
+                teamstats.push(q1);
+                teamstats.push(q3);
+                teamstats.push(maxScore);
                 return teamstats;
             }
 
-            drawSwitchCandle(data, base) {
+
+            calculateQuart(data, quartile) {
+                data.sort((a, b) => a - b);
+                var lowMiddle = Math.floor((data.length - 1) / 2);
+                var highMiddle = Math.ceil((data.length - 1) / 2);
+                var median = (data[lowMiddle] + data[highMiddle]) / 2;
+                var q1Stats = [];
+                var q3Stats = [];
+                data.forEach(function(num) {
+                    if (num < median) {
+                        q1Stats.push(num);
+                    }
+                    if (num > median) {
+                        q3Stats.push(num);
+                    }
+                });
+                if (quartile == "q1") {
+                    var q1LowMiddle = Math.floor((q1Stats.length - 1) / 2);
+                    var q1HighMiddle = Math.ceil((q1Stats.length - 1) / 2);
+                    
+                    return (q1Stats[q1LowMiddle] + q1Stats[q1HighMiddle]) / 2;
+                } else if (quartile == "q3") {
+                    var q3LowMiddle = Math.floor((q3Stats.length - 1) / 2);
+                    var q3HighMiddle = Math.ceil((q3Stats.length - 1) / 2);
+                    
+                    return (q3Stats[q3LowMiddle] + q3Stats[q3HighMiddle]) / 2;
+                }
+            }
+
+            drawSwitch(data, base) {
                 var arr = [];
                 for (var team in data) {
-                    arr.push(base.drawSwitchStat(data[team], "allianceSwitchCubes", team));
+                    arr.push(base.drawDataForSwitch(data[team], team, base));
                 }
                 console.log(arr);
                 var table = google.visualization.arrayToDataTable(arr, true);
                 var options={
+                    title : 'Switch Scores',
                     legend : 'none'
                 };
 
                 var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
                 chart.draw(table, options);
             }
+            
+            drawScale(data, base) {
+                var arr = [];
+                for (var team in data) {
+                    arr.push(base.drawDataForScale(data[team], team, base));
+                }
+                console.log(arr);
+                var table = google.visualization.arrayToDataTable(arr, true);
+                var options={
+                    title : 'Scale Scores',
+                    legend : 'none'
+                };
+
+                var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
+                chart.draw(table, options);
+            }
+ 
+
         }
     window.customElements.define(MyCompetitionView.is, MyCompetitionView);
     </script>
