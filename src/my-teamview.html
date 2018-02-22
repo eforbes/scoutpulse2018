@@ -1,133 +1,95 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<script type="text/javascript" src="../lib/jquery-3.2.1.min.js"> </script>
+<script type="text/javascript" src="/lib/jquery-3.2.1.min.js"> </script>
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
-<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
-<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/toggle-icon/toggle-icon.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../bower_components/paper-number-input/paper-number-input.html">
-<link rel="import" href="../bower_components/iron-form/iron-form.html">
-<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
-<link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../bower_components/paper-button-group/paper-button-group.html">
-<link rel="import" href="shared-styles.html">
-<link rel="import" href="../bower_components/google-chart/google-chart.html">
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
-<link rel="import" href="/bower_components/bwt-datatable/bwt-datatable.html">
-<link rel="import" href="/bower_components/paper-card/paper-card.html">
-
-
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <dom-module id="my-teamview">
-    <template>
-      <style>
-          google-chart {
-              height: 300px;
-              width: 50em;
-              background-color: white;
-          }
-          paper-card {
-            display:block;
-          }
-      </style>
-      <center>
-  <paper-card heading="Specific Team Data:">
-    <paper-datatable data="{{data}}"selectable multi-selection resize-behavior="overflow" response-width="767px">
-      <paper-datatable-column header="Match #" property="title" type="Number" align="right" sortable>
-      </paper-datatable-column>
-      <paper-datatable-column header="Mobility?" property="mobility" type="String" align="right" sortable>
-      </paper-datatable-column>
-      <paper-datatable-column header="Has a Switch Auton?" property="switchAuton" type="String" align="right" sortable>
-      </paper-datatable-column>
-      <paper-datatable-column header="Cubes in Scale" property="scaleCubes" type="Number" align="right" sortable>
-      </paper-datatable-column>
-      <paper-datatable-column header="Cubes in Exchange" property="exchange" type="Number" align="right" sortable>
-      </paper-datatable-column>
-      <paper-datatable-column header="Climb?" property="climb" type="String" align="right" sortable>
-</paper-card>
-<br>
-<paper-card heading="Averages:">
-  <paper-datatable data="{{data}}" selectable multi-selection resize-behavior="overflow" response-width="767px">
-    <paper-datatable-column header="Mobility Percentage" property="mobility%" type="Number" align="right" sortable>
-    </paper-datatable-column>
-    <paper-datatable-column header="Cubes in Scale" property="teleopScale" type="Number" align="right" sortable>
-    </paper-datatable-column>
-    <paper-datatable-column header="Cubes in Switch" property="askericaboutthis" type="Number" align="right" sortable>
-    </paper-datatable-column>
-    <paper-datatable-column header="Climb Percentage" property="climb%" type="Number" align="right" sortable>
-    </paper-datatable-column>
-  </paper-datatable>
-</paper-card>
-<google-chart
-  type='table'
-  options='{"title": "Team View",
-"border": "1px solid green;"
-}'
-  cols='[{"label":"Match #", "type":"number"},
-         {"label":"Mobility?", "type":"string"},
-         {"label":"Switch Auton", "type":"string"},
-         {"label":"Cubes in Scale", "type":"number"},
-         {"label":"Cubes in Exchange", "type":"number"},
-         {"label":"Climb?", "type":"string"}
-        ]'
-  rows='[[1, "Yes", "No", 5, 4, "Yes"],[2, "Yes", "No", 3, 2, "No"],[3, "Yes", "Yes", 6, 5, "Yes"],[4, "Yes", "Yes", 2, 4, "No"]]'>
-</google-chart>
-<google-chart
-type="table"
-options='{"title": "Averages",
-"cssClassNames": {"headerRow": "bigAndBoldClass"}}'
-cols='[{"label":"Mobility %", "type":"number"},
-{"label":"Cubes in Scale", "type":"number"},
-{"label":"Cubes in Switch", "type":"number"},
-{"label":"Climb Percentage", "type":"number"}
-]'
-rows='[[30, 2.4, 4.3, 20]]'>
-</google-chart>
-<google-chart
-type="line"
-options='{"title": "Amount of Power Cubes for Switches and Scale:",
-          "hAxis": {"title": "Match #"},
-          "vAxis": {"title": "Number of Power Cubes"},
-          "lineWidth": "4",
-          "curveType": "function"
-                }'
-cols='[{"label": "Match #", "type": "number"},
-{"label":"Cubes in Scale", "type":"number"},
-{"label":"Cubes in Switch", "type":"number"},
-{"label":"Cubes in Defensive Switch", "type":"number"},
-{"label":"Cubes in Exchange", "type":"number"}
-]'
-rows='[[1, 30, 2.4, 4.3, 20],[2, 31, 78, 4.8, 1.2],[3, 21, 2, 4, 1],[4, 5, 45, 23, 2]]'>
-view='{{dataview}}'
-        >
-      </google-chart>
-</center>
-</template>
-<script>
+    <template>           
+        <paper-input id="team_number_input" always-float-label label="Team Number: "></paper-input>
+        <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
+        <div id="teamdata">
+        </div>
+        <br>
+        
+        <div id="averages">
+        </div>
+        <br>
 
-    class MyTeamView extends Polymer.Element {
-    static get is() { return 'my-teamview' }
-    }
-window.customElements.define(MyTeamView.is, MyTeamView);
+        <div id="linegraph">
+        </div>
+        <br>
+                
+    </template>
+    <script>
+        google.charts.load('current', {'packages': ["table"]});
+        class MyTeamView extends Polymer.Element {
+            static get is() { return 'my-teamview' }
+            submit_query_team() {
+                var team_number = this.$.team_number_input.value;
+                var base = this;
+                $.ajax({
+                    url: "/getteamdata?team_number=" + team_number,
+                    type: "GET",
+                    success: function(data) {
+                        base.generate_graph(data, base);        
+                    }
+                });
+            }
 
-var teamview = document.querySelector('MyTeamView');
-teamview.data = [
-  {title: 1, mobility: "YES", switchAuton: "NO", scaleCubes: 24, exchange: 4, climb: "Yes"},
-  {title: 2, mobility: "NO", switchAuton: "YES", scaleCubes: 24, exchange: 4, climb: "Yes"}];
-</script>
+            generate_graph(data,base) {
+                google.charts.load('45', {packages: ['corechart', 'table']});
+                google.charts.setOnLoadCallback(function() {base.drawTable(data,base);});
+            } 
+
+            drawDataForTable(data, base, table) {
+                table.addColumn('number', 'Match #');
+                table.addColumn('string', 'Mobility');
+                table.addColumn('number', 'Switch Auton');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addColumn('string', 'Climb?');
+
+                for(var team in data) {
+                    var matchstat = data[team];
+                    for(var i = 0; i < matchstat.length; i++) {
+                        var stat = [];
+                        
+                        stat.push(matchstat[i]["match_number"]);
+                        stat.push(matchstat[i]["mobility"]);
+                        stat.push(matchstat[i]["autonSwitchCubes"]);
+                        stat.push(matchstat[i]["autonScaleCubes"] + matchstat[i]["teleopScaleCubes"]);
+                        stat.push(matchstat[i]["exchange"]);
+                        stat.push(matchstat[i]["climb"]);
+                        table.addRow(stat);
+                   }
+                }
+            }
+            
+            /* 
+            average(data, key) {
+                var sum = 0.0;
+                var amount = 0;
+                data.forEach(function(match) {   
+                    sum += match[key];
+                    amount++;
+                });
+                return sum/amount;
+            }*/
+
+            drawTable(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataForTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pagetitleSize": 3,
+                    "pagingButtons": "both"};
+                
+                var chart = new google.visualization.Table(base.$.teamdata);
+                chart.draw(table, options); 
+            }
+        }
+    window.customElements.define(MyTeamView.is, MyTeamView);
+    </script>
 </dom-module>
