@@ -1,0 +1,272 @@
+<script type="text/javascript" src="/lib/jquery-3.2.1.min.js"> </script>
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+<dom-module id="my-compareview">
+    <template> 
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <paper-input id="team_number1_input" always-float-label label="Team Number: "></paper-input>
+                    <paper-button raised on-click="submit_query_team1"> Display Data </paper-button>
+                    <div id="teamdata1">
+                    </div>
+                    <br>
+                    
+                    <div id="averages1">
+                    </div>
+                    <br>
+
+                    <div id="linegraph1">
+                    </div>
+                    <br>
+                </td>
+                <td>
+                    <paper-input id="team_number2_input" always-float-label label="Team Number: "></paper-input>
+                    <paper-button raised on-click="submit_query_team2"> Display Data </paper-button>
+                    <div id="teamdata2">
+                    </div>
+                    <br>
+                    
+                    <div id="averages2">
+                    </div>
+                    <br>
+
+                    <div id="linegraph2">
+                    </div>
+                    <br>
+                </td>
+            </tr>
+        </table>
+    </template>
+    <script>
+        google.charts.load('current', {'packages': ["table"]});
+        class MyCompareView extends Polymer.Element {
+            static get is() { return 'my-compareview' }
+            submit_query_team1() {
+                var team_number = this.$.team_number1_input.value;
+                var base = this;
+                $.ajax({
+                    url: "/getteamdata?team_number=" + team_number,
+                    type: "GET",
+                    success: function(data) {
+                        base.generate_graph1(data, base, team_number);        
+                    }
+                });
+            }
+            submit_query_team2() {
+                var team_number = this.$.team_number2_input.value;
+                var base = this;
+                $.ajax({
+                    url: "/getteamdata?team_number=" + team_number,
+                    type: "GET",
+                    success: function(data) {
+                        base.generate_graph2(data, base, team_number);
+                    }
+                });
+            }
+
+            generate_graph1(data,base,team_number) {
+                google.charts.load('45', {packages: ['corechart', 'table']});
+                google.charts.setOnLoadCallback(function() {base.drawGeneralTable1(data,base);});
+                google.charts.setOnLoadCallback(function() {base.drawAverageTable1(data, base);});
+                google.charts.setOnLoadCallback(function() {base.drawLineGraph1(data, base, team_number);});
+            } 
+
+            generate_graph2(data,base,team_number) {
+                google.charts.load('45', {packages: ['corechart', 'table']});
+                google.charts.setOnLoadCallback(function() {base.drawGeneralTable2(data,base);});
+                google.charts.setOnLoadCallback(function() {base.drawAverageTable2(data, base);});
+                google.charts.setOnLoadCallback(function() {base.drawLineGraph2(data, base, team_number);});
+
+            }
+
+            drawDataForGeneralTable(data, base, table) {
+                table.addColumn('number', 'Match #');
+                table.addColumn('string', 'Mobility');
+                table.addColumn('string', 'Switch Auton');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Switch');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addColumn('string', 'Climb?');
+
+                for(var team in data) {
+                    var matchstat = data[team];
+                    for(var i = 0; i < matchstat.length; i++) {
+                        var stat = [];                        
+                        stat.push(matchstat[i]["match_number"]);
+                        stat.push(matchstat[i]["mobility"]);
+                        if (matchstat[i]["autonSwitchCubes"] != 0) {
+                            stat.push("YES");
+                        } else {
+                            stat.push("NO");
+                        }
+                        stat.push(matchstat[i]["autonScaleCubes"] + matchstat[i]["teleopScaleCubes"]);
+                        stat.push(matchstat[i]["allianceSwitchCubes"] + matchstat[i]["autonSwitchCubes"] + matchstat[i]["opposingSwitchCubes"]);
+                        stat.push(matchstat[i]["exchange"]);
+                        stat.push(matchstat[i]["climb"]);
+                        table.addRow(stat);
+                   }
+                }
+            }
+             
+            drawGeneralTable1(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataForGeneralTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pagetitleSize": 3,
+                    "pagingButtons": "both"};
+                
+                var chart = new google.visualization.Table(base.$.teamdata1);
+                chart.draw(table, options); 
+            }
+            
+            drawGeneralTable2(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataForGeneralTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pagetitleSize": 3,
+                    "pagingButtons": "both"};
+                
+                var chart = new google.visualization.Table(base.$.teamdata2);
+                chart.draw(table, options); 
+            }
+
+            drawAverageTable1(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataForAverageTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pagetitleSize": 3,
+                    "pagingButtons": "both"};
+
+                var chart = new google.visualization.Table(base.$.averages1);
+                chart.draw(table, options);
+            }
+            
+            drawAverageTable2(data, base) {
+                var table = new google.visualization.DataTable();
+                base.drawDataForAverageTable(data, base, table);
+                var options = {"allowHtml": "true",
+                    "title": "Competition View",
+                    "page": "enable",
+                    "pagetitleSize": 3,
+                    "pagingButtons": "both"};
+
+                var chart = new google.visualization.Table(base.$.averages2);
+                chart.draw(table, options);
+            }
+
+
+            drawDataForAverageTable(data, base, table) {
+                table.addColumn('string', 'Mobility %');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Switch');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addColumn('string', 'Climb %');
+
+                for (var team in data) {
+                    var matchstat = data[team];
+                    var mobility_success = 0.0;
+                    var climb_success = 0.0;
+
+                    var averageScale = (base.average(matchstat, "autonScaleCubes") + base.average(matchstat, "teleopScaleCubes"));
+                    var averageSwitch = (base.average(matchstat, "autonSwitchCubes") + base.average(matchstat, "allianceSwitchCubes") + base.average(matchstat, "opposingSwitchCubes"));
+                    var averageExchange = (base.average(matchstat, "exchange"));
+                    for (var i = 0; i < matchstat.length; i++) {
+                        var stat = [];    
+                        if (matchstat[i]["mobility"] == "YES") {
+                            mobility_success += 1.0;
+                        }
+                        if (matchstat[i]["climb"] == "YES") {
+                            climb_success += 1.0;
+                        }
+                    }
+                    var mobility_percent = mobility_success / matchstat.length;
+                    var climb_percent = climb_success / matchstat.length;
+                    stat.push(mobility_percent * 100 + " %");
+                    stat.push(averageScale);
+                    stat.push(averageSwitch);
+                    stat.push(averageExchange);
+                    stat.push(climb_percent * 100 + " %");
+                    table.addRow(stat);
+                }
+            }
+
+            average(data, key) {
+                var sum = 0.0;
+                var amount = 0;
+                data.forEach(function(match) {
+                    sum += match[key];
+                    amount++;
+                });
+
+                return sum/amount;
+            }
+            
+            drawLineGraph1(data, base, team_number) {
+                var table = new google.visualization.DataTable();
+                table.addColumn('number', 'Match');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Alliance Switch');
+                table.addColumn('number', 'Cubes in Defensive Switch');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addRows(
+                    base.drawDataForLineGraph(data, base, team_number)
+                );
+                var options = {
+                    legend : 'top'
+                };
+                var chart = new google.visualization.LineChart(base.$.linegraph1);
+                chart.draw(table, options);
+            }
+            
+            drawLineGraph2(data, base, team_number) {
+                var table = new google.visualization.DataTable();
+                table.addColumn('number', 'Match');
+                table.addColumn('number', 'Cubes in Scale');
+                table.addColumn('number', 'Cubes in Alliance Switch');
+                table.addColumn('number', 'Cubes in Defensive Switch');
+                table.addColumn('number', 'Cubes in Exchange');
+                table.addRows(
+                    base.drawDataForLineGraph(data, base, team_number)
+                );
+                var options = {
+                    legend : 'top'
+                };
+                var chart = new google.visualization.LineChart(base.$.linegraph2);
+                chart.draw(table, options);
+            }
+
+            drawDataForLineGraph(data, base, team_number) {
+                var all = [];
+                var teamstats = data[team_number];
+                teamstats.forEach(function(match) {
+                    var stats = [];
+                    console.log(match["match_number"]);
+                    console.log(match["autonScaleCubes"] + match["teleopScaleCubes"]);
+                    console.log(match["allianceSwitchCubes"]);
+                    console.log(match["opposingSwitchCubes"]);
+                    console.log(match["exchange"]);
+                    stats.push(match["match_number"]);
+                    stats.push(match["autonScaleCubes"] + match["teleopScaleCubes"]);
+                    stats.push(match["allianceSwitchCubes"]);
+                    stats.push(match["opposingSwitchCubes"]);
+                    stats.push(match["exchange"]);
+                    all.push(stats);
+                });
+                return all;
+
+            }
+
+        }
+    window.customElements.define(MyCompareView.is, MyCompareView);
+    </script>
+</dom-module>
