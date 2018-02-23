@@ -32,16 +32,16 @@
                     url: "/getteamdata?team_number=" + team_number,
                     type: "GET",
                     success: function(data) {
-                        base.generate_graph(data, base);        
+                        base.generate_graph(data, base, team_number);        
                     }
                 });
             }
 
-            generate_graph(data,base) {
+            generate_graph(data,base,team_number) {
                 google.charts.load('45', {packages: ['corechart', 'table']});
                 google.charts.setOnLoadCallback(function() {base.drawGeneralTable(data,base);});
                 google.charts.setOnLoadCallback(function() {base.drawAverageTable(data, base);});
-                google.charts.setOnLoadCallback(function() {base.drawLineGraph(data, base);});
+                google.charts.setOnLoadCallback(function() {base.drawLineGraph(data, base, team_number);});
             } 
 
             drawDataForGeneralTable(data, base, table) {
@@ -55,7 +55,6 @@
 
                 for(var team in data) {
                     var matchstat = data[team];
-                    console.log(matchstat);
                     for(var i = 0; i < matchstat.length; i++) {
                         var stat = [];                        
                         stat.push(matchstat[i]["match_number"]);
@@ -111,9 +110,6 @@
                     var matchstat = data[team];
                     var mobility_success = 0.0;
                     var climb_success = 0.0;
-                    console.log(matchstat);
-                    //iterating through each match in matchstat
-                    console.log("average scale: " + base.average(matchstat, "autonScaleCubes"));
 
                     var averageScale = (base.average(matchstat, "autonScaleCubes") + base.average(matchstat, "teleopScaleCubes"));
                     var averageSwitch = (base.average(matchstat, "autonSwitchCubes") + base.average(matchstat, "allianceSwitchCubes") + base.average(matchstat, "opposingSwitchCubes"));
@@ -139,7 +135,6 @@
             }
 
             average(data, key) {
-                
                 var sum = 0.0;
                 var amount = 0;
                 data.forEach(function(match) {
@@ -150,7 +145,7 @@
                 return sum/amount;
             }
             
-            drawLineGraph(data, base) {
+            drawLineGraph(data, base, team_number) {
                 var table = new google.visualization.DataTable();
                 table.addColumn('number', 'Match');
                 table.addColumn('number', 'Cubes in Scale');
@@ -158,7 +153,7 @@
                 table.addColumn('number', 'Cubes in Defensive Switch');
                 table.addColumn('number', 'Cubes in Exchange');
                 table.addRows(
-                    base.drawDataForLineGraph(data, base)
+                    base.drawDataForLineGraph(data, base, team_number)
                 );
                 var options = {
                     legend : 'top'
@@ -167,13 +162,24 @@
                 chart.draw(table, options);
             }
 
-            drawDataForLineGraph(data, base) {
-                var stats = [];
-                
-                stats.push([1,2,4,5,3]);
-                stats.push([3,3,6,7,8]);
-                stats.push([5,3,5,7,9]);
-                return stats;
+            drawDataForLineGraph(data, base, team_number) {
+                var all = [];
+                var teamstats = data[team_number];
+                teamstats.forEach(function(match) {
+                    var stats = [];
+                    console.log(match["match_number"]);
+                    console.log(match["autonScaleCubes"] + match["teleopScaleCubes"]);
+                    console.log(match["allianceSwitchCubes"]);
+                    console.log(match["opposingSwitchCubes"]);
+                    console.log(match["exchange"]);
+                    stats.push(match["match_number"]);
+                    stats.push(match["autonScaleCubes"] + match["teleopScaleCubes"]);
+                    stats.push(match["allianceSwitchCubes"]);
+                    stats.push(match["opposingSwitchCubes"]);
+                    stats.push(match["exchange"]);
+                    all.push(stats);
+                });
+                return all;
 
             }
 
