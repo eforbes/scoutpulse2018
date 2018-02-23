@@ -6,34 +6,56 @@
 
 <dom-module id="my-compareview">
     <template> 
+        <style type="text/css">
+            td {
+                width: 50em;
+            }
+        </style>
+
         <table style="width:100%">
             <tr>
                 <td>
                     <paper-input id="team_number1_input" always-float-label label="Team Number: "></paper-input>
                     <paper-button raised on-click="submit_query_team1"> Display Data </paper-button>
-                    <div id="teamdata1">
-                    </div>
-                    <br>
-                    
-                    <div id="averages1">
-                    </div>
-                    <br>
-
-                    <div id="linegraph1">
-                    </div>
                     <br>
                 </td>
                 <td>
                     <paper-input id="team_number2_input" always-float-label label="Team Number: "></paper-input>
                     <paper-button raised on-click="submit_query_team2"> Display Data </paper-button>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="teamdata1">
+                    </div>
+                    <br>
+                </td>
+                <td>
                     <div id="teamdata2">
                     </div>
                     <br>
-                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="averages1">
+                    </div>
+                    <br>
+                </td>
+                <td>
                     <div id="averages2">
                     </div>
                     <br>
-
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="linegraph1">
+                    </div>
+                    <br>
+                </td>
+                <td>
                     <div id="linegraph2">
                     </div>
                     <br>

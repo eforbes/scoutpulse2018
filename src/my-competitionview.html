@@ -6,6 +6,12 @@
 
 <dom-module id="my-competitionview">
     <template>           
+        <style include="shared-styles">
+            .table_stats {
+                border: solid black;
+                border-width: 1px 1px 1px 1px;
+            }
+        </style>
         <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
         <div id="tablechart">
         </div>
@@ -79,14 +85,13 @@
             drawTable(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
+                var cssClassNames = {
+                    headerRow: 'table_stats',
+                    tableCell: 'table_stats'
+                };
                 
                 var chart = new google.visualization.Table(base.$.tablechart);
-                chart.draw(table, options); 
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames}); 
             }
             
             drawDataForSwitch(data, team, base) {
