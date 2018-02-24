@@ -8,8 +8,13 @@
     <template>           
         <style include="shared-styles">
             .table_stats {
-                border: solid black;
-                border-width: 1px 1px 1px 1px;
+                border: solid 1px #000000;
+                text-align: center;
+            }
+            .header_stats {
+                border: solid 1px #000000;
+                text-align: center;
+                background-color: #ffa0a0;
             }
         </style>
         <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
@@ -86,8 +91,10 @@
                 var table = new google.visualization.DataTable();
                 base.drawDataForTable(data, base, table);
                 var cssClassNames = {
-                    headerRow: 'table_stats',
-                    tableCell: 'table_stats'
+                    'headerRow': 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow': 'table_stats',
+                    'headerCell':'header_stats'
                 };
                 
                 var chart = new google.visualization.Table(base.$.tablechart);
@@ -171,13 +178,9 @@
                 }
                 console.log(arr);
                 var table = google.visualization.arrayToDataTable(arr, true);
-                var options={
-                    title : 'Switch Scores',
-                    legend : 'none'
-                };
-
+                
                 var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
-                chart.draw(table, options);
+                chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
             }
             
             drawScale(data, base) {
@@ -187,13 +190,9 @@
                 }
                 console.log(arr);
                 var table = google.visualization.arrayToDataTable(arr, true);
-                var options={
-                    title : 'Scale Scores',
-                    legend : 'none'
-                };
 
                 var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
-                chart.draw(table, options);
+                chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
             }
  
 
