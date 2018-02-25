@@ -10,6 +10,15 @@
             td {
                 width: 50em;
             }
+            .header_stats {
+                border: solid 1px #000000;
+                text-align: center;
+                background-color: #ffa0a0;
+            }
+            .table_stats {
+                border: solid 1px #000000;
+                text-align: center;
+            }
         </style>
 
         <table style="width:100%">
@@ -137,53 +146,55 @@
             drawGeneralTable1(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForGeneralTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
-                
+                var cssClassNames = {
+                    'headerRow' : 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow' : 'table_stats',
+                    'headerCell' : 'header_stats'
+                }
                 var chart = new google.visualization.Table(base.$.teamdata1);
-                chart.draw(table, options); 
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames}); 
             }
             
             drawGeneralTable2(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForGeneralTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
-                
+                var cssClassNames = {
+                    'headerRow' : 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow' : 'table_stats',
+                    'headerCell' : 'header_stats'
+                }
                 var chart = new google.visualization.Table(base.$.teamdata2);
-                chart.draw(table, options); 
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});             
             }
 
             drawAverageTable1(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForAverageTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
-
+                var cssClassNames = {
+                    'headerRow' : 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow' : 'table_stats',
+                    'headerCell' : 'header_stats'
+                }
                 var chart = new google.visualization.Table(base.$.averages1);
-                chart.draw(table, options);
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});             
+
             }
             
             drawAverageTable2(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForAverageTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
-
+                var cssClassNames = {
+                    'headerRow' : 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow' : 'table_stats',
+                    'headerCell' : 'header_stats'
+                }
                 var chart = new google.visualization.Table(base.$.averages2);
-                chart.draw(table, options);
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});             
+
             }
 
 
@@ -235,7 +246,7 @@
             
             drawLineGraph1(data, base, team_number) {
                 var table = new google.visualization.DataTable();
-                table.addColumn('number', 'Match');
+                table.addColumn('string', 'Match');
                 table.addColumn('number', 'Cubes in Scale');
                 table.addColumn('number', 'Cubes in Alliance Switch');
                 table.addColumn('number', 'Cubes in Defensive Switch');
@@ -252,7 +263,7 @@
             
             drawLineGraph2(data, base, team_number) {
                 var table = new google.visualization.DataTable();
-                table.addColumn('number', 'Match');
+                table.addColumn('string', 'Match');
                 table.addColumn('number', 'Cubes in Scale');
                 table.addColumn('number', 'Cubes in Alliance Switch');
                 table.addColumn('number', 'Cubes in Defensive Switch');
@@ -272,12 +283,7 @@
                 var teamstats = data[team_number];
                 teamstats.forEach(function(match) {
                     var stats = [];
-                    console.log(match["match_number"]);
-                    console.log(match["autonScaleCubes"] + match["teleopScaleCubes"]);
-                    console.log(match["allianceSwitchCubes"]);
-                    console.log(match["opposingSwitchCubes"]);
-                    console.log(match["exchange"]);
-                    stats.push(match["match_number"]);
+                    stats.push(match["match_number"] + "");
                     stats.push(match["autonScaleCubes"] + match["teleopScaleCubes"]);
                     stats.push(match["allianceSwitchCubes"]);
                     stats.push(match["opposingSwitchCubes"]);

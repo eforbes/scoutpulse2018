@@ -6,6 +6,17 @@
 
 <dom-module id="my-teamview">
     <template>           
+        <style include="shared-styles">
+            .table_stats {
+                border: solid 1px #000000;
+                text-align: center;
+            }
+            .header_stats {
+                border: solid 1px #000000;
+                text-align: center;
+                background-color: #ffa0a0;
+            }
+        </style>
         <paper-input id="team_number_input" always-float-label label="Team Number: "></paper-input>
         <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
         <div id="teamdata">
@@ -76,31 +87,32 @@
             drawGeneralTable(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForGeneralTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
+                var cssClassNames = {
+                    'headerRow' : 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow' : 'table_stats',
+                    'headerCell' : 'header_stats'
+                };
                 
                 var chart = new google.visualization.Table(base.$.teamdata);
-                chart.draw(table, options); 
+                chart.draw(table, {allowHtml: true, showRowNumber: false, 'cssClassNames': cssClassNames}); 
             }
             
             drawAverageTable(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForAverageTable(data, base, table);
-                var options = {"allowHtml": "true",
-                    "title": "Competition View",
-                    "page": "enable",
-                    "pagetitleSize": 3,
-                    "pagingButtons": "both"};
-
+                var cssClassNames = {
+                    'headerRow' : 'header_stats',
+                    'tableCell' : 'table_stats',
+                    'tableRow' : 'table_stats',
+                    'headerCell' : 'header_stats'
+                };
                 var chart = new google.visualization.Table(base.$.averages);
-                chart.draw(table, options);
+                chart.draw(table, {allowHtml: true, showRowNumber: false, 'cssClassNames': cssClassNames}); 
             }
 
             drawDataForAverageTable(data, base, table) {
-                table.addColumn('string', 'Mobility %');
+                table.addColumn('number', 'Mobility %');
                 table.addColumn('number', 'Cubes in Scale');
                 table.addColumn('number', 'Cubes in Switch');
                 table.addColumn('number', 'Cubes in Exchange');
@@ -147,7 +159,7 @@
             
             drawLineGraph(data, base, team_number) {
                 var table = new google.visualization.DataTable();
-                table.addColumn('number', 'Match');
+                table.addColumn('string', 'Match');
                 table.addColumn('number', 'Cubes in Scale');
                 table.addColumn('number', 'Cubes in Alliance Switch');
                 table.addColumn('number', 'Cubes in Defensive Switch');
@@ -163,16 +175,12 @@
             }
 
             drawDataForLineGraph(data, base, team_number) {
+                console.log(data);
                 var all = [];
                 var teamstats = data[team_number];
                 teamstats.forEach(function(match) {
                     var stats = [];
-                    console.log(match["match_number"]);
-                    console.log(match["autonScaleCubes"] + match["teleopScaleCubes"]);
-                    console.log(match["allianceSwitchCubes"]);
-                    console.log(match["opposingSwitchCubes"]);
-                    console.log(match["exchange"]);
-                    stats.push(match["match_number"]);
+                    stats.push(match["match_number"] + "");
                     stats.push(match["autonScaleCubes"] + match["teleopScaleCubes"]);
                     stats.push(match["allianceSwitchCubes"]);
                     stats.push(match["opposingSwitchCubes"]);
