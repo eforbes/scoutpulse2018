@@ -3,9 +3,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 <dom-module id="my-compareview">
-    <template> 
+    <template>
         <style type="text/css">
             td {
                 width: 50em;
@@ -19,19 +20,31 @@
                 border: solid 1px #000000;
                 text-align: center;
             }
+            paper-card {
+              width: 500px;
+              height: 150px;
+            }
         </style>
-
+    <center>
         <table style="width:100%">
             <tr>
                 <td>
-                    <paper-input id="team_number1_input" always-float-label label="Team Number: "></paper-input>
-                    <paper-button raised on-click="submit_query_team1"> Display Data </paper-button>
-                    <br>
+                  <center>
+                    <paper-card>
+                      <paper-input id="team_number1_input" always-float-label label="Team Number: "></paper-input>
+                      <paper-button raised on-click="submit_query_team1"> Display Data </paper-button>
+                    </paper-card>
+                  <center>
+                  <br>
                 </td>
                 <td>
-                    <paper-input id="team_number2_input" always-float-label label="Team Number: "></paper-input>
-                    <paper-button raised on-click="submit_query_team2"> Display Data </paper-button>
-                    <br>
+                  <center>
+                    <paper-card>
+                      <paper-input id="team_number2_input" always-float-label label="Team Number: "></paper-input>
+                      <paper-button raised on-click="submit_query_team2"> Display Data </paper-button>
+                    </paper-card>
+                  <center>
+                  <br>
                 </td>
             </tr>
             <tr>
@@ -83,7 +96,7 @@
                     url: "/getteamdata?team_number=" + team_number,
                     type: "GET",
                     success: function(data) {
-                        base.generate_graph1(data, base, team_number);        
+                        base.generate_graph1(data, base, team_number);
                     }
                 });
             }
@@ -104,7 +117,7 @@
                 google.charts.setOnLoadCallback(function() {base.drawGeneralTable1(data,base);});
                 google.charts.setOnLoadCallback(function() {base.drawAverageTable1(data, base);});
                 google.charts.setOnLoadCallback(function() {base.drawLineGraph1(data, base, team_number);});
-            } 
+            }
 
             generate_graph2(data,base,team_number) {
                 google.charts.load('45', {packages: ['corechart', 'table']});
@@ -126,7 +139,7 @@
                 for(var team in data) {
                     var matchstat = data[team];
                     for(var i = 0; i < matchstat.length; i++) {
-                        var stat = [];                        
+                        var stat = [];
                         stat.push(matchstat[i]["match_number"]);
                         stat.push(matchstat[i]["mobility"]);
                         if (matchstat[i]["autonSwitchCubes"] != 0) {
@@ -142,7 +155,7 @@
                    }
                 }
             }
-             
+
             drawGeneralTable1(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForGeneralTable(data, base, table);
@@ -153,9 +166,9 @@
                     'headerCell' : 'header_stats'
                 }
                 var chart = new google.visualization.Table(base.$.teamdata1);
-                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames}); 
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
             }
-            
+
             drawGeneralTable2(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForGeneralTable(data, base, table);
@@ -166,7 +179,7 @@
                     'headerCell' : 'header_stats'
                 }
                 var chart = new google.visualization.Table(base.$.teamdata2);
-                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});             
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
             }
 
             drawAverageTable1(data, base) {
@@ -179,10 +192,10 @@
                     'headerCell' : 'header_stats'
                 }
                 var chart = new google.visualization.Table(base.$.averages1);
-                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});             
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
 
             }
-            
+
             drawAverageTable2(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForAverageTable(data, base, table);
@@ -193,7 +206,7 @@
                     'headerCell' : 'header_stats'
                 }
                 var chart = new google.visualization.Table(base.$.averages2);
-                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});             
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
 
             }
 
@@ -214,7 +227,7 @@
                     var averageSwitch = (base.average(matchstat, "autonSwitchCubes") + base.average(matchstat, "allianceSwitchCubes") + base.average(matchstat, "opposingSwitchCubes"));
                     var averageExchange = (base.average(matchstat, "exchange"));
                     for (var i = 0; i < matchstat.length; i++) {
-                        var stat = [];    
+                        var stat = [];
                         if (matchstat[i]["mobility"] == "YES") {
                             mobility_success += 1.0;
                         }
@@ -243,7 +256,7 @@
 
                 return sum/amount;
             }
-            
+
             drawLineGraph1(data, base, team_number) {
                 var table = new google.visualization.DataTable();
                 table.addColumn('string', 'Match');
@@ -260,7 +273,7 @@
                 var chart = new google.visualization.LineChart(base.$.linegraph1);
                 chart.draw(table, options);
             }
-            
+
             drawLineGraph2(data, base, team_number) {
                 var table = new google.visualization.DataTable();
                 table.addColumn('string', 'Match');

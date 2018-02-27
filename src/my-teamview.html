@@ -3,9 +3,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 <dom-module id="my-teamview">
-    <template>           
+    <template>
         <style include="shared-styles">
             .table_stats {
                 border: solid 1px #000000;
@@ -16,21 +17,28 @@
                 text-align: center;
                 background-color: #ffa0a0;
             }
+            paper-card {
+              width: 500px;
+              height: 150px;
+            }
         </style>
-        <paper-input id="team_number_input" always-float-label label="Team Number: "></paper-input>
-        <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
-        <div id="teamdata">
-        </div>
-        <br>
-        
-        <div id="averages">
-        </div>
-        <br>
+        <center>
+          <paper-card>
+            <paper-input id="team_number_input" always-float-label label="Team Number: "></paper-input>
+            <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
+          </paper-card>
+          <div id="teamdata">
+          </div>
+          <br>
 
-        <div id="linegraph">
-        </div>
-        <br>
-                
+          <div id="averages">
+          </div>
+          <br>
+
+          <div id="linegraph">
+          </div>
+          <br>
+
     </template>
     <script>
         google.charts.load('current', {'packages': ["table"]});
@@ -43,7 +51,7 @@
                     url: "/getteamdata?team_number=" + team_number,
                     type: "GET",
                     success: function(data) {
-                        base.generate_graph(data, base, team_number);        
+                        base.generate_graph(data, base, team_number);
                     }
                 });
             }
@@ -53,7 +61,7 @@
                 google.charts.setOnLoadCallback(function() {base.drawGeneralTable(data,base);});
                 google.charts.setOnLoadCallback(function() {base.drawAverageTable(data, base);});
                 google.charts.setOnLoadCallback(function() {base.drawLineGraph(data, base, team_number);});
-            } 
+            }
 
             drawDataForGeneralTable(data, base, table) {
                 table.addColumn('number', 'Match #');
@@ -67,7 +75,7 @@
                 for(var team in data) {
                     var matchstat = data[team];
                     for(var i = 0; i < matchstat.length; i++) {
-                        var stat = [];                        
+                        var stat = [];
                         stat.push(matchstat[i]["match_number"]);
                         stat.push(matchstat[i]["mobility"]);
                         if (matchstat[i]["autonSwitchCubes"] != 0) {
@@ -83,7 +91,7 @@
                    }
                 }
             }
-             
+
             drawGeneralTable(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForGeneralTable(data, base, table);
@@ -93,11 +101,11 @@
                     'tableRow' : 'table_stats',
                     'headerCell' : 'header_stats'
                 };
-                
+
                 var chart = new google.visualization.Table(base.$.teamdata);
-                chart.draw(table, {allowHtml: true, showRowNumber: false, 'cssClassNames': cssClassNames}); 
+                chart.draw(table, {allowHtml: true, showRowNumber: false, 'cssClassNames': cssClassNames});
             }
-            
+
             drawAverageTable(data, base) {
                 var table = new google.visualization.DataTable();
                 base.drawDataForAverageTable(data, base, table);
@@ -108,7 +116,7 @@
                     'headerCell' : 'header_stats'
                 };
                 var chart = new google.visualization.Table(base.$.averages);
-                chart.draw(table, {allowHtml: true, showRowNumber: false, 'cssClassNames': cssClassNames}); 
+                chart.draw(table, {allowHtml: true, showRowNumber: false, 'cssClassNames': cssClassNames});
             }
 
             drawDataForAverageTable(data, base, table) {
@@ -127,7 +135,7 @@
                     var averageSwitch = (base.average(matchstat, "autonSwitchCubes") + base.average(matchstat, "allianceSwitchCubes") + base.average(matchstat, "opposingSwitchCubes"));
                     var averageExchange = (base.average(matchstat, "exchange"));
                     for (var i = 0; i < matchstat.length; i++) {
-                        var stat = [];    
+                        var stat = [];
                         if (matchstat[i]["mobility"] == "YES") {
                             mobility_success += 1.0;
                         }
@@ -156,7 +164,7 @@
 
                 return sum/amount;
             }
-            
+
             drawLineGraph(data, base, team_number) {
                 var table = new google.visualization.DataTable();
                 table.addColumn('string', 'Match');
@@ -194,4 +202,5 @@
         }
     window.customElements.define(MyTeamView.is, MyTeamView);
     </script>
+  <center>
 </dom-module>

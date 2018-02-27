@@ -3,9 +3,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 <dom-module id="my-competitionview">
-    <template>           
+    <template>
         <style include="shared-styles">
             .table_stats {
                 border: solid 1px #000000;
@@ -16,20 +17,32 @@
                 text-align: center;
                 background-color: #ffa0a0;
             }
+            paper-card {
+              width: 500px;
+              height: 150px;
+            }
+            paper-button {
+              width: 400px;
+              height: 90px;
+            }
         </style>
-        <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
-        <div id="tablechart">
-        </div>
-        <br>
-        
-        <div id="switch_candlestick">
-        </div>
-        <br>
+        <center>
+          <paper-card>
+            <br>
+            <paper-button raised on-click="submit_query_team"> Display Data </paper-button>
+          </paper-card>
+          <div id="tablechart">
+          </div>
+          <br>
 
-        <div id="scale_candlestick">
-        </div>
-        <br>
-                
+          <div id="switch_candlestick">
+          </div>
+          <br>
+
+          <div id="scale_candlestick">
+          </div>
+          <br>
+
     </template>
     <script>
         google.charts.load('current', {'packages': ["table"]});
@@ -41,7 +54,7 @@
                     url: "/getteamdata",
                     type: "GET",
                     success: function(data) {
-                        base.generate_graph(data, base);        
+                        base.generate_graph(data, base);
                     }
                 });
             }
@@ -51,7 +64,7 @@
                 google.charts.setOnLoadCallback(function() {base.drawTable(data,base);});
                 google.charts.setOnLoadCallback(function() {base.drawSwitch(data,base);});
                 google.charts.setOnLoadCallback(function() {base.drawScale(data,base);});
-            } 
+            }
 
             drawDataForTable(data, base, table) {
                 table.addColumn('string', 'Team Number');
@@ -74,13 +87,13 @@
                     table.addRow(stat);
 
                 }
-    
+
             }
-            
+
             average(data, key) {
                 var sum = 0.0;
                 var amount = 0;
-                data.forEach(function(match) {   
+                data.forEach(function(match) {
                     sum += match[key];
                     amount++;
                 });
@@ -96,11 +109,11 @@
                     'tableRow': 'table_stats',
                     'headerCell':'header_stats'
                 };
-                
+
                 var chart = new google.visualization.Table(base.$.tablechart);
-                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames}); 
+                chart.draw(table, {showRowNumber: false, allowHtml: true, 'cssClassNames': cssClassNames});
             }
-            
+
             drawDataForSwitch(data, team, base) {
                 var teamstats = [];
                 var scores = [];
@@ -121,7 +134,7 @@
                 teamstats.push(maxScore);
                 return teamstats;
             }
-           
+
             drawDataForScale(data, team, base) {
                 var teamstats = [];
                 var scores = [];
@@ -161,12 +174,12 @@
                 if (quartile == "q1") {
                     var q1LowMiddle = Math.floor((q1Stats.length - 1) / 2);
                     var q1HighMiddle = Math.ceil((q1Stats.length - 1) / 2);
-                    
+
                     return (q1Stats[q1LowMiddle] + q1Stats[q1HighMiddle]) / 2;
                 } else if (quartile == "q3") {
                     var q3LowMiddle = Math.floor((q3Stats.length - 1) / 2);
                     var q3HighMiddle = Math.ceil((q3Stats.length - 1) / 2);
-                    
+
                     return (q3Stats[q3LowMiddle] + q3Stats[q3HighMiddle]) / 2;
                 }
             }
@@ -178,11 +191,11 @@
                 }
                 console.log(arr);
                 var table = google.visualization.arrayToDataTable(arr, true);
-                
+
                 var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
                 chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
             }
-            
+
             drawScale(data, base) {
                 var arr = [];
                 for (var team in data) {
@@ -194,9 +207,10 @@
                 var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
                 chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
             }
- 
+
 
         }
     window.customElements.define(MyCompetitionView.is, MyCompetitionView);
     </script>
+  </center>
 </dom-module>
