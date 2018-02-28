@@ -39,12 +39,12 @@ function sql_connect(sql_password) {
         host: "localhost",
         user: "root",
         password: sql_password,
-        database: "db"// Database must be created first, otherwise this will crash 
+        database: "db"// Database must be created first, otherwise this will crash
     });
     sql.connect(function(err) {
         if (err) throw err;
         console.log("Connected to MySQL!");
-     
+
         sql.query('CREATE DATABASE IF NOT EXISTS db', function(err, result) {
             if (err) throw err;
             console.log("SQL Database created/checked");
@@ -53,9 +53,9 @@ function sql_connect(sql_password) {
         // Match table
         sql.query('CREATE TABLE IF NOT EXISTS matches ('
                     + 'id INT PRIMARY KEY AUTO_INCREMENT,'
-                    + 'team_number SMALLINT,'    
+                    + 'team_number SMALLINT,'
                     + 'match_type VARCHAR(50),'
-                    + 'match_number TINYINT UNSIGNED,' 
+                    + 'match_number TINYINT UNSIGNED,'
                     + 'methodScoring VARCHAR(50),'
                     + 'methodAcquiring VARCHAR(50),'
                     + 'climbMech VARCHAR(50),'
@@ -92,9 +92,9 @@ app.post('/scout', function(req, res) {
         //sql.query('SELECT 1 FROM matches m WHERE m.match_number=\'' + data.match_number + '\' AND m.team_number=\'' + data.team_number + '\'', function(err, result, fields) {
         sql.query('SELECT 1 FROM matches m WHERE m.match_number=? AND m.team_number=?', [data.match_number, data.team_number] , function(err, result, fields) {
             if (err) {
-                throw err;             
+                throw err;
                 return res.send({result: "error", error: err});
-            }           
+            }
             var abort = null;
 
         //making sure if data is valid
@@ -103,7 +103,7 @@ app.post('/scout', function(req, res) {
                     var intval = parseInt(data[element]);
                     console.log(intval);
                     if (intval > 255 || intval < 0) {
-                        abort = {result: "invalid", error: "Invalid data for " + element + ": " + intval}; 
+                        abort = {result: "invalid", error: "Invalid data for " + element + ": " + intval};
                         return;
                     }
                 }
@@ -113,7 +113,7 @@ app.post('/scout', function(req, res) {
           if (abort != null) {
               return res.send(abort);
           }
-        
+
 	        if (result.length == 0) {
               //if (result) <--?
               return res.send(sql_fast_insert('matches', data));
@@ -187,7 +187,7 @@ app.get('/getteamdata', function(req, res) {
 		if (match_number != null && match_number !== "") {
 				queryList = " WHERE m.match_number=" + sql.escape(match_number);
 		}
-		sql.query('SELECT team_number FROM matches m' + queryList, function(err, result1, fields) {
+		sql.query('SELECT team_number FROM matches m' + queryList + ' ORDER BY match_number, team_number', function(err, result1, fields) {
 				if (err) throw err;
 				var data = {};
 				var counter = 0;
