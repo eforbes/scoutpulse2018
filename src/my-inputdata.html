@@ -27,7 +27,7 @@
       }
       .fontsize {
         font-size: 2em;
-      } 
+      }
       .notif_normal {
         --paper-toast-background-color: #323232;
         --paper-toast-color: #f1f1f1;
@@ -76,13 +76,13 @@
                 <iron-label for="match_type">
                     Match Type
                 </iron-label>
-                <br>               
+                <br>
             <paper-button-group id="match_type" selected="match_type">
                 <paper-button toggles raised class="custom red"> Practice </paper-button>
                 <paper-button toggles raised class="custom red"> Qualifier </paper-button>
                 <paper-button toggles raised class="custom red"> Quarterfinals </paper-button>
                 <paper-button toggles raised class="custom red"> Semifinals </paper-button>
-                <paper-button toggles raised class="custom red"> Finals </paper-button> 
+                <paper-button toggles raised class="custom red"> Finals </paper-button>
             </paper-button-group>
             <br>
 
@@ -346,7 +346,7 @@
                             this.set_notif_normal_message("No data found! Starting new sheet");
                             return;
                         }
-                        
+
                         console.log(data);
                         data = data[0]; // object is stored in array
                         this.$.climb.selected = data.climb;
@@ -370,15 +370,40 @@
                             + "Be wary when uploading");
                     }
                 });
-                    
+
                     this.$.loadable_sheet.style.display="block";
                     this.$.sheet_key_info.style.display="none";
                     //this.$.load_sheet_button.style.display="none";
-                        
+
                     this.$.loadable_sheet_team_number.innerHTML = "Team " + team;
             }
 			close_data() {
 				this.$.loadable_sheet.style.display="none";
+        this.$.team.value = "";
+        this.$.match_type.value = "";
+        this.$.match_type.selected = "0";
+        this.$.match_number.value = "";
+        this.$.methodScoring.selected = "0";
+        this.$.methodScoringOther.value = "";
+        this.$.methodAcquiring.selected = "0";
+        this.$.methodAcquiringOther.value = "";
+        this.$.climbMech.selected = "0";
+        this.$.climbMech.value = "";
+        this.$.climbMechOther.value = "";
+        this.$.mobility.selected = "YES";
+        this.$.autonSwitchCubes.selected = "0";
+        this.$.autonSwitchCubes7.value = "";
+        this.$.autonScaleCubes.selected = "0";
+        this.$.autonScaleCubes7.value = "";
+        this.$.allianceSwitchCubes.selected = "0";
+        this.$.allianceSwitchCubes7.value = "";
+        this.$.opposingSwitchCubes.selected = "0";
+        this.$.opposingSwitchCubes7.value = "";
+        this.$.teleopScaleCubes.selected = "0";
+        this.$.teleopScaleCubes7.value = "";
+        this.$.exchange.selected = "0";
+        this.$.exchange7.value = "";
+        this.$.assistedOption.selected = "NONE";
 				this.$.sheet_key_info.style.display="block";
                 //this.$.load_sheet_button.style.display="block";
 			}
@@ -403,7 +428,7 @@
                     this.$.loadable_text1.style.display="none";
                     this.$.method_acquiring_button.id="method_acquiring_button";
                 }
-            }   
+            }
             load_text_climb_mech() {
                 var name = this.$.climbing_mech_button.id;
                 if (name == "climbing_mech_button") {
@@ -485,12 +510,12 @@
       			//var form = $("#scout_form");
                 //Changes selected numerical values to strings.
                 //Mobility
-                
+
                 if (this.$.mobility.selected == 0) {
                     this.$.mobility.value = "YES"
                 }
                 else {this.$.mobility.value = "NO"}
-                
+
                 //Match Type
                 if (this.$.match_type.selected == 0) {
                     this.$.match_type.value = "Practice"
@@ -515,7 +540,7 @@
                 if (this.$.methodScoring.selected == 1) {
                 this.$.methodScoring.value = "Shoot Cube"
                 }
-    
+
                 if (this.$.methodScoring.selected == 2) {
                 this.$.methodScoring.value = this.$.methodScoringOther.value
                 }
@@ -530,8 +555,8 @@
                 if (this.$.methodAcquiring.selected == 2) {
                 this.$.methodAcquiring.value = this.$.methodAcquiringOther.value
                 }
-                    
-    
+
+
                 //Climb Mechanism
                 if (this.$.climbMech.selected == 0) {
                 this.$.climbMech.value = "Rung"
@@ -630,7 +655,7 @@
 	  				/*console.log(this.$.team.value);
     				  console.log(form.serialize());*/
                 var base = this;
-      			
+
       			$.ajax({
       			    url: "/scout",
       			    type: "post",
@@ -655,7 +680,7 @@
                             $("#success_log").html("");*/
       			    }
 				});
-    		} 
+    		}
     }
     window.customElements.define(MyInputData.is, MyInputData);
   </script>
