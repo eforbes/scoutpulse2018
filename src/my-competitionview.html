@@ -74,7 +74,6 @@
                 table.addColumn('number', 'Avg Opposing Switch Cubes in Teleop');
                 table.addColumn('number', 'Avg Scale Cubes in Teleop');
                 table.addColumn('number', 'Avg Exchange Cubes');
-                console.log(data);
                 for (var team in data) {
                     var stat = [];
                     stat.push(team);
@@ -118,18 +117,26 @@
                 var teamstats = [];
                 var scores = [];
                 teamstats.push(team);
-                data.forEach(function(match) {
-                    scores.push(match["allianceSwitchCubes"]);
-                    scores.push(match["opposingSwitchCubes"]);
-                    scores.push(match["autonSwitchCubes"]);
-                });
+                for(var i = 0; i < data.length; i++) {
+                    scores.push(data[i]["opposingSwitchCubes"]);
+                    scores.push(data[i]["autonSwitchCubes"]);
+                    scores.push(data[i]["allianceSwitchCubes"]);
+                }
 
                 var minScore = Math.min.apply(Math, scores);
                 var maxScore = Math.max.apply(Math, scores);
                 var q1 = base.calculateQuart(scores, "q1");
                 var q3 = base.calculateQuart(scores, "q3");
+                var median = base.calculateQuart(scores, "median");
                 teamstats.push(minScore);
                 teamstats.push(q1);
+                teamstats.push(median);
+                teamstats.push(q3);
+                teamstats.push(maxScore);
+                
+                teamstats.push(minScore);
+                teamstats.push(q1);
+                teamstats.push(median);
                 teamstats.push(q3);
                 teamstats.push(maxScore);
                 return teamstats;
@@ -139,71 +146,140 @@
                 var teamstats = [];
                 var scores = [];
                 teamstats.push(team);
-                data.forEach(function(match) {
-                    scores.push(match["autonScaleCubes"]);
-                    scores.push(match["teleopScaleCubes"]);
-                });
+                for (var i = 0; i < data.length; i++) {
+                    scores.push(data[i]["autonScaleCubes"]);
+                    scores.push(data[i]["teleopScaleCubes"]);
+                }
 
                 var minScore = Math.min.apply(Math, scores);
                 var maxScore = Math.max.apply(Math, scores);
                 var q1 = base.calculateQuart(scores, "q1");
                 var q3 = base.calculateQuart(scores, "q3");
+                var median = base.calculateQuart(scores, "median");
                 teamstats.push(minScore);
                 teamstats.push(q1);
+                teamstats.push(median);
+                teamstats.push(q3);
+                teamstats.push(maxScore);
+                
+                teamstats.push(minScore);
+                teamstats.push(q1);
+                teamstats.push(median);
                 teamstats.push(q3);
                 teamstats.push(maxScore);
                 return teamstats;
             }
-
-            drawSwitch(data, base) {
-                var arr = [];
-                for (var team in data) {
-                    arr.push(base.drawDataForSwitch(data[team], team, base));
-                }
-                console.log(arr);
-                var table = google.visualization.arrayToDataTable(arr, true);
-                
-                var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
-                chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
-            }
-            
+ 
             drawScale(data, base) {
                 var arr = [];
+                var chart = new google.visualization.DataTable();
+                chart.addColumn('string', 'Team Number');
+                chart.addColumn('number', 'Minimum');
+                chart.addColumn('number', 'First Quartile');
+                chart.addColumn('number', 'Median');
+                chart.addColumn('number', 'Third Quartile');
+                chart.addColumn('number', 'Maximum');
+
+                chart.addColumn({id: 'min', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'firstQuartile', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'median', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'thirdQuartile', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'max', type: 'number', role: 'interval'});
+            
                 for (var team in data) {
                     arr.push(base.drawDataForScale(data[team], team, base));
                 }
-                console.log(arr);
-                var table = google.visualization.arrayToDataTable(arr, true);
+                
+                chart.addRows(arr);
+                var options = {
+                    title:'Scale Plot',
+                    height: 500,
+                    legend: {position: 'none'},
+                    hAxis: {
+                        gridlines: {color: '#fff'}
+                    },
+                    lineWidth: 0,
+                    series: [{'color': '#fff'}],
+                    intervals: {
+                        barWidth: 1,
+                        boxWidth: 1,
+                        lineWidth: 2,
+                        style: 'boxes'
+                    },
+                    interval: {
+                        max: {
+                        style: 'bars',
+                        fillOpacity: 1,
+                        color: '#777'
+                        },
+                        min: {
+                        style: 'bars',
+                        fillOpacity: 1,
+                        color: '#777'
+                        }
+                    }
+                };
 
-                var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
-                chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
+                var line = new google.visualization.LineChart(base.$.scale_candlestick);
+                line.draw(chart, options);
             }
  
             
             drawSwitch(data, base) {
                 var arr = [];
+                var chart = new google.visualization.DataTable();
+                chart.addColumn('string', 'Team Number');
+                chart.addColumn('number', 'Minimum');
+                chart.addColumn('number', 'First Quartile');
+                chart.addColumn('number', 'Median');
+                chart.addColumn('number', 'Third Quartile');
+                chart.addColumn('number', 'Maximum');
+
+                chart.addColumn({id: 'min', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'firstQuartile', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'median', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'thirdQuartile', type: 'number', role: 'interval'});
+                chart.addColumn({id: 'max', type: 'number', role: 'interval'});
+            
                 for (var team in data) {
                     arr.push(base.drawDataForSwitch(data[team], team, base));
                 }
-                console.log(arr);
-                var table = google.visualization.arrayToDataTable(arr, true);
+                    
+                chart.addRows(arr);
+                var options = {
+                    title:'Switch Plot',
+                    height: 500,
+                    legend: {position: 'none'},
+                    hAxis: {
+                        gridlines: {color: '#fff'}
+                    },
+                    lineWidth: 0,
+                    series: [{'color':'#fff'}],
+                    intervals: {
+                        barWidth: 1,
+                        boxWidth: 1,
+                        lineWidth: 2,
+                        style: 'boxes'
+                    },
+                    interval: {
+                        max: {
+                        style: 'bars',
+                        fillOpacity: 1,
+                        color: '#777'
+                        },
+                        min: {
+                        style: 'bars',
+                        fillOpacity: 1,
+                        color: '#777'
+                        }
+                    }
+                };
 
-                var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
-                chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
+                var line = new google.visualization.LineChart(base.$.switch_candlestick);
+                line.draw(chart, options);
             }
 
-            drawScale(data, base) {
-                var arr = [];
-                for (var team in data) {
-                    arr.push(base.drawDataForScale(data[team], team, base));
-                }
-                console.log(arr);
-                var table = google.visualization.arrayToDataTable(arr, true);
-
-                var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
-                chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
-            }
-            
+           
             calculateQuart(data, quartile) {
                 data.sort((a, b) => a - b);
                 var lowMiddle = Math.floor((data.length - 1) / 2);
@@ -229,6 +305,8 @@
                     var q3HighMiddle = Math.ceil((q3Stats.length - 1) / 2);
 
                     return (q3Stats[q3LowMiddle] + q3Stats[q3HighMiddle]) / 2;
+                } else if (quartile == "median") {
+                    return median;
                 }
             }
 
