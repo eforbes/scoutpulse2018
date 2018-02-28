@@ -75,228 +75,225 @@
 				<h3> <p id="loadable_sheet_team_number" style=""> </h3>
                 <iron-label for="match_type">
                     Match Type
-                </iron-type>
+                </iron-label>
                 <br>               
-                <paper-button-group id="match_type" selected="match_type">
-                    <paper-button toggles raised class="custom red"> Practice </paper-button>
-                    <paper-button toggles raised class="custom red"> Qualifier </paper-button>
-                    <paper-button toggles raised class="custom red"> Quarterfinals </paper-button>
-                    <paper-button toggles raised class="custom red"> Semifinals </paper-button>
-                    <paper-button toggles raised class="custom red"> Finals </paper-button> 
-                </paper-button-group>
-                <br>
+            <paper-button-group id="match_type" selected="match_type">
+                <paper-button toggles raised class="custom red"> Practice </paper-button>
+                <paper-button toggles raised class="custom red"> Qualifier </paper-button>
+                <paper-button toggles raised class="custom red"> Quarterfinals </paper-button>
+                <paper-button toggles raised class="custom red"> Semifinals </paper-button>
+                <paper-button toggles raised class="custom red"> Finals </paper-button> 
+            </paper-button-group>
+            <br>
 
-                <paper-input always-float-label id="match_number" label="Match Number: "></paper-input>
-                <br>
-               <iron-label for="methodScoring">
-                 Method of Scoring
-               </iron-label>
-               <br>
-               <paper-button-group id="methodScoring" selected = "methodScoring">
-                      <paper-button toggles raised class="custom red"> Place </paper-button>
-                      <paper-button toggles raised class="custom red"> Shoot Cube </paper-button>
-                      <paper-button toggles raised on-click="load_text_method_scoring" id="method_scoring_button" class="custom red"> Other </paper-button>
-              <div id="loadable_text0" style="display:none">
-                    <paper-input always-float-label id="methodScoringOther"> </paper-input>
-              </div>
-               </paper-button-group>
-               <br>
-               <br>
-               <iron-label for="methodAcquiring">
-                Method of Acquiring
-               </iron-label>
-               <br>
-               <paper-button-group id="methodAcquiring" selected = "methodAcquiring">
-                      <paper-button toggles raised class="custom red"> Floor </paper-button>
-                      <paper-button toggles raised class="custom red"> Portal </paper-button>
-                      <paper-button toggles raised on-click="load_text_method_acquiring" id="method_acquiring_button" class="custom red"> Other </paper-button>
-                <div id="loadable_text1" style="display:none">
-                    <paper-input always-float-label id="methodAcquiringOther"> </paper-input>
-                </div>
-               </paper-button-group>
-               <br>
-               <br>
-               <iron-label for="climbMech">
-                Climb Mechanism
-               </iron-label>
-               <br>
-               <paper-button-group id="climbMech" selected="climbMech">
-                <paper-button toggles raised class="custom red"> Rung </paper-button>
-          		<paper-button toggles raised class="custom red"> Ramp </paper-button>
-          		<paper-button toggles raised class="custom red"> Rung Expansion </paper-button>
-          		<paper-button toggles raised on-click="load_text_climb_mech" id="climbing_mech_button" class="custom red"> Other </paper-button>
-          		<div id="loadable_text2" style="display:none">
-          		    <paper-input always-float-label id="climbMechOther"> </paper-input>
-          	    </div>
-          	   </paper-button-group>
-          		<br>
-              <br>
-          		<hr>
-          		<h4> Autonomous: </h4>
-          		<iron-label for="moblity">
-          		  Mobility?
-          		</iron-label>
-              <br>
-                <paper-button-group id="mobility">
-                    <paper-button toggles raised class="custom red" name="YES">Yes</paper-button>
-                    <paper-button toggles raised class="custom red" name="NO" selected>No</paper-button>
-                </paper-button-group>
-          		<br>
-              <br>
-            <iron-label for="autonSwitchCubes">
-              Amount of Power Cubes on Switch:
+            <paper-input always-float-label id="match_number" label="Match Number: "></paper-input>
+            <br>
+
+            <iron-label for="methodScoring">
+                Method of Scoring
             </iron-label>
             <br>
-            <paper-button-group id="autonSwitchCubes" selected = "0">
-              <paper-button toggles raised class="custom red">0</paper-button>
+            <paper-button-group id="methodScoring" selected = "methodScoring">
+                    <paper-button toggles raised class="custom red"> Place </paper-button>
+                    <paper-button toggles raised class="custom red"> Shoot Cube </paper-button>
+                    <paper-button toggles raised on-click="load_text_method_scoring" id="method_scoring_button" class="custom red"> Other </paper-button>
+                <div id="loadable_text0" style="display:none">
+                    <paper-input always-float-label id="methodScoringOther"> </paper-input>
+                </div>
+            </paper-button-group>
+            <br>
+            <br>
+            <iron-label for="methodAcquiring">
+            Method of Acquiring
+            </iron-label>
+            <br>
+            <paper-button-group id="methodAcquiring" selected = "methodAcquiring">
+                    <paper-button toggles raised class="custom red"> Floor </paper-button>
+                    <paper-button toggles raised class="custom red"> Portal </paper-button>
+                <paper-button toggles raised on-click="load_text_method_acquiring" id="method_acquiring_button" class="custom red"> Other </paper-button>
+            <div id="loadable_text1" style="display:none">
+                <paper-input always-float-label id="methodAcquiringOther"> </paper-input>
+            </div>
+            </paper-button-group>
+            <br>
+            <br>
+            <iron-label for="climbMech">
+            Climb Mechanism
+            </iron-label>
+            <br>
+            <paper-button-group id="climbMech" selected="climbMech">
+            <paper-button toggles raised class="custom red"> Rung </paper-button>
+            <paper-button toggles raised class="custom red"> Ramp </paper-button>
+            <paper-button toggles raised class="custom red"> Rung Expansion </paper-button>
+            <paper-button toggles raised on-click="load_text_climb_mech" id="climbing_mech_button" class="custom red"> Other </paper-button>
+            <div id="loadable_text2" style="display:none">
+                <paper-input always-float-label id="climbMechOther"> </paper-input>
+            </div>
+            </paper-button-group>
+            <br>
+            <br>
+            <h4> Autonomous: </h4>
+            <iron-label for="moblity">
+                Mobility?
+            </iron-label>
+            <br>
+            <paper-button-group id="mobility">
+                <paper-button toggles raised class="custom red" name="YES">Yes</paper-button>
+                <paper-button toggles raised class="custom red" name="NO" selected>No</paper-button>
+            </paper-button-group>
+            <br>
+            <br>
+        <iron-label for="autonSwitchCubes">
+            Amount of Power Cubes on Switch:
+        </iron-label>
+        <br>
+        <paper-button-group id="autonSwitchCubes" selected = "0">
+            <paper-button toggles raised class="custom red">0</paper-button>
+            <paper-button toggles raised class="custom red">1</paper-button>
+            <paper-button toggles raised class="custom red">2</paper-button>
+            <paper-button toggles raised class="custom red">3</paper-button>
+            <paper-button toggles raised class="custom red">4</paper-button>
+            <paper-button toggles raised class="custom red">5</paper-button>
+            <paper-button toggles raised class="custom red">6</paper-button>
+            <paper-button toggles raised on-click="load_text_switch_cubes" id="switch_button" class="custom input">7+</paper-button>
+            <div id="loadable_text3" style="display:none">
+                <paper-input always-float-label id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
+            </div>
+
+            </paper-button-group>
+            <br>
+            <br>
+
+            <iron-label for="autonScaleCubes">
+            Number of Power Cubes on Scale:
+            </iron-label>
+            <br>
+            <paper-button-group id="autonScaleCubes" selected = "0">
+            <paper-button toggles raised class="custom red">0</paper-button>
                 <paper-button toggles raised class="custom red">1</paper-button>
                 <paper-button toggles raised class="custom red">2</paper-button>
                 <paper-button toggles raised class="custom red">3</paper-button>
                 <paper-button toggles raised class="custom red">4</paper-button>
                 <paper-button toggles raised class="custom red">5</paper-button>
                 <paper-button toggles raised class="custom red">6</paper-button>
-                <paper-button toggles raised on-click="load_text_switch_cubes" id="switch_button" class="custom input">7+</paper-button>
-				<div id="loadable_text3" style="display:none">
-					<paper-input always-float-label id="autonSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
-				</div>
+                <paper-button toggles raised on-click="load_text_scale_cubes_auton" id="scale_button" class="custom input">7+</paper-button>
+                <div id="loadable_text4" style="display:none">
+                <paper-input always-float-label id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
+                </div>
+            </paper-button-group>
+            <br>
+            <br>
+            <h4>Teleop:</h4>
+            <div>
+            <iron-label for="allianceSwitchCubes">
+                Number of Alliance Switch Power Cubes:
+            </iron-label>
+            <br>
+            <paper-button-group id="allianceSwitchCubes" selected = "0">
+                <paper-button toggles raised class="custom red">0</paper-button>
+                <paper-button toggles raised class="custom red">1</paper-button>
+                <paper-button toggles raised class="custom red">2</paper-button>
+                <paper-button toggles raised class="custom red">3</paper-button>
+                <paper-button toggles raised class="custom red">4</paper-button>
+                <paper-button toggles raised class="custom red">5</paper-button>
+                <paper-button toggles raised class="custom red">6</paper-button>
+                <paper-button toggles raised on-click="load_text_alliance_switch_cubes" id="alliance_switch_button" class="custom input">7+</paper-button>
+                <div id="loadable_text5" style="display:none">
+                    <paper-input always-float-label id="allianceSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
+                </div>
 
-             </paper-button-group>
-             <br>
-             <br>
+            </paper-button-group>
+            <br>
+            <br>
 
-             <iron-label for="autonScaleCubes">
-               Number of Power Cubes on Scale:
-             </iron-label>
-             <br>
-             <paper-button-group id="autonScaleCubes" selected = "0">
-               <paper-button toggles raised class="custom red">0</paper-button>
-                 <paper-button toggles raised class="custom red">1</paper-button>
-                 <paper-button toggles raised class="custom red">2</paper-button>
-                 <paper-button toggles raised class="custom red">3</paper-button>
-                 <paper-button toggles raised class="custom red">4</paper-button>
-                 <paper-button toggles raised class="custom red">5</paper-button>
-                 <paper-button toggles raised class="custom red">6</paper-button>
-                 <paper-button toggles raised on-click="load_text_scale_cubes_auton" id="scale_button" class="custom input">7+</paper-button>
-				 <div id="loadable_text4" style="display:none">
-					<paper-input always-float-label id="autonScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
-				 </div>
+            <iron-label for="opposingSwitchCubes">
+                Number of Opposing Switch Power Cubes:
+            <iron-label>
+                <br>
+            <paper-button-group id="opposingSwitchCubes" selected = "0">
+                <paper-button toggles raised class="custom red">0</paper-button>
+                <paper-button toggles raised class="custom red">1</paper-button>
+                <paper-button toggles raised class="custom red">2</paper-button>
+                <paper-button toggles raised class="custom red">3</paper-button>
+                <paper-button toggles raised class="custom red">4</paper-button>
+                <paper-button toggles raised class="custom red">5</paper-button>
+                <paper-button toggles raised class="custom red">6</paper-button>
+                <paper-button toggles raised on-click="load_text_opposing_switch_cubes" id="opposing_switch_button" class="custom input">7+</paper-button>
+                <div id="loadable_text6" style="display:none">
+                    <paper-input always-float-label id="opposingSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
+                </div>
 
-              </paper-button-group>
-              <br>
-              <br>
+            </paper-button-group>
+                <br>
+                <br>
 
+            <iron-label for="teleopScaleCubes">
+                Number of Power Cubes on the Scale:
+            </iron-label>
+            <br>
+            <paper-button-group id="teleopScaleCubes" selected = "0">
+                <paper-button toggles raised class="custom red">0</paper-button>
+                <paper-button toggles raised class="custom red">1</paper-button>
+                <paper-button toggles raised class="custom red">2</paper-button>
+                <paper-button toggles raised class="custom red">3</paper-button>
+                <paper-button toggles raised class="custom red">4</paper-button>
+                <paper-button toggles raised class="custom red">5</paper-button>
+                <paper-button toggles raised class="custom red">6</paper-button>
+                <paper-button toggles raised on-click="load_text_scale_cubes_teleop" id="teleop_button" class="custom input">7+</paper-button>
+                <div id="loadable_text7" style="display:none">
+                    <paper-input always-float-label id="teleopScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
+                </div>
 
-          		<h4>Teleop:</h4>
-          		<div>
-                <iron-label for="allianceSwitchCubes">
-                  Number of Alliance Switch Power Cubes:
+            </paper-button-group>
+            <br>
+            <br>
+
+            <iron-label for="exchange">
+                Power Cubes in Exchange:
+            </iron-label>
+            <br>
+            <paper-button-group id="exchange" selected = "0">
+                <paper-button toggles raised class="custom red">0</paper-button>
+                <paper-button toggles raised class="custom red">1</paper-button>
+                <paper-button toggles raised class="custom red">2</paper-button>
+                <paper-button toggles raised class="custom red">3</paper-button>
+                <paper-button toggles raised class="custom red">4</paper-button>
+                <paper-button toggles raised class="custom red">5</paper-button>
+                <paper-button toggles raised class="custom red">6</paper-button>
+                <paper-button toggles raised on-click="load_text_exchange_cubes" id="exchange_button" class="custom input">7+</paper-button>
+                <div id="loadable_text8" style="display:none">
+                    <paper-input always-float-label id="exchange7" label="If there are 7+ Cubes, Input here."> </paper-input>
+                </div>
+
+            </paper-button-group>
+                <br>
+                <h4> End Game: </h4>
+                <iron-label for="climb">
+                Climb?
                 </iron-label>
+            <br>
+            <paper-button-group  id="climb" selected="climb" aria-labelledby="climb">
+                <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
+                <paper-button toggles raised class="custom red" name="NO" selected> No </paper-button>
+            </paper-button-group>
                 <br>
-                <paper-button-group id="allianceSwitchCubes" selected = "0">
-                    <paper-button toggles raised class="custom red">0</paper-button>
-                    <paper-button toggles raised class="custom red">1</paper-button>
-                    <paper-button toggles raised class="custom red">2</paper-button>
-                    <paper-button toggles raised class="custom red">3</paper-button>
-                    <paper-button toggles raised class="custom red">4</paper-button>
-                    <paper-button toggles raised class="custom red">5</paper-button>
-                    <paper-button toggles raised class="custom red">6</paper-button>
-                    <paper-button toggles raised on-click="load_text_alliance_switch_cubes" id="alliance_switch_button" class="custom input">7+</paper-button>
-					<div id="loadable_text5" style="display:none">
-						<paper-input always-float-label id="allianceSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
-					</div>
-
-                 </paper-button-group>
-               <br>
-               <br>
-
-               <iron-label for="opposingSwitchCubes">
-                 Number of Opposing Switch Power Cubes:
-          		  <iron-label>
-                  <br>
-                  <paper-button-group id="opposingSwitchCubes" selected = "0">
-                    <paper-button toggles raised class="custom red">0</paper-button>
-                    <paper-button toggles raised class="custom red">1</paper-button>
-                    <paper-button toggles raised class="custom red">2</paper-button>
-                    <paper-button toggles raised class="custom red">3</paper-button>
-                    <paper-button toggles raised class="custom red">4</paper-button>
-                    <paper-button toggles raised class="custom red">5</paper-button>
-                    <paper-button toggles raised class="custom red">6</paper-button>
-					<paper-button toggles raised on-click="load_text_opposing_switch_cubes" id="opposing_switch_button" class="custom input">7+</paper-button>
-					<div id="loadable_text6" style="display:none">
-						<paper-input always-float-label id="opposingSwitchCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
-					</div>
-
-                   </paper-button-group>
-                 <br>
-                 <br>
-
-                 <iron-label for="teleopScaleCubes">
-                  Number of Power Cubes on the Scale:
+                <br>
+                <iron-label for="assistedOption">
+                Robots Assisted?
                 </iron-label>
-                <br>
-                <paper-button-group id="teleopScaleCubes" selected = "0">
-                  <paper-button toggles raised class="custom red">0</paper-button>
-                    <paper-button toggles raised class="custom red">1</paper-button>
-                    <paper-button toggles raised class="custom red">2</paper-button>
-                    <paper-button toggles raised class="custom red">3</paper-button>
-                    <paper-button toggles raised class="custom red">4</paper-button>
-                    <paper-button toggles raised class="custom red">5</paper-button>
-                    <paper-button toggles raised class="custom red">6</paper-button>
-					<paper-button toggles raised on-click="load_text_scale_cubes_teleop" id="teleop_button" class="custom input">7+</paper-button>
-					<div id="loadable_text7" style="display:none">
-						<paper-input always-float-label id="teleopScaleCubes7" label="If there are 7+ Cubes, Input here."> </paper-input>
-					</div>
-
-                 </paper-button-group>
-                <br>
-                <br>
-
-                <iron-label for="exchange">
-                  Power Cubes in Exchange:
-                </iron-label>
-                <br>
-                <paper-button-group id="exchange" selected = "0">
-                    <paper-button toggles raised class="custom red">0</paper-button>
-                    <paper-button toggles raised class="custom red">1</paper-button>
-                    <paper-button toggles raised class="custom red">2</paper-button>
-                    <paper-button toggles raised class="custom red">3</paper-button>
-                    <paper-button toggles raised class="custom red">4</paper-button>
-                    <paper-button toggles raised class="custom red">5</paper-button>
-                    <paper-button toggles raised class="custom red">6</paper-button>
-					<paper-button toggles raised on-click="load_text_exchange_cubes" id="exchange_button" class="custom input">7+</paper-button>
-					<div id="loadable_text8" style="display:none">
-						<paper-input always-float-label id="exchange7" label="If there are 7+ Cubes, Input here."> </paper-input>
-					</div>
-
-                 </paper-button-group>
-                  <br>
-                  <h4> End Game: </h4>
-                  <iron-label for="climb">
-          		    Climb?
-          		  </iron-label>
-                <br>
-                <paper-button-group  id="climb" selected="climb" aria-labelledby="climb">
-                 <paper-button toggles raised class="custom red" name="YES"> Yes </paper-button>
-                 <paper-button toggles raised class="custom red" name="NO" selected> No </paper-button>
+            <br>
+                <paper-button-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
+                <paper-button toggles raised class="custom red" name="NONE" selected> None </paper-button>
+                <paper-button toggles raised class="custom red" name="ONE"> One </paper-button>
+                <paper-button toggles raised class="custom red" name="TWO"> Two </paper-button>
                 </paper-button-group>
-                   <br>
-                   <br>
-          		  <iron-label for="assistedOption">
-          		  	Robots Assisted?
-          		  </iron-label>
                 <br>
-          		  <paper-button-group id="assistedOption" selected="assistedOption" aria-labelledby="assistedOption">
-                  <paper-button toggles raised class="custom red" name="NONE" selected> None </paper-button>
-                    <paper-button toggles raised class="custom red" name="ONE"> One </paper-button>
-                    <paper-button toggles raised class="custom red" name="TWO"> Two </paper-button>
-                  </paper-button-group>
-          		  <br>
-                <br>
-          		</div>
-	  	  	    <paper-button on-click="submit_data"> Submit </paper-button>
-      		    <paper-button on-click="close_data"> Edit other sheet </paper-button>
-			  		</div>
-			  	</form>
+            <br>
+            </div>
+            <paper-button on-click="submit_data"> Submit </paper-button>
+            <paper-button on-click="close_data"> Edit other sheet </paper-button>
+                </div>
+            </form>
       	</iron-form>
 	  	 	<p id="success_log"></p>
 	  	  <p id="error_log"></p>

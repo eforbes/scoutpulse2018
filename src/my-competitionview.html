@@ -155,7 +155,55 @@
                 return teamstats;
             }
 
+            drawSwitch(data, base) {
+                var arr = [];
+                for (var team in data) {
+                    arr.push(base.drawDataForSwitch(data[team], team, base));
+                }
+                console.log(arr);
+                var table = google.visualization.arrayToDataTable(arr, true);
+                
+                var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
+                chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
+            }
+            
+            drawScale(data, base) {
+                var arr = [];
+                for (var team in data) {
+                    arr.push(base.drawDataForScale(data[team], team, base));
+                }
+                console.log(arr);
+                var table = google.visualization.arrayToDataTable(arr, true);
 
+                var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
+                chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
+            }
+ 
+            
+            drawSwitch(data, base) {
+                var arr = [];
+                for (var team in data) {
+                    arr.push(base.drawDataForSwitch(data[team], team, base));
+                }
+                console.log(arr);
+                var table = google.visualization.arrayToDataTable(arr, true);
+
+                var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
+                chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
+            }
+
+            drawScale(data, base) {
+                var arr = [];
+                for (var team in data) {
+                    arr.push(base.drawDataForScale(data[team], team, base));
+                }
+                console.log(arr);
+                var table = google.visualization.arrayToDataTable(arr, true);
+
+                var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
+                chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
+            }
+            
             calculateQuart(data, quartile) {
                 data.sort((a, b) => a - b);
                 var lowMiddle = Math.floor((data.length - 1) / 2);
@@ -183,31 +231,6 @@
                     return (q3Stats[q3LowMiddle] + q3Stats[q3HighMiddle]) / 2;
                 }
             }
-
-            drawSwitch(data, base) {
-                var arr = [];
-                for (var team in data) {
-                    arr.push(base.drawDataForSwitch(data[team], team, base));
-                }
-                console.log(arr);
-                var table = google.visualization.arrayToDataTable(arr, true);
-
-                var chart = new google.visualization.CandlestickChart(base.$.switch_candlestick);
-                chart.draw(table, {title: 'Switch Scores', legend:'none', candlestick: {hollowIsRising: true,}});
-            }
-
-            drawScale(data, base) {
-                var arr = [];
-                for (var team in data) {
-                    arr.push(base.drawDataForScale(data[team], team, base));
-                }
-                console.log(arr);
-                var table = google.visualization.arrayToDataTable(arr, true);
-
-                var chart = new google.visualization.CandlestickChart(base.$.scale_candlestick);
-                chart.draw(table, {title: 'Scale Scores', legend:'none', candlestick: {hollowIsRising: true,}});
-            }
-
 
         }
     window.customElements.define(MyCompetitionView.is, MyCompetitionView);
