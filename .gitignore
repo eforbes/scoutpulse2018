@@ -1,7 +1,7 @@
 # Server Specific ignore files
 password
 package-lock.json
-bower_components
+bower_components/
 
 # Logs
 logs
