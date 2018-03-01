@@ -13,6 +13,7 @@
     "test:integration": "polymer build # test that psk builds without error with the CLI"
   },
   "dependencies": {
+    "polymer": "*",
     "db": "^1.0.6",
     "express": "^4.16.2",
     "forever": "^0.15.3",

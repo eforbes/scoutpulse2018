@@ -7,7 +7,7 @@ const mysql = require('mysql');
 
 const app = express();
 
-const SITE_PORT = 8081;
+const SITE_PORT = 80;
 const TEMPLATE_FOLDER = 'templates'
 
 var sql;
@@ -214,7 +214,14 @@ app.get('/getteamdata', function(req, res) {
 		});
 });
 
+/*
 app.get("*", function(req, res) {
+    res.sendFile('index.html', {root: __dirname});
+});
+*/
+
+
+app.get("/", function(req, res) {
     res.sendFile('index.html', {root: __dirname});
 });
 
