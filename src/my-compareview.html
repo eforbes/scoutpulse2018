@@ -129,6 +129,7 @@
 
             drawDataForGeneralTable(data, base, table) {
                 table.addColumn('number', 'Match #');
+                table.addColumn('string', 'Match Type');
                 table.addColumn('string', 'Mobility');
                 table.addColumn('string', 'Switch Auton');
                 table.addColumn('number', 'Cubes in Scale');
@@ -141,6 +142,7 @@
                     for(var i = 0; i < matchstat.length; i++) {
                         var stat = [];
                         stat.push(matchstat[i]["match_number"]);
+                        stat.push(matchstat[i]["match_type"]);
                         stat.push(matchstat[i]["mobility"]);
                         if (matchstat[i]["autonSwitchCubes"] != 0) {
                             stat.push("YES");
@@ -295,13 +297,15 @@
                 var all = [];
                 var teamstats = data[team_number];
                 teamstats.forEach(function(match) {
-                    var stats = [];
-                    stats.push(match["match_number"] + "");
-                    stats.push(match["autonScaleCubes"] + match["teleopScaleCubes"]);
-                    stats.push(match["allianceSwitchCubes"]);
-                    stats.push(match["opposingSwitchCubes"]);
-                    stats.push(match["exchange"]);
-                    all.push(stats);
+                    if(match["match_type"] == "Qualifier") {
+                        var stats = [];
+                        stats.push(match["match_number"] + "");
+                        stats.push(match["autonScaleCubes"] + match["teleopScaleCubes"]);
+                        stats.push(match["allianceSwitchCubes"]);
+                        stats.push(match["opposingSwitchCubes"]);
+                        stats.push(match["exchange"]);
+                        all.push(stats);
+                    }
                 });
                 return all;
 
