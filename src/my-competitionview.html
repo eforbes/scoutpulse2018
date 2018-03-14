@@ -76,7 +76,7 @@
                 table.addColumn('number', 'Avg Exchange Cubes');
                 for (var team in data) {
                     var stat = [];
-                    stat.push(team);
+                    stat.push(data[team][0].team_number + ''); // Needs to be a string.
                     stat.push(base.average(data[team], "autonScaleCubes"));
                     stat.push(base.average(data[team], "autonSwitchCubes"));
                     stat.push(base.average(data[team], "allianceSwitchCubes"));
@@ -187,7 +187,7 @@
                 chart.addColumn({id: 'max', type: 'number', role: 'interval'});
             
                 for (var team in data) {
-                    arr.push(base.drawDataForScale(data[team], team, base));
+                    arr.push(base.drawDataForScale(data[team], data[team][0].team_number+'', base));
                 }
                 
                 chart.addRows(arr);
@@ -243,7 +243,7 @@
                 chart.addColumn({id: 'max', type: 'number', role: 'interval'});
             
                 for (var team in data) {
-                    arr.push(base.drawDataForSwitch(data[team], team, base));
+                    arr.push(base.drawDataForSwitch(data[team], data[team][0].team_number+'', base));
                 }
                     
                 chart.addRows(arr);

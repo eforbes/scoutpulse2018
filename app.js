@@ -187,9 +187,9 @@ app.get('/getteamdata', function(req, res) {
 		if (match_number != null && match_number !== "") {
 				queryList = " WHERE m.match_number=" + sql.escape(match_number);
 		}
-		sql.query('SELECT team_number FROM matches m' + queryList + ' ORDER BY match_number, team_number', function(err, result1, fields) {
+		sql.query('SELECT distinct team_number FROM matches m' + queryList + ' ORDER BY match_number, team_number', function(err, result1, fields) {
 				if (err) throw err;
-				var data = {};
+				var data = [];
 				var counter = 0;
 
 				if (result1.length == 0) {
@@ -201,7 +201,7 @@ app.get('/getteamdata', function(req, res) {
 						var element = result1[counter];
 
 						console.log(element.team_number);
-						data[element.team_number] = result2;
+						data.push(result2);
 						if (result1[counter + 1] === undefined) {
 								res.send(data);
 								return;
